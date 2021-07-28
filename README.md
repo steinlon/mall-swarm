@@ -99,9 +99,10 @@ mall
 
 | 工具          | 版本号 | 下载                                                         |
 | ------------- | ------ | ------------------------------------------------------------ |
-| JDK           | 1.8    | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
+| JDK           | 11    | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
 | Mysql         | 5.7    | https://www.mysql.com/                                       |
 | Redis         | 7.0    | https://redis.io/download                                    |
+| Redis Commander        | 5.0    | https://redis.io/download                                    |
 | Elasticsearch | 7.17.3 | https://www.elastic.co/cn/downloads/elasticsearch            |
 | Kibana        | 7.17.3 | https://www.elastic.co/cn/downloads/kibana                   |
 | Logstash      | 7.17.3 | https://www.elastic.co/cn/downloads/logstash                 |
@@ -110,6 +111,9 @@ mall
 | nginx         | 1.22   | http://nginx.org/en/download.html                            |
 
 ### 搭建步骤
+
+> 数据库部署
+- create database mall;
 
 > Windows环境部署
 
@@ -145,6 +149,10 @@ mall
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_new_03.png)
 
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_new_04.png)
+
+- Redis Commander可视化工具管理，访问地址：http://192.168.2.101:8101
+
+![](document/resource/redis_commander.png)
 
 - API文档信息，访问地址：http://192.168.3.101:8201
 
