@@ -1,7 +1,7 @@
 package com.macro.mall.auth.service.impl;
 
-import com.macro.mall.auth.domain.SecurityUser;
 import com.macro.mall.auth.constant.MessageConstant;
+import com.macro.mall.auth.domain.SecurityUser;
 import com.macro.mall.auth.service.UmsAdminService;
 import com.macro.mall.auth.service.UmsMemberService;
 import com.macro.mall.common.constant.AuthConstant;
@@ -36,12 +36,12 @@ public class UserServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String clientId = request.getParameter("client_id");
         UserDto userDto;
-        if(AuthConstant.ADMIN_CLIENT_ID.equals(clientId)){
+        if (AuthConstant.ADMIN_CLIENT_ID.equals(clientId)) {
             userDto = adminService.loadUserByUsername(username);
-        }else{
+        } else {
             userDto = memberService.loadUserByUsername(username);
         }
-        if (userDto==null) {
+        if (userDto == null) {
             throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);
         }
         userDto.setClientId(clientId);
