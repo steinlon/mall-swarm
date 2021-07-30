@@ -7,17 +7,17 @@ services:
     command: [ "postgres", "-c", "log_statement=all" ]
     environment:
       - TZ=Asia/Shanghai
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=mall
     volumes:
       - ./mydata/postgres/data:/var/lib/postgresql/data
     ports:
-      - "3306:5432"
+      - "9999:5432"
     healthcheck:
-      test: pg_isready -U root -d mall
-      interval: 10s
-      timeout: 5s
+      test: pg_isready -U postgres -d mall
+      interval: 300s
+      timeout: 10s
       retries: 5
 
   mall-flyway:
