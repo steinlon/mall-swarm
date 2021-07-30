@@ -3,14 +3,14 @@ package com.macro.mall.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CmsPrefrenceAreaProductRelationExample {
+public class CmsPreferenceAreaProductRelationExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CmsPrefrenceAreaProductRelationExample() {
+    public CmsPreferenceAreaProductRelationExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -164,63 +164,63 @@ public class CmsPrefrenceAreaProductRelationExample {
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdIsNull() {
-            addCriterion("prefrence_area_id is null");
+        public Criteria andPreferenceAreaIdIsNull() {
+            addCriterion("preference_area_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdIsNotNull() {
-            addCriterion("prefrence_area_id is not null");
+        public Criteria andPreferenceAreaIdIsNotNull() {
+            addCriterion("preference_area_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdEqualTo(Long value) {
-            addCriterion("prefrence_area_id =", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdEqualTo(Long value) {
+            addCriterion("preference_area_id =", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdNotEqualTo(Long value) {
-            addCriterion("prefrence_area_id <>", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdNotEqualTo(Long value) {
+            addCriterion("preference_area_id <>", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdGreaterThan(Long value) {
-            addCriterion("prefrence_area_id >", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdGreaterThan(Long value) {
+            addCriterion("preference_area_id >", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("prefrence_area_id >=", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("preference_area_id >=", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdLessThan(Long value) {
-            addCriterion("prefrence_area_id <", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdLessThan(Long value) {
+            addCriterion("preference_area_id <", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdLessThanOrEqualTo(Long value) {
-            addCriterion("prefrence_area_id <=", value, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdLessThanOrEqualTo(Long value) {
+            addCriterion("preference_area_id <=", value, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdIn(List<Long> values) {
-            addCriterion("prefrence_area_id in", values, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdIn(List<Long> values) {
+            addCriterion("preference_area_id in", values, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdNotIn(List<Long> values) {
-            addCriterion("prefrence_area_id not in", values, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdNotIn(List<Long> values) {
+            addCriterion("preference_area_id not in", values, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdBetween(Long value1, Long value2) {
-            addCriterion("prefrence_area_id between", value1, value2, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdBetween(Long value1, Long value2) {
+            addCriterion("preference_area_id between", value1, value2, "preferenceAreaId");
             return (Criteria) this;
         }
 
-        public Criteria andPrefrenceAreaIdNotBetween(Long value1, Long value2) {
-            addCriterion("prefrence_area_id not between", value1, value2, "prefrenceAreaId");
+        public Criteria andPreferenceAreaIdNotBetween(Long value1, Long value2) {
+            addCriterion("preference_area_id not between", value1, value2, "preferenceAreaId");
             return (Criteria) this;
         }
 
