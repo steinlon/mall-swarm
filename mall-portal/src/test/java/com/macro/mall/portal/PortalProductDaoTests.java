@@ -13,15 +13,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Created by macro on 2018/8/27.
  * 前台商品查询逻辑单元测试
  */
 @SpringBootTest
 public class PortalProductDaoTests {
+
     @Autowired
     private PortalProductDao portalProductDao;
+
     @Test
-    public void testGetPromotionProductList(){
+    public void testGetPromotionProductList() {
         List<Long> ids = new ArrayList<>();
         ids.add(26L);
         ids.add(27L);
