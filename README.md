@@ -99,8 +99,8 @@ mall
 
 | 工具          | 版本号 | 下载                                                         |
 | ------------- | ------ | ------------------------------------------------------------ |
-| JDK           | 11    | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
-| Mysql         | 5.7    | https://www.mysql.com/                                       |
+| JDK           | 11     | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
+| Postgres      | 13.3   | https://www.postgresql.org                                     |
 | Redis         | 5.0    | https://redis.io/download                                    |
 | Redis Commander        | 5.0    | https://redis.io/download                                    |
 | Elasticsearch | 7.6.2  | https://www.elastic.co/cn/downloads/elasticsearch            |
