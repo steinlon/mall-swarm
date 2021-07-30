@@ -10007,8 +10007,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o248">
 <a:ObjectID>143551D6-36A8-4263-B499-17416D5B4E78</a:ObjectID>
-<a:Name>cms_prefrence_area</a:Name>
-<a:Code>cms_prefrence_area</a:Code>
+<a:Name>cms_preference_area</a:Name>
+<a:Code>cms_preference_area</a:Code>
 <a:CreationDate>1522112533</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522139400</a:ModificationDate>
@@ -10104,8 +10104,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o249">
 <a:ObjectID>A13BD5C1-4EB4-4269-978C-7BC04C9CDC6E</a:ObjectID>
-<a:Name>cms_prefrence_area_product_relation</a:Name>
-<a:Code>cms_prefrence_area_product_relation</a:Code>
+<a:Name>cms_preference_area_product_relation</a:Name>
+<a:Code>cms_preference_area_product_relation</a:Code>
 <a:CreationDate>1522112617</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522215871</a:ModificationDate>
@@ -10127,8 +10127,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o491">
 <a:ObjectID>AD6438FF-9782-40FA-82DB-D99F8C15BC39</a:ObjectID>
-<a:Name>prefrence_area_id</a:Name>
-<a:Code>prefrence_area_id</a:Code>
+<a:Name>preference_area_id</a:Name>
+<a:Code>preference_area_id</a:Code>
 <a:CreationDate>1522112691</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522139303</a:ModificationDate>

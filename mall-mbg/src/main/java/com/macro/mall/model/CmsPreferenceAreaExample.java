@@ -3,14 +3,14 @@ package com.macro.mall.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CmsPrefrenceAreaExample {
+public class CmsPreferenceAreaExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CmsPrefrenceAreaExample() {
+    public CmsPreferenceAreaExample() {
         oredCriteria = new ArrayList<>();
     }
 
