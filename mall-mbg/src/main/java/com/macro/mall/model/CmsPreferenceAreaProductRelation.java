@@ -3,10 +3,10 @@ package com.macro.mall.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
-public class CmsPrefrenceAreaProductRelation implements Serializable {
+public class CmsPreferenceAreaProductRelation implements Serializable {
     private Long id;
 
-    private Long prefrenceAreaId;
+    private Long preferenceAreaId;
 
     private Long productId;
 
@@ -20,12 +20,12 @@ public class CmsPrefrenceAreaProductRelation implements Serializable {
         this.id = id;
     }
 
-    public Long getPrefrenceAreaId() {
-        return prefrenceAreaId;
+    public Long getPreferenceAreaId() {
+        return preferenceAreaId;
     }
 
-    public void setPrefrenceAreaId(Long prefrenceAreaId) {
-        this.prefrenceAreaId = prefrenceAreaId;
+    public void setPreferenceAreaId(Long preferenceAreaId) {
+        this.preferenceAreaId = preferenceAreaId;
     }
 
     public Long getProductId() {
@@ -43,7 +43,7 @@ public class CmsPrefrenceAreaProductRelation implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", prefrenceAreaId=").append(prefrenceAreaId);
+        sb.append(", preferenceAreaId=").append(preferenceAreaId);
         sb.append(", productId=").append(productId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

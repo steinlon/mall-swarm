@@ -5,7 +5,14 @@ import com.macro.mall.dao.UmsRoleDao;
 import com.macro.mall.mapper.UmsRoleMapper;
 import com.macro.mall.mapper.UmsRoleMenuRelationMapper;
 import com.macro.mall.mapper.UmsRoleResourceRelationMapper;
-import com.macro.mall.model.*;
+import com.macro.mall.model.UmsMenu;
+import com.macro.mall.model.UmsResource;
+import com.macro.mall.model.UmsRole;
+import com.macro.mall.model.UmsRoleExample;
+import com.macro.mall.model.UmsRoleMenuRelation;
+import com.macro.mall.model.UmsRoleMenuRelationExample;
+import com.macro.mall.model.UmsRoleResourceRelation;
+import com.macro.mall.model.UmsRoleResourceRelationExample;
 import com.macro.mall.service.UmsResourceService;
 import com.macro.mall.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +38,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleDao roleDao;
     @Autowired
     private UmsResourceService resourceService;
+
     @Override
     public int create(UmsRole role) {
         role.setCreateTime(new Date());
@@ -87,7 +95,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Override
     public int allocMenu(Long roleId, List<Long> menuIds) {
         //先删除原有关系
-        UmsRoleMenuRelationExample example=new UmsRoleMenuRelationExample();
+        UmsRoleMenuRelationExample example = new UmsRoleMenuRelationExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
         roleMenuRelationMapper.deleteByExample(example);
         //批量插入新关系
@@ -103,7 +111,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Override
     public int allocResource(Long roleId, List<Long> resourceIds) {
         //先删除原有关系
-        UmsRoleResourceRelationExample example=new UmsRoleResourceRelationExample();
+        UmsRoleResourceRelationExample example = new UmsRoleResourceRelationExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
         roleResourceRelationMapper.deleteByExample(example);
         //批量插入新关系
