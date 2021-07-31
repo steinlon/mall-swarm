@@ -5,28 +5,27 @@ import com.macro.mall.model.CmsPreferenceArea;
 import com.macro.mall.service.CmsPreferenceAreaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 /**
  * 商品优选管理Controller
- * Created by macro on 2018/6/1.
  */
 @Controller
+@AllArgsConstructor
 @Api(tags = "CmsPreferenceAreaController", description = "商品优选管理")
 @RequestMapping("/preferenceArea")
 public class CmsPreferenceAreaController {
 
-    @Autowired
-    private CmsPreferenceAreaService preferenceAreaService;
+    private final CmsPreferenceAreaService preferenceAreaService;
 
     @ApiOperation("获取所有商品优选")
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @GetMapping(value = "/listAll")
     @ResponseBody
     public CommonResult<List<CmsPreferenceArea>> listAll() {
         final List<CmsPreferenceArea> preferenceAreaList = preferenceAreaService.listAll();

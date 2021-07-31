@@ -7,72 +7,73 @@ import com.macro.mall.model.SmsFlashPromotionProductRelation;
 import com.macro.mall.service.SmsFlashPromotionProductRelationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 /**
  * 限时购和商品关系管理Controller
- * Created by macro on 2018/11/16.
  */
 @Controller
+@AllArgsConstructor
 @Api(tags = "SmsFlashPromotionProductRelationController", description = "限时购和商品关系管理")
 @RequestMapping("/flashProductRelation")
 public class SmsFlashPromotionProductRelationController {
-    @Autowired
-    private SmsFlashPromotionProductRelationService relationService;
+
+    private final SmsFlashPromotionProductRelationService relationService;
 
     @ApiOperation("批量选择商品添加关联")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     @ResponseBody
-    public CommonResult<?> create(@RequestBody List<SmsFlashPromotionProductRelation> relationList) {
-        int count = relationService.create(relationList);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> create(@RequestBody final List<SmsFlashPromotionProductRelation> relationList) {
+        final int count = relationService.create(relationList);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("修改关联相关信息")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/update/{id}")
     @ResponseBody
-    public CommonResult<?> update(@PathVariable Long id, @RequestBody SmsFlashPromotionProductRelation relation) {
-        int count = relationService.update(id, relation);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> update(
+            @PathVariable final Long id,
+            @RequestBody final SmsFlashPromotionProductRelation relation) {
+        final int count = relationService.update(id, relation);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("删除关联")
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/delete/{id}")
     @ResponseBody
-    public CommonResult<?> delete(@PathVariable Long id) {
-        int count = relationService.delete(id);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> delete(@PathVariable final Long id) {
+        final int count = relationService.delete(id);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("获取管理商品促销信息")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ResponseBody
-    public CommonResult<SmsFlashPromotionProductRelation> getItem(@PathVariable Long id) {
-        SmsFlashPromotionProductRelation relation = relationService.getItem(id);
+    public CommonResult<SmsFlashPromotionProductRelation> getItem(@PathVariable final Long id) {
+        final SmsFlashPromotionProductRelation relation = relationService.getItem(id);
         return CommonResult.success(relation);
     }
 
     @ApiOperation("分页查询不同场次关联及商品信息")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     @ResponseBody
-    public CommonResult<CommonPage<SmsFlashPromotionProduct>> list(@RequestParam(value = "flashPromotionId") Long flashPromotionId,
-                                                                   @RequestParam(value = "flashPromotionSessionId") Long flashPromotionSessionId,
-                                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<SmsFlashPromotionProduct> flashPromotionProductList = relationService.list(flashPromotionId, flashPromotionSessionId, pageSize, pageNum);
+    public CommonResult<CommonPage<SmsFlashPromotionProduct>> list(
+            @RequestParam(value = "flashPromotionId") final Long flashPromotionId,
+            @RequestParam(value = "flashPromotionSessionId") final Long flashPromotionSessionId,
+            @RequestParam(value = "pageSize", defaultValue = "5") final Integer pageSize,
+            @RequestParam(value = "pageNum", defaultValue = "1") final Integer pageNum) {
+        final List<SmsFlashPromotionProduct> flashPromotionProductList =
+                relationService.list(flashPromotionId, flashPromotionSessionId, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(flashPromotionProductList));
     }
 }
