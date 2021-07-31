@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -33,23 +32,23 @@ public class PmsDaoTests {
     @Test
     @Transactional
     @Rollback
-    public void testInsertBatch() {
-        List<PmsMemberPrice> list = new ArrayList<>();
+    public void insertPriceBatch() {
+        final List<PmsMemberPrice> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            PmsMemberPrice memberPrice = new PmsMemberPrice();
+            final PmsMemberPrice memberPrice = new PmsMemberPrice();
             memberPrice.setProductId(1L);
             memberPrice.setMemberLevelId((long) (i + 1));
             memberPrice.setMemberPrice(new BigDecimal("22"));
             list.add(memberPrice);
         }
-        int count = memberPriceDao.insertList(list);
+        final int count = memberPriceDao.insertList(list);
         Assertions.assertEquals(5, count);
     }
 
     @Test
-    public void testGetProductUpdateInfo() {
-        PmsProductResult productResult = productDao.getUpdateInfo(7L);
-        String json = JSONUtil.parse(productResult).toString();
+    public void getProductUpdateInfo() {
+        final PmsProductResult productResult = productDao.getUpdateInfo(7L);
+        final String json = JSONUtil.parse(productResult).toString();
         LOGGER.info(json);
     }
 }

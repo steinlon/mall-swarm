@@ -19,7 +19,8 @@
 
 ## 项目介绍
 
-`mall-swarm`是一套微服务商城系统，采用了 Spring Cloud Hoxton & Alibaba、Spring Boot 2.3、Oauth2、MyBatis、Elasticsearch、Docker、Kubernetes等核心技术，同时提供了基于Vue的管理后台方便快速搭建系统。`mall-swarm`在电商业务的基础集成了注册中心、配置中心、监控中心、网关等系统功能。文档齐全，附带全套Spring Cloud教程。 
+`mall-swarm`是一套微服务商城系统，采用了 Spring Cloud Hoxton & Alibaba、Spring Boot
+2.3、Oauth2、MyBatis、Elasticsearch、Docker、Kubernetes等核心技术，同时提供了基于Vue的管理后台方便快速搭建系统。`mall-swarm`在电商业务的基础集成了注册中心、配置中心、监控中心、网关等系统功能。文档齐全，附带全套Spring Cloud教程。
 
 ## 系统架构图
 
@@ -48,7 +49,7 @@ mall
 
 ## 项目演示
 
-- 后台管理系统： [http://www.macrozheng.com/admin/index.html](http://www.macrozheng.com/admin/index.html)  
+- 后台管理系统： [http://www.macrozheng.com/admin/index.html](http://www.macrozheng.com/admin/index.html)
 - 移动端商城系统：[http://www.macrozheng.com/app/index.html](http://www.macrozheng.com/app/index.html)
 
 ## 技术选型
@@ -92,27 +93,28 @@ mall
 | Axios      | 前端HTTP框架          | https://github.com/axios/axios |
 | v-charts   | 基于Echarts的图表框架 | https://v-charts.js.org/       |
 
-
 ## 环境搭建
 
 ### 开发环境
 
-| 工具          | 版本号 | 下载                                                         |
-| ------------- | ------ | ------------------------------------------------------------ |
-| JDK           | 11     | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
-| Postgres      | 13.3   | https://www.postgresql.org                                     |
-| Redis         | 5.0    | https://redis.io/download                                    |
-| Redis Commander        | 5.0    | https://redis.io/download                                    |
-| Elasticsearch | 7.6.2  | https://www.elastic.co/cn/downloads/elasticsearch            |
-| Kibana        | 7.6.2  | https://www.elastic.co/cn/downloads/kibana                   |
-| Logstash      | 7.6.2  | https://www.elastic.co/cn/downloads/logstash                 |
-| MongoDb       | 4.2.5  | https://www.mongodb.com/download-center                      |
-| RabbitMq      | 3.7.14 | http://www.rabbitmq.com/download.html                        |
-| nginx         | 1.10   | http://nginx.org/en/download.html                            |
+| 工具             | 版本号    | 下载                                                         |
+| --------------- | -------- | ------------------------------------------------------------ |
+| JDK             | 11       | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
+| Postgres        | 13.3     | https://www.postgresql.org                                     |
+| Redis           | 6.2.5    | https://redis.io/download                                    |
+| Redis Commander | latest   | https://registry.hub.docker.com/r/rediscommander/redis-commander |
+| Elasticsearch   | 7.6.2    | https://www.elastic.co/cn/downloads/elasticsearch            |
+| Kibana          | 7.6.2    | https://www.elastic.co/cn/downloads/kibana                   |
+| Logstash        | 7.6.2    | https://www.elastic.co/cn/downloads/logstash                 |
+| MongoDb         | 4.2.5    | https://www.mongodb.com/download-center                      |
+| RabbitMq        | 3.9.1    | http://www.rabbitmq.com/download.html                        |
+| nginx           | 1.10     | http://nginx.org/en/download.html                            |
+| nacos           | v2.0.3   | https://nacos.io/en-us/index.html                            |
 
 ### 搭建步骤
 
 > 数据库部署
+
 - create database mall;
 
 > Windows环境部署
@@ -154,6 +156,7 @@ mall
 
 ![](document/resource/redis_commander.png)
 
+- API文档信息(本地运行)，访问地址：http://localhost:8201/doc.html
 - API文档信息，访问地址：http://192.168.3.101:8201
 
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_05.png)

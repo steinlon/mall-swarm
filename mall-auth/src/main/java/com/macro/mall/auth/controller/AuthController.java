@@ -7,12 +7,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -25,11 +25,11 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "AuthController", description = "认证中心登录认证")
+@AllArgsConstructor
 @RequestMapping("/oauth")
 public class AuthController {
 
-    @Autowired
-    private TokenEndpoint tokenEndpoint;
+    private final TokenEndpoint tokenEndpoint;
 
     @ApiOperation("Oauth2获取token")
     @ApiImplicitParams({
@@ -40,11 +40,13 @@ public class AuthController {
             @ApiImplicitParam(name = "username", value = "登录用户名"),
             @ApiImplicitParam(name = "password", value = "登录密码")
     })
-    @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public CommonResult<Oauth2TokenDto> postAccessToken(@ApiIgnore Principal principal, @ApiIgnore @RequestParam Map<String, String> parameters)
+    @PostMapping(value = "/token")
+    public CommonResult<Oauth2TokenDto> postAccessToken(
+            @ApiIgnore final Principal principal,
+            @ApiIgnore @RequestParam final Map<String, String> parameters)
             throws HttpRequestMethodNotSupportedException {
-        OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
-        Oauth2TokenDto oauth2TokenDto = Oauth2TokenDto.builder()
+        final OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
+        final Oauth2TokenDto oauth2TokenDto = Oauth2TokenDto.builder()
                 .token(oAuth2AccessToken.getValue())
                 .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
                 .expiresIn(oAuth2AccessToken.getExpiresIn())
