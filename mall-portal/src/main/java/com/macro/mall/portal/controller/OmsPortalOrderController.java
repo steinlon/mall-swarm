@@ -38,7 +38,7 @@ public class OmsPortalOrderController {
     @ApiOperation("根据购物车信息生成订单")
     @RequestMapping(value = "/generateOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult generateOrder(@RequestBody OrderParam orderParam) {
+    public CommonResult<?> generateOrder(@RequestBody OrderParam orderParam) {
         Map<String, Object> result = portalOrderService.generateOrder(orderParam);
         return CommonResult.success(result, "下单成功");
     }
@@ -46,7 +46,7 @@ public class OmsPortalOrderController {
     @ApiOperation("用户支付成功的回调")
     @RequestMapping(value = "/paySuccess", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult paySuccess(@RequestParam Long orderId,@RequestParam Integer payType) {
+    public CommonResult<?> paySuccess(@RequestParam Long orderId,@RequestParam Integer payType) {
         Integer count = portalOrderService.paySuccess(orderId,payType);
         return CommonResult.success(count, "支付成功");
     }
@@ -54,7 +54,7 @@ public class OmsPortalOrderController {
     @ApiOperation("自动取消超时订单")
     @RequestMapping(value = "/cancelTimeOutOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult cancelTimeOutOrder() {
+    public CommonResult<?> cancelTimeOutOrder() {
         portalOrderService.cancelTimeOutOrder();
         return CommonResult.success(null);
     }
@@ -62,7 +62,7 @@ public class OmsPortalOrderController {
     @ApiOperation("取消单个超时订单")
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult cancelOrder(Long orderId) {
+    public CommonResult<?> cancelOrder(Long orderId) {
         portalOrderService.sendDelayMessageCancelOrder(orderId);
         return CommonResult.success(null);
     }
@@ -90,7 +90,7 @@ public class OmsPortalOrderController {
     @ApiOperation("用户取消订单")
     @RequestMapping(value = "/cancelUserOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult cancelUserOrder(Long orderId) {
+    public CommonResult<?> cancelUserOrder(Long orderId) {
         portalOrderService.cancelOrder(orderId);
         return CommonResult.success(null);
     }
@@ -98,7 +98,7 @@ public class OmsPortalOrderController {
     @ApiOperation("用户确认收货")
     @RequestMapping(value = "/confirmReceiveOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult confirmReceiveOrder(Long orderId) {
+    public CommonResult<?> confirmReceiveOrder(Long orderId) {
         portalOrderService.confirmReceiveOrder(orderId);
         return CommonResult.success(null);
     }
@@ -106,7 +106,7 @@ public class OmsPortalOrderController {
     @ApiOperation("用户删除订单")
     @RequestMapping(value = "/deleteOrder", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteOrder(Long orderId) {
+    public CommonResult<?> deleteOrder(Long orderId) {
         portalOrderService.deleteOrder(orderId);
         return CommonResult.success(null);
     }
