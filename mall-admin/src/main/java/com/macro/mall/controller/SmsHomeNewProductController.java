@@ -6,75 +6,72 @@ import com.macro.mall.model.SmsHomeNewProduct;
 import com.macro.mall.service.SmsHomeNewProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 /**
  * 首页新品管理Controller
- * Created by macro on 2018/11/6.
  */
 @Controller
+@AllArgsConstructor
 @Api(tags = "SmsHomeNewProductController", description = "首页新品管理")
 @RequestMapping("/home/newProduct")
 public class SmsHomeNewProductController {
-    @Autowired
-    private SmsHomeNewProductService homeNewProductService;
+
+    private final SmsHomeNewProductService homeNewProductService;
 
     @ApiOperation("添加首页推荐品牌")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     @ResponseBody
-    public CommonResult<?> create(@RequestBody List<SmsHomeNewProduct> homeBrandList) {
-        int count = homeNewProductService.create(homeBrandList);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> create(@RequestBody final List<SmsHomeNewProduct> homeBrandList) {
+        final int count = homeNewProductService.create(homeBrandList);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("修改推荐排序")
-    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/update/sort/{id}")
     @ResponseBody
-    public CommonResult<?> updateSort(@PathVariable Long id, Integer sort) {
-        int count = homeNewProductService.updateSort(id, sort);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> updateSort(@PathVariable final Long id, final Integer sort) {
+        final int count = homeNewProductService.updateSort(id, sort);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("批量删除推荐")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @PostMapping(value = "/delete")
     @ResponseBody
-    public CommonResult<?> delete(@RequestParam("ids") List<Long> ids) {
-        int count = homeNewProductService.delete(ids);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> delete(@RequestParam("ids") final List<Long> ids) {
+        final int count = homeNewProductService.delete(ids);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("批量修改推荐状态")
-    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @PostMapping(value = "/update/recommendStatus")
     @ResponseBody
-    public CommonResult<?> updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
-        int count = homeNewProductService.updateRecommendStatus(ids, recommendStatus);
-        if (count > 0) {
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> updateRecommendStatus(
+            @RequestParam("ids") final List<Long> ids,
+            @RequestParam final Integer recommendStatus) {
+        final int count = homeNewProductService.updateRecommendStatus(ids, recommendStatus);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("分页查询推荐")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     @ResponseBody
-    public CommonResult<CommonPage<SmsHomeNewProduct>> list(@RequestParam(value = "productName", required = false) String productName,
-                                                            @RequestParam(value = "recommendStatus", required = false) Integer recommendStatus,
-                                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<SmsHomeNewProduct> homeBrandList = homeNewProductService.list(productName, recommendStatus, pageSize, pageNum);
+    public CommonResult<CommonPage<SmsHomeNewProduct>> list(
+            @RequestParam(value = "productName", required = false) final String productName,
+            @RequestParam(value = "recommendStatus", required = false) final Integer recommendStatus,
+            @RequestParam(value = "pageSize", defaultValue = "5") final Integer pageSize,
+            @RequestParam(value = "pageNum", defaultValue = "1") final Integer pageNum) {
+        final List<SmsHomeNewProduct> homeBrandList = homeNewProductService.list(productName, recommendStatus, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(homeBrandList));
     }
 }

@@ -4,20 +4,19 @@ import com.macro.mall.mapper.CmsPreferenceAreaMapper;
 import com.macro.mall.model.CmsPreferenceArea;
 import com.macro.mall.model.CmsPreferenceAreaExample;
 import com.macro.mall.service.CmsPreferenceAreaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * 商品优选Service实现类
- * Created by macro on 2018/6/1.
  */
 @Service
+@AllArgsConstructor
 public class CmsPreferenceAreaServiceImpl implements CmsPreferenceAreaService {
-    
-    @Autowired
-    private CmsPreferenceAreaMapper preferenceAreaMapper;
+
+    private final CmsPreferenceAreaMapper preferenceAreaMapper;
 
     @Override
     public List<CmsPreferenceArea> listAll() {

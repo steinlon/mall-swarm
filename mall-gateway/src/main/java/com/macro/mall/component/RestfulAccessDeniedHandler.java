@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 
@@ -24,14 +23,14 @@ import java.nio.charset.StandardCharsets;
 public class RestfulAccessDeniedHandler implements ServerAccessDeniedHandler {
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException denied) {
-        ServerHttpResponse response = exchange.getResponse();
+    public Mono<Void> handle(final ServerWebExchange exchange, final AccessDeniedException denied) {
+        final ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.getHeaders().set("Access-Control-Allow-Origin", "*");
         response.getHeaders().set("Cache-Control", "no-cache");
-        String body = JSONUtil.toJsonStr(CommonResult.forbidden(denied.getMessage()));
-        DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
+        final String body = JSONUtil.toJsonStr(CommonResult.forbidden(denied.getMessage()));
+        final DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
     }
 }

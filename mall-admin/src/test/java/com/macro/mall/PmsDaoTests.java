@@ -33,10 +33,10 @@ public class PmsDaoTests {
     @Test
     @Transactional
     @Rollback
-    public void testInsertBatch() {
-        List<PmsMemberPrice> list = new ArrayList<>();
+    public void insertPriceBatch() {
+        final List<PmsMemberPrice> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            PmsMemberPrice memberPrice = new PmsMemberPrice();
+            final PmsMemberPrice memberPrice = new PmsMemberPrice();
             memberPrice.setProductId(1L);
             memberPrice.setMemberLevelId((long) (i + 1));
             memberPrice.setMemberPrice(new BigDecimal("22"));
@@ -47,9 +47,9 @@ public class PmsDaoTests {
     }
 
     @Test
-    public void testGetProductUpdateInfo() {
-        PmsProductResult productResult = productDao.getUpdateInfo(7L);
-        String json = JSONUtil.parse(productResult).toString();
+    public void getProductUpdateInfo() {
+        final PmsProductResult productResult = productDao.getUpdateInfo(7L);
+        final String json = JSONUtil.parse(productResult).toString();
         LOGGER.info(json);
     }
 }
