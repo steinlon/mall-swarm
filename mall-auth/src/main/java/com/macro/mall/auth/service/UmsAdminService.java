@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UmsAdminService {
 
     @GetMapping("/admin/loadByUsername")
-    UserDto loadUserByUsername(@RequestParam String username);
+    UserDto loadUserByUsername(@RequestParam final String username);
 
 }
