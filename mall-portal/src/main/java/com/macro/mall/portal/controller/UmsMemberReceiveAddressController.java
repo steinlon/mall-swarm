@@ -25,7 +25,7 @@ public class UmsMemberReceiveAddressController {
     @ApiOperation("添加收货地址")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult add(@RequestBody UmsMemberReceiveAddress address) {
+    public CommonResult<?> add(@RequestBody UmsMemberReceiveAddress address) {
         int count = memberReceiveAddressService.add(address);
         if (count > 0) {
             return CommonResult.success(count);
@@ -36,7 +36,7 @@ public class UmsMemberReceiveAddressController {
     @ApiOperation("删除收货地址")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         int count = memberReceiveAddressService.delete(id);
         if (count > 0) {
             return CommonResult.success(count);
@@ -47,7 +47,7 @@ public class UmsMemberReceiveAddressController {
     @ApiOperation("修改收货地址")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody UmsMemberReceiveAddress address) {
+    public CommonResult<?> update(@PathVariable Long id, @RequestBody UmsMemberReceiveAddress address) {
         int count = memberReceiveAddressService.update(id, address);
         if (count > 0) {
             return CommonResult.success(count);

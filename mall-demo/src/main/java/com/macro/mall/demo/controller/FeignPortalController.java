@@ -19,12 +19,12 @@ public class FeignPortalController {
     private FeignPortalService portalService;
 
     @PostMapping("/login")
-    public CommonResult login(@RequestParam String username, @RequestParam String password) {
+    public CommonResult<?> login(@RequestParam String username, @RequestParam String password) {
         return portalService.login(username,password);
     }
 
     @GetMapping("/cartList")
-    public CommonResult cartList() {
+    public CommonResult<?> cartList() {
         return portalService.list();
     }
 }

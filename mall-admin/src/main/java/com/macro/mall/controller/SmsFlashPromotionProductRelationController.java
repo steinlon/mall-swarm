@@ -27,7 +27,7 @@ public class SmsFlashPromotionProductRelationController {
     @ApiOperation("批量选择商品添加关联")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody List<SmsFlashPromotionProductRelation> relationList) {
+    public CommonResult<?> create(@RequestBody List<SmsFlashPromotionProductRelation> relationList) {
         int count = relationService.create(relationList);
         if (count > 0) {
             return CommonResult.success(count);
@@ -38,7 +38,7 @@ public class SmsFlashPromotionProductRelationController {
     @ApiOperation("修改关联相关信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody SmsFlashPromotionProductRelation relation) {
+    public CommonResult<?> update(@PathVariable Long id, @RequestBody SmsFlashPromotionProductRelation relation) {
         int count = relationService.update(id, relation);
         if (count > 0) {
             return CommonResult.success(count);
@@ -49,7 +49,7 @@ public class SmsFlashPromotionProductRelationController {
     @ApiOperation("删除关联")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         int count = relationService.delete(id);
         if (count > 0) {
             return CommonResult.success(count);

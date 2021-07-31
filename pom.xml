@@ -164,12 +164,6 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-            <!--Mysql数据库驱动-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector.version}</version>
-            </dependency>
             <!--SpringData工具包-->
             <dependency>
                 <groupId>org.springframework.data</groupId>

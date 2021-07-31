@@ -27,7 +27,7 @@ public class MemberAttentionController {
     @ApiOperation("添加品牌关注")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult add(@RequestBody MemberBrandAttention memberBrandAttention) {
+    public CommonResult<?> add(@RequestBody MemberBrandAttention memberBrandAttention) {
         int count = memberAttentionService.add(memberBrandAttention);
         if(count>0){
             return CommonResult.success(count);
@@ -39,7 +39,7 @@ public class MemberAttentionController {
     @ApiOperation("取消关注")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(Long brandId) {
+    public CommonResult<?> delete(Long brandId) {
         int count = memberAttentionService.delete(brandId);
         if(count>0){
             return CommonResult.success(count);
@@ -68,7 +68,7 @@ public class MemberAttentionController {
     @ApiOperation("清空关注列表")
     @RequestMapping(value = "/clear", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult clear() {
+    public CommonResult<?> clear() {
         memberAttentionService.clear();
         return CommonResult.success(null);
     }
