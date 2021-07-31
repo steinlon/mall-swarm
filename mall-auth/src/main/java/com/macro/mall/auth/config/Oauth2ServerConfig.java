@@ -1,12 +1,12 @@
 package com.macro.mall.auth.config;
 
 import com.macro.mall.auth.component.JwtTokenEnhancer;
-import com.macro.mall.auth.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -31,12 +31,12 @@ import java.util.List;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("admin-app")
                 .secret(passwordEncoder.encode("123456"))
@@ -54,7 +54,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> delegates = new ArrayList<>();
         delegates.add(jwtTokenEnhancer);
@@ -69,13 +69,13 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    public void configure(final AuthorizationServerSecurityConfigurer security) {
         security.allowFormAuthenticationForClients();
     }
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        final JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setKeyPair(keyPair());
         return jwtAccessTokenConverter;
     }
@@ -83,7 +83,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public KeyPair keyPair() {
         //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
+        final KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
         return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
     }
 

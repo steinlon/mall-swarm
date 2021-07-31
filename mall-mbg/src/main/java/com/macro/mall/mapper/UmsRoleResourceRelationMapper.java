@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UmsRoleResourceRelationMapper {
+
     long countByExample(UmsRoleResourceRelationExample example);
 
     int deleteByExample(UmsRoleResourceRelationExample example);

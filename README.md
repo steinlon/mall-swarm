@@ -92,7 +92,6 @@ mall
 | Axios      | 前端HTTP框架          | https://github.com/axios/axios |
 | v-charts   | 基于Echarts的图表框架 | https://v-charts.js.org/       |
 
-
 ## 环境搭建
 
 ### 开发环境
@@ -102,7 +101,7 @@ mall
 | JDK           | 11    | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
 | Postgres      | 13.3   | https://www.postgresql.org                                   |
 | Redis         | 7.0    | https://redis.io/download                                    |
-| Redis Commander        | 5.0    | https://redis.io/download                                    |
+| Redis Commander | latest   | https://registry.hub.docker.com/r/rediscommander/redis-commander |
 | Elasticsearch | 7.17.3 | https://www.elastic.co/cn/downloads/elasticsearch            |
 | Kibana        | 7.17.3 | https://www.elastic.co/cn/downloads/kibana                   |
 | Logstash      | 7.17.3 | https://www.elastic.co/cn/downloads/logstash                 |
@@ -113,6 +112,7 @@ mall
 ### 搭建步骤
 
 > 数据库部署
+
 - create database mall;
 
 > Windows环境部署
@@ -154,6 +154,7 @@ mall
 
 ![](document/resource/redis_commander.png)
 
+- API文档信息(本地运行)，访问地址：http://localhost:8201/doc.html
 - API文档信息，访问地址：http://192.168.3.101:8201
 
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_05.png)

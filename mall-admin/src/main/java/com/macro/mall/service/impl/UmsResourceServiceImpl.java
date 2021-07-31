@@ -27,20 +27,29 @@ import java.util.stream.Collectors;
 
 /**
  * 后台资源管理Service实现类
- * Created by macro on 2020/2/2.
  */
 @Service
 public class UmsResourceServiceImpl implements UmsResourceService {
+
+    private final UmsResourceMapper resourceMapper;
+    private final UmsRoleMapper roleMapper;
+    private final UmsRoleResourceRelationMapper roleResourceRelationMapper;
+    private final RedisService redisService;
+    private final String applicationName;
+
     @Autowired
-    private UmsResourceMapper resourceMapper;
-    @Autowired
-    private UmsRoleMapper roleMapper;
-    @Autowired
-    private UmsRoleResourceRelationMapper roleResourceRelationMapper;
-    @Autowired
-    private RedisService redisService;
-    @Value("${spring.application.name}")
-    private String applicationName;
+    public UmsResourceServiceImpl(
+            final UmsResourceMapper resourceMapper,
+            final UmsRoleMapper roleMapper,
+            final UmsRoleResourceRelationMapper roleResourceRelationMapper,
+            final RedisService redisService,
+            @Value("${spring.application.name}") final String applicationName) {
+        this.resourceMapper = resourceMapper;
+        this.roleMapper = roleMapper;
+        this.roleResourceRelationMapper = roleResourceRelationMapper;
+        this.redisService = redisService;
+        this.applicationName = applicationName;
+    }
 
     @Override
     public int create(UmsResource umsResource) {
@@ -94,14 +103,20 @@ public class UmsResourceServiceImpl implements UmsResourceService {
 
     @Override
     public Map<String, List<String>> initResourceRolesMap() {
-        Map<String, List<String>> resourceRoleMap = new TreeMap<>();
-        List<UmsResource> resourceList = resourceMapper.selectByExample(new UmsResourceExample());
-        List<UmsRole> roleList = roleMapper.selectByExample(new UmsRoleExample());
-        List<UmsRoleResourceRelation> relationList = roleResourceRelationMapper.selectByExample(new UmsRoleResourceRelationExample());
+        final Map<String, List<String>> resourceRoleMap = new TreeMap<>();
+        final List<UmsResource> resourceList = resourceMapper.selectByExample(new UmsResourceExample());
+        final List<UmsRole> roleList = roleMapper.selectByExample(new UmsRoleExample());
+        final List<UmsRoleResourceRelation> relationList = roleResourceRelationMapper.selectByExample(new UmsRoleResourceRelationExample());
         for (UmsResource resource : resourceList) {
-            Set<Long> roleIds = relationList.stream().filter(item -> item.getResourceId().equals(resource.getId()))
-                    .map(UmsRoleResourceRelation::getRoleId).collect(Collectors.toSet());
-            List<String> roleNames = roleList.stream().filter(item -> roleIds.contains(item.getId())).map(item -> item.getId() + "_" + item.getName())
+            final Set<Long> roleIds = relationList
+                    .stream()
+                    .filter(item -> item.getResourceId().equals(resource.getId()))
+                    .map(UmsRoleResourceRelation::getRoleId)
+                    .collect(Collectors.toSet());
+            List<String> roleNames = roleList
+                    .stream()
+                    .filter(item -> roleIds.contains(item.getId()))
+                    .map(item -> item.getId() + "_" + item.getName())
                     .collect(Collectors.toList());
             resourceRoleMap.put("/" + applicationName + resource.getUrl(), roleNames);
         }
