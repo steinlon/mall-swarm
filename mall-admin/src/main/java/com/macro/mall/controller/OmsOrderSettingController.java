@@ -31,7 +31,7 @@ public class OmsOrderSettingController {
     @ApiOperation("修改指定订单设置")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody OmsOrderSetting orderSetting) {
+    public CommonResult<?> update(@PathVariable Long id, @RequestBody OmsOrderSetting orderSetting) {
         int count = orderSettingService.update(id,orderSetting);
         if(count>0){
             return CommonResult.success(count);

@@ -9,8 +9,9 @@
     <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="springBoot"/>
     <!--日志文件保存路径-->
     <property name="LOG_FILE_PATH" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs}"/>
+    <!-- TODO Remove LogStash and Learn for it in Future -->
     <!--LogStash访问host-->
-    <springProperty name="LOG_STASH_HOST" scope="context" source="logstash.host" defaultValue="localhost"/>
+    <!--    <springProperty name="LOG_STASH_HOST" scope="context" source="logstash.host" defaultValue="localhost"/>-->
 
     <!--DEBUG日志输出到文件-->
     <appender name="FILE_DEBUG"
@@ -59,141 +60,141 @@
     </appender>
 
     <!--DEBUG日志输出到LogStash-->
-    <appender name="LOG_STASH_DEBUG" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
-        </filter>
-        <destination>${LOG_STASH_HOST}:4560</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>Asia/Shanghai</timeZone>
-                </timestamp>
-                <!--自定义日志输出格式-->
-                <pattern>
-                    <pattern>
-                        {
-                        "project": "mall-swarm",
-                        "level": "%level",
-                        "service": "${APP_NAME:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger",
-                        "message": "%message",
-                        "stack_trace": "%exception{20}"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-        <!--当有多个LogStash服务时，设置访问策略为轮询-->
-        <connectionStrategy>
-            <roundRobin>
-                <connectionTTL>5 minutes</connectionTTL>
-            </roundRobin>
-        </connectionStrategy>
-    </appender>
+    <!--    <appender name="LOG_STASH_DEBUG" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+    <!--            <level>DEBUG</level>-->
+    <!--        </filter>-->
+    <!--        <destination>${LOG_STASH_HOST}:4560</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+    <!--            <providers>-->
+    <!--                <timestamp>-->
+    <!--                    <timeZone>Asia/Shanghai</timeZone>-->
+    <!--                </timestamp>-->
+    <!--                &lt;!&ndash;自定义日志输出格式&ndash;&gt;-->
+    <!--                <pattern>-->
+    <!--                    <pattern>-->
+    <!--                        {-->
+    <!--                        "project": "mall-swarm",-->
+    <!--                        "level": "%level",-->
+    <!--                        "service": "${APP_NAME:-}",-->
+    <!--                        "pid": "${PID:-}",-->
+    <!--                        "thread": "%thread",-->
+    <!--                        "class": "%logger",-->
+    <!--                        "message": "%message",-->
+    <!--                        "stack_trace": "%exception{20}"-->
+    <!--                        }-->
+    <!--                    </pattern>-->
+    <!--                </pattern>-->
+    <!--            </providers>-->
+    <!--        </encoder>-->
+    <!--        &lt;!&ndash;当有多个LogStash服务时，设置访问策略为轮询&ndash;&gt;-->
+    <!--        <connectionStrategy>-->
+    <!--            <roundRobin>-->
+    <!--                <connectionTTL>5 minutes</connectionTTL>-->
+    <!--            </roundRobin>-->
+    <!--        </connectionStrategy>-->
+    <!--    </appender>-->
 
     <!--ERROR日志输出到LogStash-->
-    <appender name="LOG_STASH_ERROR" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <destination>${LOG_STASH_HOST}:4561</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>Asia/Shanghai</timeZone>
-                </timestamp>
-                <!--自定义日志输出格式-->
-                <pattern>
-                    <pattern>
-                        {
-                        "project": "mall-swarm",
-                        "level": "%level",
-                        "service": "${APP_NAME:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger",
-                        "message": "%message",
-                        "stack_trace": "%exception{20}"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-        <!--当有多个LogStash服务时，设置访问策略为轮询-->
-        <connectionStrategy>
-            <roundRobin>
-                <connectionTTL>5 minutes</connectionTTL>
-            </roundRobin>
-        </connectionStrategy>
-    </appender>
+    <!--    <appender name="LOG_STASH_ERROR" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--            <level>ERROR</level>-->
+    <!--            <onMatch>ACCEPT</onMatch>-->
+    <!--            <onMismatch>DENY</onMismatch>-->
+    <!--        </filter>-->
+    <!--        <destination>${LOG_STASH_HOST}:4561</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+    <!--            <providers>-->
+    <!--                <timestamp>-->
+    <!--                    <timeZone>Asia/Shanghai</timeZone>-->
+    <!--                </timestamp>-->
+    <!--                &lt;!&ndash;自定义日志输出格式&ndash;&gt;-->
+    <!--                <pattern>-->
+    <!--                    <pattern>-->
+    <!--                        {-->
+    <!--                        "project": "mall-swarm",-->
+    <!--                        "level": "%level",-->
+    <!--                        "service": "${APP_NAME:-}",-->
+    <!--                        "pid": "${PID:-}",-->
+    <!--                        "thread": "%thread",-->
+    <!--                        "class": "%logger",-->
+    <!--                        "message": "%message",-->
+    <!--                        "stack_trace": "%exception{20}"-->
+    <!--                        }-->
+    <!--                    </pattern>-->
+    <!--                </pattern>-->
+    <!--            </providers>-->
+    <!--        </encoder>-->
+    <!--        &lt;!&ndash;当有多个LogStash服务时，设置访问策略为轮询&ndash;&gt;-->
+    <!--        <connectionStrategy>-->
+    <!--            <roundRobin>-->
+    <!--                <connectionTTL>5 minutes</connectionTTL>-->
+    <!--            </roundRobin>-->
+    <!--        </connectionStrategy>-->
+    <!--    </appender>-->
 
-    <!--业务日志输出到LogStash-->
-    <appender name="LOG_STASH_BUSINESS" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${LOG_STASH_HOST}:4562</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>Asia/Shanghai</timeZone>
-                </timestamp>
-                <!--自定义日志输出格式-->
-                <pattern>
-                    <pattern>
-                        {
-                        "project": "mall-swarm",
-                        "level": "%level",
-                        "service": "${APP_NAME:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger",
-                        "message": "%message",
-                        "stack_trace": "%exception{20}"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-        <!--当有多个LogStash服务时，设置访问策略为轮询-->
-        <connectionStrategy>
-            <roundRobin>
-                <connectionTTL>5 minutes</connectionTTL>
-            </roundRobin>
-        </connectionStrategy>
-    </appender>
+    <!--    &lt;!&ndash;业务日志输出到LogStash&ndash;&gt;-->
+    <!--    <appender name="LOG_STASH_BUSINESS" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>${LOG_STASH_HOST}:4562</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+    <!--            <providers>-->
+    <!--                <timestamp>-->
+    <!--                    <timeZone>Asia/Shanghai</timeZone>-->
+    <!--                </timestamp>-->
+    <!--                &lt;!&ndash;自定义日志输出格式&ndash;&gt;-->
+    <!--                <pattern>-->
+    <!--                    <pattern>-->
+    <!--                        {-->
+    <!--                        "project": "mall-swarm",-->
+    <!--                        "level": "%level",-->
+    <!--                        "service": "${APP_NAME:-}",-->
+    <!--                        "pid": "${PID:-}",-->
+    <!--                        "thread": "%thread",-->
+    <!--                        "class": "%logger",-->
+    <!--                        "message": "%message",-->
+    <!--                        "stack_trace": "%exception{20}"-->
+    <!--                        }-->
+    <!--                    </pattern>-->
+    <!--                </pattern>-->
+    <!--            </providers>-->
+    <!--        </encoder>-->
+    <!--        &lt;!&ndash;当有多个LogStash服务时，设置访问策略为轮询&ndash;&gt;-->
+    <!--        <connectionStrategy>-->
+    <!--            <roundRobin>-->
+    <!--                <connectionTTL>5 minutes</connectionTTL>-->
+    <!--            </roundRobin>-->
+    <!--        </connectionStrategy>-->
+    <!--    </appender>-->
 
-    <!--接口访问记录日志输出到LogStash-->
-    <appender name="LOG_STASH_RECORD" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${LOG_STASH_HOST}:4563</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>Asia/Shanghai</timeZone>
-                </timestamp>
-                <!--自定义日志输出格式-->
-                <pattern>
-                    <pattern>
-                        {
-                        "project": "mall-swarm",
-                        "level": "%level",
-                        "service": "${APP_NAME:-}",
-                        "class": "%logger",
-                        "message": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-        <!--当有多个LogStash服务时，设置访问策略为轮询-->
-        <connectionStrategy>
-            <roundRobin>
-                <connectionTTL>5 minutes</connectionTTL>
-            </roundRobin>
-        </connectionStrategy>
-    </appender>
+    <!--    &lt;!&ndash;接口访问记录日志输出到LogStash&ndash;&gt;-->
+    <!--    <appender name="LOG_STASH_RECORD" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>${LOG_STASH_HOST}:4563</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+    <!--            <providers>-->
+    <!--                <timestamp>-->
+    <!--                    <timeZone>Asia/Shanghai</timeZone>-->
+    <!--                </timestamp>-->
+    <!--                &lt;!&ndash;自定义日志输出格式&ndash;&gt;-->
+    <!--                <pattern>-->
+    <!--                    <pattern>-->
+    <!--                        {-->
+    <!--                        "project": "mall-swarm",-->
+    <!--                        "level": "%level",-->
+    <!--                        "service": "${APP_NAME:-}",-->
+    <!--                        "class": "%logger",-->
+    <!--                        "message": "%message"-->
+    <!--                        }-->
+    <!--                    </pattern>-->
+    <!--                </pattern>-->
+    <!--            </providers>-->
+    <!--        </encoder>-->
+    <!--        &lt;!&ndash;当有多个LogStash服务时，设置访问策略为轮询&ndash;&gt;-->
+    <!--        <connectionStrategy>-->
+    <!--            <roundRobin>-->
+    <!--                <connectionTTL>5 minutes</connectionTTL>-->
+    <!--            </roundRobin>-->
+    <!--        </connectionStrategy>-->
+    <!--    </appender>-->
 
     <!--控制框架输出日志-->
     <logger name="org.slf4j" level="INFO"/>
@@ -207,15 +208,15 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_DEBUG"/>
         <appender-ref ref="FILE_ERROR"/>
-        <appender-ref ref="LOG_STASH_DEBUG"/>
-        <appender-ref ref="LOG_STASH_ERROR"/>
+        <!--        <appender-ref ref="LOG_STASH_DEBUG"/>-->
+        <!--        <appender-ref ref="LOG_STASH_ERROR"/>-->
     </root>
 
-    <logger name="com.macro.mall.common.log.WebLogAspect" level="DEBUG">
-        <appender-ref ref="LOG_STASH_RECORD"/>
-    </logger>
+    <!--    <logger name="com.macro.mall.common.log.WebLogAspect" level="DEBUG">-->
+    <!--        <appender-ref ref="LOG_STASH_RECORD"/>-->
+    <!--    </logger>-->
 
-    <logger name="com.macro.mall" level="DEBUG">
-        <appender-ref ref="LOG_STASH_BUSINESS"/>
-    </logger>
+    <!--    <logger name="com.macro.mall" level="DEBUG">-->
+    <!--        <appender-ref ref="LOG_STASH_BUSINESS"/>-->
+    <!--    </logger>-->
 </configuration>

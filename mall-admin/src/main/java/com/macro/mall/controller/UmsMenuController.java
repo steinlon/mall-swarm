@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * 后台菜单管理Controller
- * Created by macro on 2020/2/4.
  */
 @Controller
 @Api(tags = "UmsMenuController", description = "后台菜单管理")
@@ -28,7 +27,7 @@ public class UmsMenuController {
     @ApiOperation("添加后台菜单")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsMenu umsMenu) {
+    public CommonResult<?> create(@RequestBody UmsMenu umsMenu) {
         int count = menuService.create(umsMenu);
         if (count > 0) {
             return CommonResult.success(count);
@@ -40,7 +39,7 @@ public class UmsMenuController {
     @ApiOperation("修改后台菜单")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
+    public CommonResult<?> update(@PathVariable Long id,
                                @RequestBody UmsMenu umsMenu) {
         int count = menuService.update(id, umsMenu);
         if (count > 0) {
@@ -61,7 +60,7 @@ public class UmsMenuController {
     @ApiOperation("根据ID删除后台菜单")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         int count = menuService.delete(id);
         if (count > 0) {
             return CommonResult.success(count);
@@ -91,7 +90,7 @@ public class UmsMenuController {
     @ApiOperation("修改菜单显示状态")
     @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
+    public CommonResult<?> updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
         int count = menuService.updateHidden(id, hidden);
         if (count > 0) {
             return CommonResult.success(count);

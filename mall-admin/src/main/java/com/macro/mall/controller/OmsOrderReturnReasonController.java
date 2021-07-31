@@ -26,7 +26,7 @@ public class OmsOrderReturnReasonController {
     @ApiOperation("添加退货原因")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody OmsOrderReturnReason returnReason) {
+    public CommonResult<?> create(@RequestBody OmsOrderReturnReason returnReason) {
         int count = orderReturnReasonService.create(returnReason);
         if (count > 0) {
             return CommonResult.success(count);
@@ -37,7 +37,7 @@ public class OmsOrderReturnReasonController {
     @ApiOperation("修改退货原因")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody OmsOrderReturnReason returnReason) {
+    public CommonResult<?> update(@PathVariable Long id, @RequestBody OmsOrderReturnReason returnReason) {
         int count = orderReturnReasonService.update(id, returnReason);
         if (count > 0) {
             return CommonResult.success(count);
@@ -48,7 +48,7 @@ public class OmsOrderReturnReasonController {
     @ApiOperation("批量删除退货原因")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@RequestParam("ids") List<Long> ids) {
+    public CommonResult<?> delete(@RequestParam("ids") List<Long> ids) {
         int count = orderReturnReasonService.delete(ids);
         if (count > 0) {
             return CommonResult.success(count);
@@ -76,7 +76,7 @@ public class OmsOrderReturnReasonController {
     @ApiOperation("修改退货原因启用状态")
     @RequestMapping(value = "/update/status", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateStatus(@RequestParam(value = "status") Integer status,
+    public CommonResult<?> updateStatus(@RequestParam(value = "status") Integer status,
                                      @RequestParam("ids") List<Long> ids) {
         int count = orderReturnReasonService.updateStatus(ids, status);
         if (count > 0) {
