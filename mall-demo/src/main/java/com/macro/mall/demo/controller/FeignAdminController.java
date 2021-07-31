@@ -22,12 +22,12 @@ public class FeignAdminController {
     private FeignAdminService adminService;
 
     @PostMapping("/login")
-    public CommonResult login(@RequestBody UmsAdminLoginParam loginParam) {
+    public CommonResult<?> login(@RequestBody UmsAdminLoginParam loginParam) {
         return adminService.login(loginParam);
     }
 
     @GetMapping("/getBrandList")
-    public CommonResult getBrandList(){
+    public CommonResult<?> getBrandList(){
         return adminService.getList();
     }
 }

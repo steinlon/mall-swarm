@@ -26,7 +26,7 @@ public class SmsHomeBrandController {
     @ApiOperation("添加首页推荐品牌")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody List<SmsHomeBrand> homeBrandList) {
+    public CommonResult<?> create(@RequestBody List<SmsHomeBrand> homeBrandList) {
         int count = homeBrandService.create(homeBrandList);
         if (count > 0) {
             return CommonResult.success(count);
@@ -37,7 +37,7 @@ public class SmsHomeBrandController {
     @ApiOperation("修改品牌排序")
     @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateSort(@PathVariable Long id, Integer sort) {
+    public CommonResult<?> updateSort(@PathVariable Long id, Integer sort) {
         int count = homeBrandService.updateSort(id, sort);
         if (count > 0) {
             return CommonResult.success(count);
@@ -48,7 +48,7 @@ public class SmsHomeBrandController {
     @ApiOperation("批量删除推荐品牌")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@RequestParam("ids") List<Long> ids) {
+    public CommonResult<?> delete(@RequestParam("ids") List<Long> ids) {
         int count = homeBrandService.delete(ids);
         if (count > 0) {
             return CommonResult.success(count);
@@ -59,7 +59,7 @@ public class SmsHomeBrandController {
     @ApiOperation("批量修改推荐状态")
     @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
+    public CommonResult<?> updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
         int count = homeBrandService.updateRecommendStatus(ids, recommendStatus);
         if (count > 0) {
             return CommonResult.success(count);

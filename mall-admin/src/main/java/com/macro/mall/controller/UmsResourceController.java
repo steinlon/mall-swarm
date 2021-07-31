@@ -28,7 +28,7 @@ public class UmsResourceController {
     @ApiOperation("添加后台资源")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsResource umsResource) {
+    public CommonResult<?> create(@RequestBody UmsResource umsResource) {
         int count = resourceService.create(umsResource);
         if (count > 0) {
             return CommonResult.success(count);
@@ -40,7 +40,7 @@ public class UmsResourceController {
     @ApiOperation("修改后台资源")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
+    public CommonResult<?> update(@PathVariable Long id,
                                @RequestBody UmsResource umsResource) {
         int count = resourceService.update(id, umsResource);
         if (count > 0) {
@@ -61,7 +61,7 @@ public class UmsResourceController {
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         int count = resourceService.delete(id);
         if (count > 0) {
             return CommonResult.success(count);
@@ -93,7 +93,7 @@ public class UmsResourceController {
     @ApiOperation("初始化资源角色关联数据")
     @RequestMapping(value = "/initResourceRolesMap", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult initResourceRolesMap() {
+    public CommonResult<?> initResourceRolesMap() {
         Map<String, List<String>> resourceRolesMap = resourceService.initResourceRolesMap();
         return CommonResult.success(resourceRolesMap);
     }
