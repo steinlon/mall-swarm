@@ -22,7 +22,7 @@ public class FeignSearchController {
     @ApiOperation(value = "简单商品搜索")
     @RequestMapping(value = "/justSearch", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult search(@RequestParam(required = false) String keyword,
+    public CommonResult<?> search(@RequestParam(required = false) String keyword,
                                @RequestParam(required = false, defaultValue = "0") Integer pageNum,
                                @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
 
