@@ -43,13 +43,13 @@
         <hutool.version>5.4.0</hutool.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mybatis.version>3.5.6</mybatis.version>
-        <spring-data-commons.version>2.5.3</spring-data-commons.version>
+        <spring-data-commons.version>2.3.9.RELEASE</spring-data-commons.version>
         <jjwt.version>0.9.1</jjwt.version>
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
         <logstash-logback.version>6.6</logstash-logback.version>
         <admin-starter-server.version>2.2.3</admin-starter-server.version>
         <minio.version>8.3.0</minio.version>
-        <knife4j.version>2.0.4</knife4j.version>
+        <knife4j.version>3.0.3</knife4j.version>
         <nimbus-jose-jwt.version>8.19</nimbus-jose-jwt.version>
         <mall-common.version>1.0-SNAPSHOT</mall-common.version>
         <mall-mbg.version>1.0-SNAPSHOT</mall-mbg.version>
