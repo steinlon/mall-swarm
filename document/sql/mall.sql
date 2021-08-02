@@ -3406,12 +3406,12 @@ create table `ums_member_level` (
     `default_status`          int(1)         default null comment '是否为默认等级：0->不是；1->是',
     `free_freight_point`      decimal(10, 2) default null comment '免运费标准',
     `comment_growth_point`    int(11)        default null comment '每次评价获取的成长值',
-    `priviledge_free_freight` int(1)         default null comment '是否有免邮特权',
-    `priviledge_sign_in`      int(1)         default null comment '是否有签到特权',
-    `priviledge_comment`      int(1)         default null comment '是否有评论获奖励特权',
-    `priviledge_promotion`    int(1)         default null comment '是否有专享活动特权',
-    `priviledge_member_price` int(1)         default null comment '是否有会员价格特权',
-    `priviledge_birthday`     int(1)         default null comment '是否有生日特权',
+    `privilege_free_freight` int(1)         default null comment '是否有免邮特权',
+    `privilege_sign_in`      int(1)         default null comment '是否有签到特权',
+    `privilege_comment`      int(1)         default null comment '是否有评论获奖励特权',
+    `privilege_promotion`    int(1)         default null comment '是否有专享活动特权',
+    `privilege_member_price` int(1)         default null comment '是否有会员价格特权',
+    `privilege_birthday`     int(1)         default null comment '是否有生日特权',
     `note`                    varchar(200)   default null,
     primary key (`id`)
 )
@@ -3594,7 +3594,7 @@ create table `ums_member_task` (
     `id`           bigint(20) not null auto_increment,
     `name`         varchar(100) default null,
     `growth`       int(11)      default null comment '赠送成长值',
-    `intergration` int(11)      default null comment '赠送积分',
+    `integration` int(11)      default null comment '赠送积分',
     `type`         int(1)       default null comment '任务类型：0->新手任务；1->日常任务',
     primary key (`id`)
 )
