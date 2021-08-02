@@ -13525,8 +13525,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o747">
 <a:ObjectID>437D93E8-BC05-48F4-9103-AAADEC2F18B3</a:ObjectID>
-<a:Name>priviledge_free_freight</a:Name>
-<a:Code>priviledge_free_freight</a:Code>
+<a:Name>privilege_free_freight</a:Name>
+<a:Code>privilege_free_freight</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522380558</a:ModificationDate>
@@ -13537,8 +13537,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o748">
 <a:ObjectID>4ACB8B0D-322B-4240-994A-BF76A866C4C1</a:ObjectID>
-<a:Name>priviledge_sign_in</a:Name>
-<a:Code>priviledge_sign_in</a:Code>
+<a:Name>privilege_sign_in</a:Name>
+<a:Code>privilege_sign_in</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522380566</a:ModificationDate>
@@ -13549,8 +13549,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o749">
 <a:ObjectID>76160658-2A87-4D99-8A9E-9F2CA2752530</a:ObjectID>
-<a:Name>priviledge_comment</a:Name>
-<a:Code>priviledge_comment</a:Code>
+<a:Name>privilege_comment</a:Name>
+<a:Code>privilege_comment</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522380592</a:ModificationDate>
@@ -13561,8 +13561,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o750">
 <a:ObjectID>4BFAE1D1-5395-4502-BA29-FD53E5C998FF</a:ObjectID>
-<a:Name>priviledge_promotion</a:Name>
-<a:Code>priviledge_promotion</a:Code>
+<a:Name>privilege_promotion</a:Name>
+<a:Code>privilege_promotion</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522380617</a:ModificationDate>
@@ -13573,8 +13573,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o751">
 <a:ObjectID>4D408989-5456-40D8-AEEE-9E1E14564E6A</a:ObjectID>
-<a:Name>priviledge_member_price</a:Name>
-<a:Code>priviledge_member_price</a:Code>
+<a:Name>privilege_member_price</a:Name>
+<a:Code>privilege_member_price</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522747697</a:ModificationDate>
@@ -13585,8 +13585,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o752">
 <a:ObjectID>3C4297F8-BFE4-42AC-8967-1627A0EB62AE</a:ObjectID>
-<a:Name>priviledge_birthday</a:Name>
-<a:Code>priviledge_birthday</a:Code>
+<a:Name>privilege_birthday</a:Name>
+<a:Code>privilege_birthday</a:Code>
 <a:CreationDate>1522380199</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522380640</a:ModificationDate>
@@ -14572,8 +14572,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o825">
 <a:ObjectID>55E587FF-CF0D-45D0-B63D-171E313D0FEB</a:ObjectID>
-<a:Name>intergration</a:Name>
-<a:Code>intergration</a:Code>
+<a:Name>integration</a:Name>
+<a:Code>integration</a:Code>
 <a:CreationDate>1522397207</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522397329</a:ModificationDate>
