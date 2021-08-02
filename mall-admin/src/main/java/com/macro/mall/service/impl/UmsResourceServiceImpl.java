@@ -52,38 +52,43 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     }
 
     @Override
-    public int create(UmsResource umsResource) {
+    public int create(final UmsResource umsResource) {
         umsResource.setCreateTime(new Date());
-        int count = resourceMapper.insert(umsResource);
+        final int count = resourceMapper.insert(umsResource);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public int update(Long id, UmsResource umsResource) {
+    public int update(final Long id, final UmsResource umsResource) {
         umsResource.setId(id);
-        int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
+        final int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public UmsResource getItem(Long id) {
+    public UmsResource getItem(final Long id) {
         return resourceMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public int delete(Long id) {
-        int count = resourceMapper.deleteByPrimaryKey(id);
+    public int delete(final Long id) {
+        final int count = resourceMapper.deleteByPrimaryKey(id);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
+    public List<UmsResource> list(
+            final Long categoryId,
+            final String nameKeyword,
+            final String urlKeyword,
+            final Integer pageSize,
+            final Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
-        UmsResourceExample example = new UmsResourceExample();
-        UmsResourceExample.Criteria criteria = example.createCriteria();
+        final UmsResourceExample example = new UmsResourceExample();
+        final UmsResourceExample.Criteria criteria = example.createCriteria();
         if (categoryId != null) {
             criteria.andCategoryIdEqualTo(categoryId);
         }
