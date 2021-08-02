@@ -43,14 +43,15 @@ comment on table cms_help is '帮助分类表';
 -- ----------------------------
 drop table if exists cms_member_report;
 create table cms_member_report (
-    id                 bigint       default null,
+    id                 bigint not null,
     report_type        int          default null,
     report_member_name varchar(100) default null,
     create_time        date         default null,
     report_object      varchar(100) default null,
     report_status      int          default null,
     handle_status      int          default null,
-    note               varchar(200) default null
+    note               varchar(200) default null,
+    primary key (id)
 );
 comment on table cms_member_report is '用户举报表';
 
@@ -90,9 +91,9 @@ values ('4', '让音质更出众44', null, null, null, null);
 -- ----------------------------
 drop table if exists cms_preference_area_product_relation;
 create table cms_preference_area_product_relation (
-    id                bigint not null,
+    id                 bigint not null,
     preference_area_id bigint default null,
-    product_id        bigint default null,
+    product_id         bigint default null,
     primary key (id)
 );
 comment on table cms_preference_area_product_relation is '优选专区和产品关系表';
@@ -2666,23 +2667,10 @@ comment on table ums_admin is '后台用户表';
 -- ----------------------------
 -- Records of ums_admin
 -- ----------------------------
-insert into ums_admin
-values ('1', 'test', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG',
-        'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180607/timg.jpg', 'test@qq.com', '测试账号', null, '2018-09-29 13:55:30',
-        '2018-09-29 13:55:39', '1');
-insert into ums_admin
-values ('3', 'admin', '$2a$10$.E1FokumK5GIXWgKlg.Hc.i/0/2.qdAwYFL1zc5QHdyzpXOr38RZO',
-        'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180607/timg.jpg', 'admin@163.com', '系统管理员', '系统管理员', '2018-10-08 13:32:47',
-        '2019-04-20 12:45:16', '1');
-insert into ums_admin
-values ('4', 'macro', '$2a$10$Bx4jZPR7GhEpIQfefDQtVeS58GfT5n6mxs/b4nLLK65eMFa16topa', 'string', 'macro@qq.com', 'macro', 'macro专用',
-        '2019-10-06 15:53:51', '2020-02-03 14:55:55', '1');
-insert into ums_admin
-values ('6', 'productAdmin', '$2a$10$6/.J.p.6Bhn7ic4GfoB5D.pGd7xSiD1a9M6ht6yO0fxzlKJPjRAGm', null, 'product@qq.com', '商品管理员', '只有商品权限',
-        '2020-02-07 16:15:08', null, '1');
-insert into ums_admin
-values ('7', 'orderAdmin', '$2a$10$UqEhA9UZXjHHA3B.L9wNG.6aerrBjC6WHTtbv1FdvYPUI.7lkL6E.', null, 'order@qq.com', '订单管理员', '只有订单管理权限',
-        '2020-02-07 16:15:50', null, '1');
+insert into ums_admin (username, password, icon, email, nick_name, note, create_time, login_time, status)
+values ('admin', '$2a$10$.E1FokumK5GIXWgKlg.Hc.i/0/2.qdAwYFL1zc5QHdyzpXOr38RZO',
+        'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180607/timg.jpg',
+        'admin@163.com', '系统管理员', '系统管理员', '2018-10-08 13:32:47', '2019-04-20 12:45:16', '1');
 
 -- ----------------------------
 -- Table structure for ums_admin_login_log
@@ -2700,421 +2688,11 @@ create table ums_admin_login_log (
 comment on table ums_admin_login_log is '后台用户登录日志表';
 
 -- ----------------------------
--- Records of ums_admin_login_log
--- ----------------------------
-insert into ums_admin_login_log
-values ('1', '3', '2018-12-23 14:27:00', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('2', '3', '2019-04-07 16:04:39', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('3', '3', '2019-04-08 21:47:52', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('4', '3', '2019-04-08 21:48:18', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('5', '3', '2019-04-18 22:18:40', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('6', '3', '2019-04-20 12:45:16', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('7', '3', '2019-05-19 14:52:12', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('8', '3', '2019-05-25 15:00:17', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('9', '3', '2019-06-19 20:11:42', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('10', '3', '2019-06-30 10:33:48', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('11', '3', '2019-06-30 10:34:31', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('12', '3', '2019-06-30 10:35:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('13', '3', '2019-07-27 17:11:01', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('14', '3', '2019-07-27 17:13:18', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('15', '3', '2019-07-27 17:15:35', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('16', '3', '2019-07-27 17:17:11', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('17', '3', '2019-07-27 17:18:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('18', '3', '2019-07-27 21:21:52', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('19', '3', '2019-07-27 21:34:29', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('20', '3', '2019-07-27 21:35:17', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('21', '3', '2019-07-27 21:35:48', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('22', '3', '2019-07-27 21:40:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('23', '3', '2019-08-18 16:00:38', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('24', '3', '2019-08-18 16:01:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('25', '3', '2019-08-18 16:47:01', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('26', '3', '2019-10-06 15:54:23', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('27', '3', '2019-10-06 16:03:28', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('28', '3', '2019-10-06 16:04:51', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('29', '3', '2019-10-06 16:06:44', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('30', '3', '2019-10-06 16:14:51', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('31', '1', '2019-10-06 16:15:09', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('32', '1', '2019-10-06 16:16:14', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('33', '3', '2019-10-06 16:16:35', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('34', '3', '2019-10-06 16:16:42', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('35', '3', '2019-10-07 15:20:48', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('36', '3', '2019-10-07 15:40:07', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('37', '3', '2019-10-07 16:34:15', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('38', '3', '2019-10-09 21:19:08', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('39', '4', '2019-10-09 21:30:35', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('40', '4', '2019-10-09 21:31:30', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('41', '4', '2019-10-09 21:32:39', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('42', '4', '2019-10-09 21:33:27', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('43', '4', '2019-10-09 21:33:50', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('44', '3', '2019-10-20 16:02:53', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('45', '3', '2019-10-23 21:20:55', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('46', '3', '2019-10-27 21:41:45', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('47', '3', '2019-11-09 16:44:57', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('48', '3', '2019-11-09 16:46:56', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('49', '3', '2019-11-09 16:49:55', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('50', '3', '2019-11-23 14:17:16', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('51', '6', '2019-11-23 14:52:30', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('52', '3', '2019-11-23 15:07:24', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('53', '3', '2019-11-30 21:25:30', '192.168.3.185', null, null);
-insert into ums_admin_login_log
-values ('54', '3', '2019-11-30 21:27:54', '192.168.3.185', null, null);
-insert into ums_admin_login_log
-values ('55', '3', '2019-12-28 15:23:01', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('56', '3', '2020-01-01 15:21:46', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('57', '3', '2020-01-04 16:00:54', '192.168.3.185', null, null);
-insert into ums_admin_login_log
-values ('58', '3', '2020-02-01 15:05:19', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('59', '3', '2020-02-01 15:36:05', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('60', '3', '2020-02-01 15:36:36', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('61', '3', '2020-02-01 15:37:30', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('62', '3', '2020-02-01 15:37:46', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('63', '3', '2020-02-01 15:38:20', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('64', '3', '2020-02-01 15:38:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('65', '3', '2020-02-01 15:39:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('66', '3', '2020-02-01 15:41:31', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('67', '3', '2020-02-01 15:43:17', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('68', '3', '2020-02-01 15:44:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('69', '3', '2020-02-01 15:45:10', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('70', '3', '2020-02-01 15:46:04', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('71', '3', '2020-02-01 15:48:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('72', '3', '2020-02-01 16:00:07', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('73', '3', '2020-02-01 16:07:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('74', '3', '2020-02-01 16:08:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('75', '3', '2020-02-02 15:28:13', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('76', '3', '2020-02-02 15:44:37', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('77', '3', '2020-02-02 15:45:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('78', '3', '2020-02-02 15:52:32', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('79', '3', '2020-02-02 15:53:44', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('80', '3', '2020-02-02 15:54:36', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('81', '3', '2020-02-02 16:01:00', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('82', '3', '2020-02-02 16:05:19', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('83', '3', '2020-02-02 16:06:31', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('84', '3', '2020-02-02 16:17:26', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('85', '3', '2020-02-02 16:18:45', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('86', '3', '2020-02-02 16:19:05', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('87', '3', '2020-02-02 16:19:23', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('88', '3', '2020-02-02 16:22:27', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('89', '3', '2020-02-02 16:23:30', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('90', '3', '2020-02-02 16:23:48', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('91', '3', '2020-02-02 16:24:38', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('92', '3', '2020-02-02 16:25:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('93', '3', '2020-02-02 16:26:19', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('94', '3', '2020-02-02 16:26:31', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('95', '3', '2020-02-02 16:27:08', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('96', '3', '2020-02-02 16:31:02', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('97', '3', '2020-02-02 16:31:08', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('98', '3', '2020-02-02 16:31:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('99', '3', '2020-02-02 16:31:50', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('100', '3', '2020-02-02 16:33:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('101', '3', '2020-02-02 16:33:41', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('102', '3', '2020-02-02 16:34:58', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('103', '3', '2020-02-02 16:38:42', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('104', '3', '2020-02-02 16:39:41', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('105', '3', '2020-02-02 16:42:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('106', '3', '2020-02-02 16:46:21', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('107', '3', '2020-02-02 16:50:23', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('108', '3', '2020-02-02 16:51:11', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('109', '3', '2020-02-02 16:51:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('110', '3', '2020-02-02 16:52:00', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('111', '3', '2020-02-02 17:01:05', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('112', '3', '2020-02-03 10:43:22', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('113', '3', '2020-02-03 10:45:29', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('114', '3', '2020-02-03 10:46:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('115', '3', '2020-02-03 10:54:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('116', '3', '2020-02-03 14:24:47', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('117', '3', '2020-02-03 14:25:38', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('118', '5', '2020-02-03 15:22:28', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('119', '5', '2020-02-03 15:23:00', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('120', '5', '2020-02-03 15:24:29', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('121', '3', '2020-02-03 15:24:50', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('122', '5', '2020-02-03 15:27:18', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('123', '3', '2020-02-03 15:27:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('124', '3', '2020-02-03 15:29:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('125', '5', '2020-02-03 15:33:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('126', '3', '2020-02-03 15:33:51', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('127', '1', '2020-02-03 15:34:35', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('128', '3', '2020-02-03 15:34:47', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('129', '3', '2020-02-04 14:14:46', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('130', '3', '2020-02-05 10:33:35', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('131', '3', '2020-02-05 10:36:21', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('132', '3', '2020-02-05 16:34:37', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('133', '4', '2020-02-05 16:58:37', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('134', '3', '2020-02-05 16:59:03', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('135', '3', '2020-02-06 10:25:02', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('136', '3', '2020-02-07 14:34:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('137', '3', '2020-02-07 14:36:20', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('138', '1', '2020-02-07 14:43:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('139', '3', '2020-02-07 15:18:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('140', '3', '2020-02-07 15:20:07', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('141', '3', '2020-02-07 15:22:20', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('142', '3', '2020-02-07 15:22:28', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('143', '3', '2020-02-07 15:55:11', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('144', '3', '2020-02-07 15:56:04', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('145', '3', '2020-02-07 15:58:49', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('146', '6', '2020-02-07 16:16:21', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('147', '7', '2020-02-07 16:16:37', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('148', '3', '2020-02-07 16:18:39', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('149', '7', '2020-02-07 16:20:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('150', '3', '2020-02-07 16:20:44', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('151', '3', '2020-02-07 16:32:31', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('152', '3', '2020-02-07 19:32:34', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('153', '3', '2020-02-07 19:32:48', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('154', '3', '2020-02-07 19:33:01', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('155', '3', '2020-02-07 19:33:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('156', '3', '2020-02-07 19:33:21', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('157', '3', '2020-02-07 19:35:33', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('158', '3', '2020-02-07 19:37:10', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('159', '3', '2020-02-07 19:37:14', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('160', '3', '2020-02-07 19:37:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('161', '3', '2020-02-07 19:45:41', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('162', '3', '2020-02-07 19:47:45', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('163', '3', '2020-02-07 20:02:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('164', '6', '2020-02-07 20:10:55', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('165', '6', '2020-02-07 20:11:02', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('166', '6', '2020-02-07 20:13:44', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('167', '6', '2020-02-07 20:17:14', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('168', '3', '2020-02-07 20:17:44', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('169', '6', '2020-02-07 20:18:13', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('170', '3', '2020-02-10 10:28:14', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('171', '3', '2020-02-10 10:45:15', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('172', '3', '2020-02-10 10:57:46', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('173', '3', '2020-02-10 10:59:06', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('174', '3', '2020-02-10 11:04:19', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('175', '3', '2020-02-10 11:05:55', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('176', '3', '2020-02-10 11:06:45', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('177', '3', '2020-02-10 11:07:41', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('178', '3', '2020-02-10 11:08:13', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('179', '3', '2020-02-10 11:10:02', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('180', '6', '2020-02-10 14:25:17', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('181', '6', '2020-02-10 14:29:14', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('182', '3', '2020-02-10 16:09:16', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('183', '3', '2020-02-20 14:39:19', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('184', '8', '2020-02-20 17:14:58', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('185', '8', '2020-02-20 17:17:04', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('186', '8', '2020-02-20 17:17:42', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('187', '8', '2020-02-21 10:26:56', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('188', '8', '2020-02-21 10:28:54', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('189', '8', '2020-02-21 10:32:25', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('190', '8', '2020-02-21 10:33:41', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('191', '8', '2020-02-21 10:35:58', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('192', '8', '2020-02-21 10:36:49', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('193', '3', '2020-02-21 11:10:11', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('194', '3', '2020-02-25 16:11:13', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('195', '3', '2020-02-25 16:46:29', '0:0:0:0:0:0:0:1', null, null);
-insert into ums_admin_login_log
-values ('196', '6', '2020-08-24 13:39:59', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('197', '3', '2020-08-24 13:40:08', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('198', '3', '2020-08-24 13:40:14', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('199', '3', '2020-08-24 13:40:20', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('200', '1', '2020-08-24 13:40:55', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('201', '3', '2020-08-24 13:42:42', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('202', '6', '2020-08-24 13:45:28', '192.168.5.145', null, null);
-insert into ums_admin_login_log
-values ('203', '3', '2020-08-24 13:45:39', '192.168.5.145', null, null);
-
--- ----------------------------
 -- Table structure for ums_admin_permission_relation
 -- ----------------------------
 drop table if exists ums_admin_permission_relation;
 create table ums_admin_permission_relation (
-    id            bigint not null,
+    id            serial not null,
     admin_id      bigint default null,
     permission_id bigint default null,
     type          int    default null,
@@ -3123,15 +2701,11 @@ create table ums_admin_permission_relation (
 comment on table ums_admin_permission_relation is '后台用户和权限关系表(除角色中定义的权限以外的加减权限)';
 
 -- ----------------------------
--- Records of ums_admin_permission_relation
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_admin_role_relation
 -- ----------------------------
 drop table if exists ums_admin_role_relation;
 create table ums_admin_role_relation (
-    id       bigint not null,
+    id       serial not null,
     admin_id bigint default null,
     role_id  bigint default null,
     primary key (id)
@@ -3141,23 +2715,15 @@ comment on table ums_admin_role_relation is '后台用户和角色关系表';
 -- ----------------------------
 -- Records of ums_admin_role_relation
 -- ----------------------------
-insert into ums_admin_role_relation
-values ('26', '3', '5');
-insert into ums_admin_role_relation
-values ('27', '6', '1');
-insert into ums_admin_role_relation
-values ('28', '7', '2');
-insert into ums_admin_role_relation
-values ('29', '1', '5');
-insert into ums_admin_role_relation
-values ('30', '4', '5');
+insert into ums_admin_role_relation(admin_id, role_id)
+values (1, 5);
 
 -- ----------------------------
 -- Table structure for ums_growth_change_history
 -- ----------------------------
 drop table if exists ums_growth_change_history;
 create table ums_growth_change_history (
-    id           bigint not null,
+    id           serial not null,
     member_id    bigint       default null,
     create_time  date         default null,
     change_type  int          default null,
@@ -3172,15 +2738,15 @@ comment on table ums_growth_change_history is '成长值变化历史记录表';
 -- ----------------------------
 -- Records of ums_growth_change_history
 -- ----------------------------
-insert into ums_growth_change_history
-values ('1', '1', '2018-08-29 17:16:35', '0', '1000', 'test', '测试使用', '1');
+insert into ums_growth_change_history (member_id, create_time, change_type, change_count, operate_man, operate_note, source_type)
+values (1, '2018-08-29 17:16:35', '0', '1000', 'test', '测试使用', 1);
 
 -- ----------------------------
 -- Table structure for ums_integration_change_history
 -- ----------------------------
 drop table if exists ums_integration_change_history;
 create table ums_integration_change_history (
-    id           bigint not null,
+    id           serial not null,
     member_id    bigint       default null,
     create_time  date         default null,
     change_type  int          default null,
@@ -3193,15 +2759,11 @@ create table ums_integration_change_history (
 comment on table ums_integration_change_history is '积分变化历史记录表';
 
 -- ----------------------------
--- Records of ums_integration_change_history
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_integration_consume_setting
 -- ----------------------------
 drop table if exists ums_integration_consume_setting;
 create table ums_integration_consume_setting (
-    id                    bigint not null,
+    id                    serial not null,
     deduction_per_amount  int default null,
     max_percent_per_order int default null,
     use_unit              int default null,
@@ -3213,8 +2775,8 @@ comment on table ums_integration_consume_setting is '积分消费设置';
 -- ----------------------------
 -- Records of ums_integration_consume_setting
 -- ----------------------------
-insert into ums_integration_consume_setting
-values ('1', '100', '50', '100', '1');
+insert into ums_integration_consume_setting (deduction_per_amount, max_percent_per_order, use_unit, coupon_status)
+values (100, 50, 100, 1);
 
 -- ----------------------------
 -- Table structure for ums_member
@@ -3279,19 +2841,19 @@ values ('9', '4', 'aewen', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi
 -- ----------------------------
 drop table if exists ums_member_level;
 create table ums_member_level (
-    id                      bigint not null,
-    name                    varchar(100)   default null,
-    growth_point            int            default null,
-    default_status          int            default null,
-    free_freight_point      decimal(10, 2) default null,
-    comment_growth_point    int            default null,
-    priviledge_free_freight int            default null,
-    priviledge_sign_in      int            default null,
-    priviledge_comment      int            default null,
-    priviledge_promotion    int            default null,
-    priviledge_member_price int            default null,
-    priviledge_birthday     int            default null,
-    note                    varchar(200)   default null,
+    id                     serial not null,
+    name                   varchar(100)   default null,
+    growth_point           int            default null,
+    default_status         int            default null,
+    free_freight_point     decimal(10, 2) default null,
+    comment_growth_point   int            default null,
+    privilege_free_freight int            default null,
+    privilege_sign_in      int            default null,
+    privilege_comment      int            default null,
+    privilege_promotion    int            default null,
+    privilege_member_price int            default null,
+    privilege_birthday     int            default null,
+    note                   varchar(200)   default null,
     primary key (id)
 );
 comment on table ums_member_level is '会员等级表';
@@ -3299,14 +2861,22 @@ comment on table ums_member_level is '会员等级表';
 -- ----------------------------
 -- Records of ums_member_level
 -- ----------------------------
-insert into ums_member_level
-values ('1', '黄金会员', '1000', '0', '199.00', '5', '1', '1', '1', '1', '1', '1', null);
-insert into ums_member_level
-values ('2', '白金会员', '5000', '0', '99.00', '10', '1', '1', '1', '1', '1', '1', null);
-insert into ums_member_level
-values ('3', '钻石会员', '15000', '0', '69.00', '15', '1', '1', '1', '1', '1', '1', null);
-insert into ums_member_level
-values ('4', '普通会员', '1', '1', '199.00', '20', '1', '1', '1', '1', '0', '0', null);
+insert into ums_member_level (name, growth_point, default_status, free_freight_point, comment_growth_point,
+                              privilege_free_freight, privilege_sign_in, privilege_comment, privilege_promotion,
+                              privilege_member_price, privilege_birthday, note)
+values ('黄金会员', '1000', '0', '199.00', '5', '1', '1', '1', '1', '1', '1', null);
+insert into ums_member_level (name, growth_point, default_status, free_freight_point, comment_growth_point,
+                              privilege_free_freight, privilege_sign_in, privilege_comment, privilege_promotion,
+                              privilege_member_price, privilege_birthday, note)
+values ('白金会员', '5000', '0', '99.00', '10', '1', '1', '1', '1', '1', '1', null);
+insert into ums_member_level (name, growth_point, default_status, free_freight_point, comment_growth_point,
+                              privilege_free_freight, privilege_sign_in, privilege_comment, privilege_promotion,
+                              privilege_member_price, privilege_birthday, note)
+values ('钻石会员', '15000', '0', '69.00', '15', '1', '1', '1', '1', '1', '1', null);
+insert into ums_member_level (name, growth_point, default_status, free_freight_point, comment_growth_point,
+                              privilege_free_freight, privilege_sign_in, privilege_comment, privilege_promotion,
+                              privilege_member_price, privilege_birthday, note)
+values ('普通会员', '1', '1', '199.00', '20', '1', '1', '1', '1', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for ums_member_login_log
@@ -3325,15 +2895,11 @@ create table ums_member_login_log (
 comment on table ums_member_login_log is '会员登录记录';
 
 -- ----------------------------
--- Records of ums_member_login_log
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_member_member_tag_relation
 -- ----------------------------
 drop table if exists ums_member_member_tag_relation;
 create table ums_member_member_tag_relation (
-    id        bigint not null,
+    id        serial not null,
     member_id bigint default null,
     tag_id    bigint default null,
     primary key (id)
@@ -3341,24 +2907,16 @@ create table ums_member_member_tag_relation (
 comment on table ums_member_member_tag_relation is '用户和标签关系表';
 
 -- ----------------------------
--- Records of ums_member_member_tag_relation
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_member_product_category_relation
 -- ----------------------------
 drop table if exists ums_member_product_category_relation;
 create table ums_member_product_category_relation (
-    id                  bigint not null,
+    id                  serial not null,
     member_id           bigint default null,
     product_category_id bigint default null,
     primary key (id)
 );
 comment on table ums_member_product_category_relation is '会员与产品分类关系表（用户喜欢的分类）';
-
--- ----------------------------
--- Records of ums_member_product_category_relation
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for ums_member_receive_address
@@ -3394,7 +2952,7 @@ values ('4', '1', '大梨', '18033441849', '1', '518000', '广东省', '深圳�
 -- ----------------------------
 drop table if exists ums_member_rule_setting;
 create table ums_member_rule_setting (
-    id                  bigint not null,
+    id                  serial not null,
     continue_sign_day   int            default null,
     continue_sign_point int            default null,
     consume_per_point   decimal(10, 2) default null,
@@ -3406,15 +2964,11 @@ create table ums_member_rule_setting (
 comment on table ums_member_rule_setting is '会员积分成长规则表';
 
 -- ----------------------------
--- Records of ums_member_rule_setting
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_member_statistics_info
 -- ----------------------------
 drop table if exists ums_member_statistics_info;
 create table ums_member_statistics_info (
-    id                    bigint not null,
+    id                    serial not null,
     member_id             bigint         default null,
     consume_amount        decimal(10, 2) default null,
     order_count           int            default null,
@@ -3435,15 +2989,11 @@ create table ums_member_statistics_info (
 comment on table ums_member_statistics_info is '会员统计信息';
 
 -- ----------------------------
--- Records of ums_member_statistics_info
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_member_tag
 -- ----------------------------
 drop table if exists ums_member_tag;
 create table ums_member_tag (
-    id                  bigint not null,
+    id                  serial not null,
     name                varchar(100)   default null,
     finish_order_count  int            default null,
     finish_order_amount decimal(10, 2) default null,
@@ -3452,29 +3002,22 @@ create table ums_member_tag (
 comment on table ums_member_tag is '用户标签表';
 
 -- ----------------------------
--- Records of ums_member_tag
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ums_member_task
 -- ----------------------------
 drop table if exists ums_member_task;
 create table ums_member_task (
-    id           bigint not null,
-    name         varchar(100) default null,
-    growth       int          default null,
-    intergration int          default null,
-    type         int          default null,
+    id          serial not null,
+    name        varchar(100) default null,
+    growth      int          default null,
+    integration int          default null,
+    type        int          default null,
     primary key (id)
 );
 comment on table ums_member_task is '会员任务表';
 
 -- ----------------------------
--- Records of ums_member_task
+-- Table structure for ums_menu--
 -- ----------------------------
-
--- ----------------------------
--- Table structure for ums_menu-- ----------------------------
 drop table if exists ums_menu;
 create table ums_menu (
     id          serial not null,
@@ -3491,58 +3034,60 @@ create table ums_menu (
 comment on table ums_menu is '后台菜单表';
 
 -- ----------------------------
--- Records of ums_menu-- ----------------------------
-insert into ums_menu
-values ('1', '0', '2020-02-02 14:50:36', '商品', '0', '0', 'pms', 'product', '0');
-insert into ums_menu
-values ('2', '1', '2020-02-02 14:51:50', '商品列表', '1', '0', 'product', 'product-list', '0');
-insert into ums_menu
-values ('3', '1', '2020-02-02 14:52:44', '添加商品', '1', '0', 'addProduct', 'product-add', '0');
-insert into ums_menu
-values ('4', '1', '2020-02-02 14:53:51', '商品分类', '1', '0', 'productCate', 'product-cate', '0');
-insert into ums_menu
-values ('5', '1', '2020-02-02 14:54:51', '商品类型', '1', '0', 'productAttr', 'product-attr', '0');
-insert into ums_menu
-values ('6', '1', '2020-02-02 14:56:29', '品牌管理', '1', '0', 'brand', 'product-brand', '0');
-insert into ums_menu
-values ('7', '0', '2020-02-02 16:54:07', '订单', '0', '0', 'oms', 'order', '0');
-insert into ums_menu
-values ('8', '7', '2020-02-02 16:55:18', '订单列表', '1', '0', 'order', 'product-list', '0');
-insert into ums_menu
-values ('9', '7', '2020-02-02 16:56:46', '订单设置', '1', '0', 'orderSetting', 'order-setting', '0');
-insert into ums_menu
-values ('10', '7', '2020-02-02 16:57:39', '退货申请处理', '1', '0', 'returnApply', 'order-return', '0');
-insert into ums_menu
-values ('11', '7', '2020-02-02 16:59:40', '退货原因设置', '1', '0', 'returnReason', 'order-return-reason', '0');
-insert into ums_menu
-values ('12', '0', '2020-02-04 16:18:00', '营销', '0', '0', 'sms', 'sms', '0');
-insert into ums_menu
-values ('13', '12', '2020-02-04 16:19:22', '秒杀活动列表', '1', '0', 'flash', 'sms-flash', '0');
-insert into ums_menu
-values ('14', '12', '2020-02-04 16:20:16', '优惠券列表', '1', '0', 'coupon', 'sms-coupon', '0');
-insert into ums_menu
-values ('16', '12', '2020-02-07 16:22:38', '品牌推荐', '1', '0', 'homeBrand', 'product-brand', '0');
-insert into ums_menu
-values ('17', '12', '2020-02-07 16:23:14', '新品推荐', '1', '0', 'homeNew', 'sms-new', '0');
-insert into ums_menu
-values ('18', '12', '2020-02-07 16:26:38', '人气推荐', '1', '0', 'homeHot', 'sms-hot', '0');
-insert into ums_menu
-values ('19', '12', '2020-02-07 16:28:16', '专题推荐', '1', '0', 'homeSubject', 'sms-subject', '0');
-insert into ums_menu
-values ('20', '12', '2020-02-07 16:28:42', '广告列表', '1', '0', 'homeAdvertise', 'sms-ad', '0');
-insert into ums_menu
-values ('21', '0', '2020-02-07 16:29:13', '权限', '0', '0', 'ums', 'ums', '0');
-insert into ums_menu
-values ('22', '21', '2020-02-07 16:29:51', '用户列表', '1', '0', 'admin', 'ums-admin', '0');
-insert into ums_menu
-values ('23', '21', '2020-02-07 16:30:13', '角色列表', '1', '0', 'role', 'ums-role', '0');
-insert into ums_menu
-values ('24', '21', '2020-02-07 16:30:53', '菜单列表', '1', '0', 'menu', 'ums-menu', '0');
-insert into ums_menu
-values ('25', '21', '2020-02-07 16:31:13', '资源列表', '1', '0', 'resource', 'ums-resource', '0');
+-- Records of ums_menu--
+-- ----------------------------
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('0', '2020-02-02 14:50:36', '商品', '0', '0', 'pms', 'product', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('1', '2020-02-02 14:51:50', '商品列表', '1', '0', 'product', 'product-list', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('1', '2020-02-02 14:52:44', '添加商品', '1', '0', 'addProduct', 'product-add', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('1', '2020-02-02 14:53:51', '商品分类', '1', '0', 'productCate', 'product-cate', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('1', '2020-02-02 14:54:51', '商品类型', '1', '0', 'productAttr', 'product-attr', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('1', '2020-02-02 14:56:29', '品牌管理', '1', '0', 'brand', 'product-brand', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('0', '2020-02-02 16:54:07', '订单', '0', '0', 'oms', 'order', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('7', '2020-02-02 16:55:18', '订单列表', '1', '0', 'order', 'product-list', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('7', '2020-02-02 16:56:46', '订单设置', '1', '0', 'orderSetting', 'order-setting', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('7', '2020-02-02 16:57:39', '退货申请处理', '1', '0', 'returnApply', 'order-return', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('7', '2020-02-02 16:59:40', '退货原因设置', '1', '0', 'returnReason', 'order-return-reason', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('0', '2020-02-04 16:18:00', '营销', '0', '0', 'sms', 'sms', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-04 16:19:22', '秒杀活动列表', '1', '0', 'flash', 'sms-flash', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-04 16:20:16', '优惠券列表', '1', '0', 'coupon', 'sms-coupon', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-07 16:22:38', '品牌推荐', '1', '0', 'homeBrand', 'product-brand', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-07 16:23:14', '新品推荐', '1', '0', 'homeNew', 'sms-new', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-07 16:26:38', '人气推荐', '1', '0', 'homeHot', 'sms-hot', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-07 16:28:16', '专题推荐', '1', '0', 'homeSubject', 'sms-subject', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('12', '2020-02-07 16:28:42', '广告列表', '1', '0', 'homeAdvertise', 'sms-ad', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('0', '2020-02-07 16:29:13', '权限', '0', '0', 'ums', 'ums', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('21', '2020-02-07 16:29:51', '用户列表', '1', '0', 'admin', 'ums-admin', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('21', '2020-02-07 16:30:13', '角色列表', '1', '0', 'role', 'ums-role', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('21', '2020-02-07 16:30:53', '菜单列表', '1', '0', 'menu', 'ums-menu', '0');
+insert into ums_menu (parent_id, create_time, title, level, sort, name, icon, hidden)
+values ('21', '2020-02-07 16:31:13', '资源列表', '1', '0', 'resource', 'ums-resource', '0');
 
 -- ----------------------------
--- Table structure forums_permission-- ----------------------------
+-- Table structure forums_permission--
+-- ----------------------------
 drop table if exists ums_permission;
 create table ums_permission (
     id          serial not null,
@@ -3560,43 +3105,44 @@ create table ums_permission (
 comment on table ums_permission is '后台用户权限表';
 
 -- ----------------------------
--- Records ofums_permission-- ----------------------------
-insert into ums_permission
-values ('1', '0', '商品', null, null, '0', null, '1', '2018-09-29 16:15:14', '0');
-insert into ums_permission
-values ('2', '1', '商品列表', 'pms:product:read', null, '1', '/pms/product/index', '1', '2018-09-29 16:17:01', '0');
-insert into ums_permission
-values ('3', '1', '添加商品', 'pms:product:create', null, '1', '/pms/product/add', '1', '2018-09-29 16:18:51', '0');
-insert into ums_permission
-values ('4', '1', '商品分类', 'pms:productCategory:read', null, '1', '/pms/productCate/index', '1', '2018-09-29 16:23:07', '0');
-insert into ums_permission
-values ('5', '1', '商品类型', 'pms:productAttribute:read', null, '1', '/pms/productAttr/index', '1', '2018-09-29 16:24:43', '0');
-insert into ums_permission
-values ('6', '1', '品牌管理', 'pms:brand:read', null, '1', '/pms/brand/index', '1', '2018-09-29 16:25:45', '0');
-insert into ums_permission
-values ('7', '2', '编辑商品', 'pms:product:update', null, '2', '/pms/product/updateProduct', '1', '2018-09-29 16:34:23', '0');
-insert into ums_permission
-values ('8', '2', '删除商品', 'pms:product:delete', null, '2', '/pms/product/delete', '1', '2018-09-29 16:38:33', '0');
-insert into ums_permission
-values ('9', '4', '添加商品分类', 'pms:productCategory:create', null, '2', '/pms/productCate/create', '1', '2018-09-29 16:43:23', '0');
-insert into ums_permission
-values ('10', '4', '修改商品分类', 'pms:productCategory:update', null, '2', '/pms/productCate/update', '1', '2018-09-29 16:43:55', '0');
-insert into ums_permission
-values ('11', '4', '删除商品分类', 'pms:productCategory:delete', null, '2', '/pms/productAttr/delete', '1', '2018-09-29 16:44:38', '0');
-insert into ums_permission
-values ('12', '5', '添加商品类型', 'pms:productAttribute:create', null, '2', '/pms/productAttr/create', '1', '2018-09-29 16:45:25', '0');
-insert into ums_permission
-values ('13', '5', '修改商品类型', 'pms:productAttribute:update', null, '2', '/pms/productAttr/update', '1', '2018-09-29 16:48:08', '0');
-insert into ums_permission
-values ('14', '5', '删除商品类型', 'pms:productAttribute:delete', null, '2', '/pms/productAttr/delete', '1', '2018-09-29 16:48:44', '0');
-insert into ums_permission
-values ('15', '6', '添加品牌', 'pms:brand:create', null, '2', '/pms/brand/add', '1', '2018-09-29 16:49:34', '0');
-insert into ums_permission
-values ('16', '6', '修改品牌', 'pms:brand:update', null, '2', '/pms/brand/update', '1', '2018-09-29 16:50:55', '0');
-insert into ums_permission
-values ('17', '6', '删除品牌', 'pms:brand:delete', null, '2', '/pms/brand/delete', '1', '2018-09-29 16:50:59', '0');
-insert into ums_permission
-values ('18', '0', '首页', null, null, '0', null, '1', '2018-09-29 16:51:57', '0');
+-- Records of ums_permission--
+-- ----------------------------
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('0', '商品', null, null, '0', null, '1', '2018-09-29 16:15:14', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('1', '商品列表', 'pms:product:read', null, '1', '/pms/product/index', '1', '2018-09-29 16:17:01', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('1', '添加商品', 'pms:product:create', null, '1', '/pms/product/add', '1', '2018-09-29 16:18:51', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('1', '商品分类', 'pms:productCategory:read', null, '1', '/pms/productCate/index', '1', '2018-09-29 16:23:07', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('1', '商品类型', 'pms:productAttribute:read', null, '1', '/pms/productAttr/index', '1', '2018-09-29 16:24:43', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('1', '品牌管理', 'pms:brand:read', null, '1', '/pms/brand/index', '1', '2018-09-29 16:25:45', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('2', '编辑商品', 'pms:product:update', null, '2', '/pms/product/updateProduct', '1', '2018-09-29 16:34:23', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('2', '删除商品', 'pms:product:delete', null, '2', '/pms/product/delete', '1', '2018-09-29 16:38:33', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('4', '添加商品分类', 'pms:productCategory:create', null, '2', '/pms/productCate/create', '1', '2018-09-29 16:43:23', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('4', '修改商品分类', 'pms:productCategory:update', null, '2', '/pms/productCate/update', '1', '2018-09-29 16:43:55', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('4', '删除商品分类', 'pms:productCategory:delete', null, '2', '/pms/productAttr/delete', '1', '2018-09-29 16:44:38', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('5', '添加商品类型', 'pms:productAttribute:create', null, '2', '/pms/productAttr/create', '1', '2018-09-29 16:45:25', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('5', '修改商品类型', 'pms:productAttribute:update', null, '2', '/pms/productAttr/update', '1', '2018-09-29 16:48:08', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('5', '删除商品类型', 'pms:productAttribute:delete', null, '2', '/pms/productAttr/delete', '1', '2018-09-29 16:48:44', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('6', '添加品牌', 'pms:brand:create', null, '2', '/pms/brand/add', '1', '2018-09-29 16:49:34', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('6', '修改品牌', 'pms:brand:update', null, '2', '/pms/brand/update', '1', '2018-09-29 16:50:55', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('6', '删除品牌', 'pms:brand:delete', null, '2', '/pms/brand/delete', '1', '2018-09-29 16:50:59', '0');
+insert into ums_permission (pid, name, value, icon, type, uri, status, create_time, sort)
+values ('0', '首页', null, null, '0', null, '1', '2018-09-29 16:51:57', '0');
 
 -- ----------------------------
 -- Table structure for ums_resource
@@ -3616,66 +3162,68 @@ comment on table ums_resource is '后台资源表';
 -- ----------------------------
 -- Records of ums_resource
 -- ----------------------------
-insert into ums_resource
-values ('1', '2020-02-04 17:04:55', '商品品牌管理', '/brand/**', null, '1');
-insert into ums_resource
-values ('2', '2020-02-04 17:05:35', '商品属性分类管理', '/productAttribute/**', null, '1');
-insert into ums_resource
-values ('3', '2020-02-04 17:06:13', '商品属性管理', '/productAttribute/**', null, '1');
-insert into ums_resource
-values ('4', '2020-02-04 17:07:15', '商品分类管理', '/productCategory/**', null, '1');
-insert into ums_resource
-values ('5', '2020-02-04 17:09:16', '商品管理', '/product/**', null, '1');
-insert into ums_resource
-values ('6', '2020-02-04 17:09:53', '商品库存管理', '/sku/**', null, '1');
-insert into ums_resource
-values ('8', '2020-02-05 14:43:37', '订单管理', '/order/**', '', '2');
-insert into ums_resource
-values ('9', '2020-02-05 14:44:22', ' 订单退货申请管理', '/returnApply/**', '', '2');
-insert into ums_resource
-values ('10', '2020-02-05 14:45:08', '退货原因管理', '/returnReason/**', '', '2');
-insert into ums_resource
-values ('11', '2020-02-05 14:45:43', '订单设置管理', '/orderSetting/**', '', '2');
-insert into ums_resource
-values ('12', '2020-02-05 14:46:23', '收货地址管理', '/companyAddress/**', '', '2');
-insert into ums_resource
-values ('13', '2020-02-07 16:37:22', '优惠券管理', '/coupon/**', '', '3');
-insert into ums_resource
-values ('14', '2020-02-07 16:37:59', '优惠券领取记录管理', '/couponHistory/**', '', '3');
-insert into ums_resource
-values ('15', '2020-02-07 16:38:28', '限时购活动管理', '/flash/**', '', '3');
-insert into ums_resource
-values ('16', '2020-02-07 16:38:59', '限时购商品关系管理', '/flashProductRelation/**', '', '3');
-insert into ums_resource
-values ('17', '2020-02-07 16:39:22', '限时购场次管理', '/flashSession/**', '', '3');
-insert into ums_resource
-values ('18', '2020-02-07 16:40:07', '首页轮播广告管理', '/home/advertise/**', '', '3');
-insert into ums_resource
-values ('19', '2020-02-07 16:40:34', '首页品牌管理', '/home/brand/**', '', '3');
-insert into ums_resource
-values ('20', '2020-02-07 16:41:06', '首页新品管理', '/home/newProduct/**', '', '3');
-insert into ums_resource
-values ('21', '2020-02-07 16:42:16', '首页人气推荐管理', '/home/recommendProduct/**', '', '3');
-insert into ums_resource
-values ('22', '2020-02-07 16:42:48', '首页专题推荐管理', '/home/recommendSubject/**', '', '3');
-insert into ums_resource
-values ('23', '2020-02-07 16:44:56', ' 商品优选管理', '/preferenceArea/**', '', '5');
-insert into ums_resource
-values ('24', '2020-02-07 16:45:39', '商品专题管理', '/subject/**', '', '5');
-insert into ums_resource
-values ('25', '2020-02-07 16:47:34', '后台用户管理', '/admin/**', '', '4');
-insert into ums_resource
-values ('26', '2020-02-07 16:48:24', '后台用户角色管理', '/role/**', '', '4');
-insert into ums_resource
-values ('27', '2020-02-07 16:48:48', '后台菜单管理', '/menu/**', '', '4');
-insert into ums_resource
-values ('28', '2020-02-07 16:49:18', '后台资源分类管理', '/resourceCategory/**', '', '4');
-insert into ums_resource
-values ('29', '2020-02-07 16:49:45', '后台资源管理', '/resource/**', '', '4');
-insert into ums_resource
-values ('31', '2020-08-24 13:43:54', '登录后获取用户信息', '/admin/info', '后台用户登录需要配置', '4');
-insert into ums_resource
-values ('32', '2020-08-24 13:44:37', '后台用户登出', '/admin/logout', '后台用户登出需要配置', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:04:55', '商品品牌管理', '/brand/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:05:35', '商品属性分类管理', '/productAttribute/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:06:13', '商品属性管理', '/productAttribute/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:07:15', '商品分类管理', '/productCategory/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:09:16', '商品管理', '/product/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-04 17:09:53', '商品库存管理', '/sku/**', null, '1');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-05 14:43:37', '订单管理', '/order/**', '', '2');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-05 14:44:22', ' 订单退货申请管理', '/returnApply/**', '', '2');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-05 14:45:08', '退货原因管理', '/returnReason/**', '', '2');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-05 14:45:43', '订单设置管理', '/orderSetting/**', '', '2');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-05 14:46:23', '收货地址管理', '/companyAddress/**', '', '2');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:37:22', '优惠券管理', '/coupon/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:37:59', '优惠券领取记录管理', '/couponHistory/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:38:28', '限时购活动管理', '/flash/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:38:59', '限时购商品关系管理', '/flashProductRelation/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:39:22', '限时购场次管理', '/flashSession/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:40:07', '首页轮播广告管理', '/home/advertise/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:40:34', '首页品牌管理', '/home/brand/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:41:06', '首页新品管理', '/home/newProduct/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:42:16', '首页人气推荐管理', '/home/recommendProduct/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:42:48', '首页专题推荐管理', '/home/recommendSubject/**', '', '3');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:44:56', ' 商品优选管理', '/preferenceArea/**', '', '5');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:45:39', '商品专题管理', '/subject/**', '', '5');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:47:34', '后台用户管理', '/admin/**', '', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:48:24', '后台用户角色管理', '/role/**', '', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:48:48', '后台菜单管理', '/menu/**', '', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:49:18', '后台资源分类管理', '/resourceCategory/**', '', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-02-07 16:49:45', '后台资源管理', '/resource/**', '', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-08-24 13:43:54', '登录后获取用户信息', '/admin/info', '后台用户登录需要配置', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2020-08-24 13:44:37', '后台用户登出', '/admin/logout', '后台用户登出需要配置', '4');
+insert into ums_resource (create_time, name, url, description, category_id)
+values ('2021-08-03 00:17:30', '会员用户等级列表', '/memberLevel/list', '会员用户等级列表', '4');
 
 -- ----------------------------
 -- Table structure for ums_resource_category
@@ -3693,18 +3241,18 @@ comment on table ums_resource_category is '资源分类表';
 -- ----------------------------
 -- Records of ums_resource_category
 -- ----------------------------
-insert into ums_resource_category
-values ('1', '2020-02-05 10:21:44', '商品模块', '0');
-insert into ums_resource_category
-values ('2', '2020-02-05 10:22:34', '订单模块', '0');
-insert into ums_resource_category
-values ('3', '2020-02-05 10:22:48', '营销模块', '0');
-insert into ums_resource_category
-values ('4', '2020-02-05 10:23:04', '权限模块', '0');
-insert into ums_resource_category
-values ('5', '2020-02-07 16:34:27', '内容模块', '0');
-insert into ums_resource_category
-values ('6', '2020-02-07 16:35:49', '其他模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-05 10:21:44', '商品模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-05 10:22:34', '订单模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-05 10:22:48', '营销模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-05 10:23:04', '权限模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-07 16:34:27', '内容模块', '0');
+insert into ums_resource_category (create_time, name, sort)
+values ('2020-02-07 16:35:49', '其他模块', '0');
 
 -- ----------------------------
 -- Table structure for ums_role
@@ -3737,7 +3285,7 @@ values ('5', '超级管理员', '拥有所有查看和操作功能', '0', '2020-
 -- ----------------------------
 drop table if exists ums_role_menu_relation;
 create table ums_role_menu_relation (
-    id      bigint not null,
+    id      serial not null,
     role_id bigint default null,
     menu_id bigint default null,
     primary key (id)
@@ -3747,83 +3295,83 @@ comment on table ums_role_menu_relation is '后台角色菜单关系表';
 -- ----------------------------
 -- Records of ums_role_menu_relation
 -- ----------------------------
-insert into ums_role_menu_relation
-values ('33', '1', '1');
-insert into ums_role_menu_relation
-values ('34', '1', '2');
-insert into ums_role_menu_relation
-values ('35', '1', '3');
-insert into ums_role_menu_relation
-values ('36', '1', '4');
-insert into ums_role_menu_relation
-values ('37', '1', '5');
-insert into ums_role_menu_relation
-values ('38', '1', '6');
-insert into ums_role_menu_relation
-values ('53', '2', '7');
-insert into ums_role_menu_relation
-values ('54', '2', '8');
-insert into ums_role_menu_relation
-values ('55', '2', '9');
-insert into ums_role_menu_relation
-values ('56', '2', '10');
-insert into ums_role_menu_relation
-values ('57', '2', '11');
-insert into ums_role_menu_relation
-values ('72', '5', '1');
-insert into ums_role_menu_relation
-values ('73', '5', '2');
-insert into ums_role_menu_relation
-values ('74', '5', '3');
-insert into ums_role_menu_relation
-values ('75', '5', '4');
-insert into ums_role_menu_relation
-values ('76', '5', '5');
-insert into ums_role_menu_relation
-values ('77', '5', '6');
-insert into ums_role_menu_relation
-values ('78', '5', '7');
-insert into ums_role_menu_relation
-values ('79', '5', '8');
-insert into ums_role_menu_relation
-values ('80', '5', '9');
-insert into ums_role_menu_relation
-values ('81', '5', '10');
-insert into ums_role_menu_relation
-values ('82', '5', '11');
-insert into ums_role_menu_relation
-values ('83', '5', '12');
-insert into ums_role_menu_relation
-values ('84', '5', '13');
-insert into ums_role_menu_relation
-values ('85', '5', '14');
-insert into ums_role_menu_relation
-values ('86', '5', '16');
-insert into ums_role_menu_relation
-values ('87', '5', '17');
-insert into ums_role_menu_relation
-values ('88', '5', '18');
-insert into ums_role_menu_relation
-values ('89', '5', '19');
-insert into ums_role_menu_relation
-values ('90', '5', '20');
-insert into ums_role_menu_relation
-values ('91', '5', '21');
-insert into ums_role_menu_relation
-values ('92', '5', '22');
-insert into ums_role_menu_relation
-values ('93', '5', '23');
-insert into ums_role_menu_relation
-values ('94', '5', '24');
-insert into ums_role_menu_relation
-values ('95', '5', '25');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '1');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '2');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '3');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '4');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '5');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('1', '6');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('2', '7');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('2', '8');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('2', '9');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('2', '10');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('2', '11');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '1');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '2');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '3');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '4');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '5');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '6');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '7');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '8');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '9');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '10');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '11');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '12');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '13');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '14');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '16');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '17');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '18');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '19');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '20');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '21');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '22');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '23');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '24');
+insert into ums_role_menu_relation (role_id, menu_id)
+values ('5', '25');
 
 -- ----------------------------
 -- Table structure forums_role_permission_relation
 -- ----------------------------
 drop table if exists ums_role_permission_relation;
 create table ums_role_permission_relation (
-    id            bigint not null,
+    id            serial not null,
     role_id       bigint default null,
     permission_id bigint default null,
     primary key (id)
@@ -3831,42 +3379,42 @@ create table ums_role_permission_relation (
 comment on table ums_role_permission_relation is '后台用户角色和权限关系表';
 
 -- ----------------------------
--- Records ofums_role_permission_relatio
+-- Records of ums_role_permission_relation
 -- ----------------------------
-insert into ums_role_permission_relation
-values ('1', '1', '1');
-insert into ums_role_permission_relation
-values ('2', '1', '2');
-insert into ums_role_permission_relation
-values ('3', '1', '3');
-insert into ums_role_permission_relation
-values ('4', '1', '7');
-insert into ums_role_permission_relation
-values ('5', '1', '8');
-insert into ums_role_permission_relation
-values ('6', '2', '4');
-insert into ums_role_permission_relation
-values ('7', '2', '9');
-insert into ums_role_permission_relation
-values ('8', '2', '10');
-insert into ums_role_permission_relation
-values ('9', '2', '11');
-insert into ums_role_permission_relation
-values ('10', '3', '5');
-insert into ums_role_permission_relation
-values ('11', '3', '12');
-insert into ums_role_permission_relation
-values ('12', '3', '13');
-insert into ums_role_permission_relation
-values ('13', '3', '14');
-insert into ums_role_permission_relation
-values ('14', '4', '6');
-insert into ums_role_permission_relation
-values ('15', '4', '15');
-insert into ums_role_permission_relation
-values ('16', '4', '16');
-insert into ums_role_permission_relation
-values ('17', '4', '17');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('1', '1');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('1', '2');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('1', '3');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('1', '7');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('1', '8');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('2', '4');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('2', '9');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('2', '10');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('2', '11');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('3', '5');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('3', '12');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('3', '13');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('3', '14');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('4', '6');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('4', '15');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('4', '16');
+insert into ums_role_permission_relation (role_id, permission_id)
+values ('4', '17');
 
 -- ----------------------------
 -- Table structure forums_role_resource_relation
@@ -3883,97 +3431,97 @@ comment on table ums_role_resource_relation is '后台角色资源关系表';
 -- ----------------------------
 -- Records of ums_role_resource_relation
 -- ----------------------------
-insert into ums_role_resource_relation
-values ('178', '5', '1');
-insert into ums_role_resource_relation
-values ('179', '5', '2');
-insert into ums_role_resource_relation
-values ('180', '5', '3');
-insert into ums_role_resource_relation
-values ('181', '5', '4');
-insert into ums_role_resource_relation
-values ('182', '5', '5');
-insert into ums_role_resource_relation
-values ('183', '5', '6');
-insert into ums_role_resource_relation
-values ('184', '5', '8');
-insert into ums_role_resource_relation
-values ('185', '5', '9');
-insert into ums_role_resource_relation
-values ('186', '5', '10');
-insert into ums_role_resource_relation
-values ('187', '5', '11');
-insert into ums_role_resource_relation
-values ('188', '5', '12');
-insert into ums_role_resource_relation
-values ('189', '5', '13');
-insert into ums_role_resource_relation
-values ('190', '5', '14');
-insert into ums_role_resource_relation
-values ('191', '5', '15');
-insert into ums_role_resource_relation
-values ('192', '5', '16');
-insert into ums_role_resource_relation
-values ('193', '5', '17');
-insert into ums_role_resource_relation
-values ('194', '5', '18');
-insert into ums_role_resource_relation
-values ('195', '5', '19');
-insert into ums_role_resource_relation
-values ('196', '5', '20');
-insert into ums_role_resource_relation
-values ('197', '5', '21');
-insert into ums_role_resource_relation
-values ('198', '5', '22');
-insert into ums_role_resource_relation
-values ('199', '5', '23');
-insert into ums_role_resource_relation
-values ('200', '5', '24');
-insert into ums_role_resource_relation
-values ('201', '5', '25');
-insert into ums_role_resource_relation
-values ('202', '5', '26');
-insert into ums_role_resource_relation
-values ('203', '5', '27');
-insert into ums_role_resource_relation
-values ('204', '5', '28');
-insert into ums_role_resource_relation
-values ('205', '5', '29');
-insert into ums_role_resource_relation
-values ('206', '5', '31');
-insert into ums_role_resource_relation
-values ('207', '5', '32');
-insert into ums_role_resource_relation
-values ('208', '2', '8');
-insert into ums_role_resource_relation
-values ('209', '2', '9');
-insert into ums_role_resource_relation
-values ('210', '2', '10');
-insert into ums_role_resource_relation
-values ('211', '2', '11');
-insert into ums_role_resource_relation
-values ('212', '2', '12');
-insert into ums_role_resource_relation
-values ('213', '2', '31');
-insert into ums_role_resource_relation
-values ('214', '2', '32');
-insert into ums_role_resource_relation
-values ('215', '1', '1');
-insert into ums_role_resource_relation
-values ('216', '1', '2');
-insert into ums_role_resource_relation
-values ('217', '1', '3');
-insert into ums_role_resource_relation
-values ('218', '1', '4');
-insert into ums_role_resource_relation
-values ('219', '1', '5');
-insert into ums_role_resource_relation
-values ('220', '1', '6');
-insert into ums_role_resource_relation
-values ('221', '1', '23');
-insert into ums_role_resource_relation
-values ('222', '1', '24');
-insert into ums_role_resource_relation
-values ('223', '1', '31');
-insert into ums_role_resource_relation
-values ('224', '1', '32');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '1');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '2');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '3');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '4');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '5');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '6');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '8');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '9');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '10');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '11');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '12');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '13');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '14');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '15');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '16');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '17');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '18');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '19');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '20');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '21');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '22');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '23');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '24');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '25');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '26');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '27');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '28');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '29');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '31');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('5', '32');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '8');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '9');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '10');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '11');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '12');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '31');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '32');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '1');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '2');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '3');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '4');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '5');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '6');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '23');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '24');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '31');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('1', '32');
