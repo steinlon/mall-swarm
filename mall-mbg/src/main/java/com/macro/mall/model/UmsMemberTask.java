@@ -12,7 +12,7 @@ public class UmsMemberTask implements Serializable {
     private Integer growth;
 
     @ApiModelProperty(value = "赠送积分")
-    private Integer intergration;
+    private Integer integration;
 
     @ApiModelProperty(value = "任务类型：0->新手任务；1->日常任务")
     private Integer type;
@@ -44,11 +44,11 @@ public class UmsMemberTask implements Serializable {
     }
 
     public Integer getIntergration() {
-        return intergration;
+        return integration;
     }
 
-    public void setIntergration(Integer intergration) {
-        this.intergration = intergration;
+    public void setIntergration(Integer integration) {
+        this.integration = integration;
     }
 
     public Integer getType() {
@@ -68,7 +68,7 @@ public class UmsMemberTask implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", growth=").append(growth);
-        sb.append(", intergration=").append(intergration);
+        sb.append(", integration=").append(integration);
         sb.append(", type=").append(type);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
