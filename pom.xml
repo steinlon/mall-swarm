@@ -38,7 +38,7 @@
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
         <pagehelper-starter.version>1.3.0</pagehelper-starter.version>
-        <pagehelper.version>5.2.0</pagehelper.version>
+        <pagehelper.version>5.2.1</pagehelper.version>
         <druid.version>1.2.6</druid.version>
         <hutool.version>5.4.0</hutool.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
