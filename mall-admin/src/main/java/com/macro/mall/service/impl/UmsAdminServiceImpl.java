@@ -7,6 +7,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.common.api.IErrorCode;
 import com.macro.mall.common.api.ResultCode;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.domain.UserDto;
@@ -100,20 +101,19 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         params.put("grant_type", "password");
         params.put("username", username);
         params.put("password", password);
-        CommonResult<?> restResult = authService.getAccessToken(params);
-        if (ResultCode.SUCCESS.getCode() == restResult.getCode() && restResult.getData() != null) {
-            insertLoginLog(username);
-//            updateLoginTimeByUsername(username);
+        final CommonResult<?> restResult = authService.getAccessToken(params);
+        if (ResultCode.SUCCESS == restResult.getErrorCode() && restResult.getData() != null) {
+            insertUserLoginLog(username);
+        } else {
+            updateLoginWithErrorCode(username, restResult.getErrorCode());
         }
         return restResult;
     }
 
     /**
      * 添加登录记录
-     *
-     * @param username 用户名
      */
-    private void insertLoginLog(final String username) {
+    private void insertUserLoginLog(final String username) {
         final UmsAdmin admin = getAdminByUsername(username);
         if (admin == null) {
             return;
@@ -122,17 +122,17 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         loginLog.setAdminId(admin.getId());
         loginLog.setCreateTime(new Date());
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        loginLog.setIp(request.getRemoteAddr());
+        if (attributes != null) {
+            final HttpServletRequest request = attributes.getRequest();
+            loginLog.setIp(request.getRemoteAddr());
+        }
         loginLogMapper.insert(loginLog);
     }
 
-    /**
-     * 根据用户名修改登录时间
-     */
-    private void updateLoginTimeByUsername(final String username) {
+    private void updateLoginWithErrorCode(final String username, final IErrorCode errorCode) {
         final UmsAdmin record = new UmsAdmin();
         record.setLoginTime(new Date());
+        record.setNote(errorCode.getMessage());
         final UmsAdminExample example = new UmsAdminExample();
         example.createCriteria().andUsernameEqualTo(username);
         adminMapper.updateByExampleSelective(record, example);

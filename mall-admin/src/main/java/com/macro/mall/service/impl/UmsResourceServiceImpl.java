@@ -112,19 +112,19 @@ public class UmsResourceServiceImpl implements UmsResourceService {
         final List<UmsResource> resourceList = resourceMapper.selectByExample(new UmsResourceExample());
         final List<UmsRole> roleList = roleMapper.selectByExample(new UmsRoleExample());
         final List<UmsRoleResourceRelation> relationList = roleResourceRelationMapper.selectByExample(new UmsRoleResourceRelationExample());
-        for (UmsResource resource : resourceList) {
+        resourceList.forEach(resource -> {
             final Set<Long> roleIds = relationList
                     .stream()
                     .filter(item -> item.getResourceId().equals(resource.getId()))
                     .map(UmsRoleResourceRelation::getRoleId)
                     .collect(Collectors.toSet());
-            List<String> roleNames = roleList
+            final List<String> roleNames = roleList
                     .stream()
                     .filter(item -> roleIds.contains(item.getId()))
                     .map(item -> item.getId() + "_" + item.getName())
                     .collect(Collectors.toList());
             resourceRoleMap.put("/" + applicationName + resource.getUrl(), roleNames);
-        }
+        });
         redisService.del(AuthConstant.RESOURCE_ROLES_MAP_KEY);
         redisService.hSetAll(AuthConstant.RESOURCE_ROLES_MAP_KEY, resourceRoleMap);
         return resourceRoleMap;
