@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 自定义优惠券管理Dao
- * Created by macro on 2018/8/29.
  */
 public interface SmsCouponDao {
     /**

@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 
 /**
  * 确认收货提交参数
- * Created by macro on 2018/10/18.
  */
 @Getter
 @Setter
 public class OmsUpdateStatusParam {
+
     @ApiModelProperty("服务单号")
     private Long id;
     @ApiModelProperty("收货地址关联id")

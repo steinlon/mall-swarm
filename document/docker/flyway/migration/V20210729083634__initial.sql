@@ -8,7 +8,7 @@ create table cms_help (
     icon        varchar(500) default null,
     title       varchar(100) default null,
     show_status int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     read_count  int          default null,
     content     text,
     primary key (id)
@@ -904,7 +904,7 @@ create table oms_order_return_reason (
     name        varchar(100) default null,
     sort        int          default null,
     status      int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     primary key (id)
 );
 comment on table oms_order_return_reason is '退货原因表';
@@ -2002,7 +2002,7 @@ drop table if exists pms_product_vertify_record;
 create table pms_product_vertify_record (
     id          serial not null,
     product_id  bigint       default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     vertify_man varchar(64)  default null,
     status      int          default null,
     detail      varchar(255) default null,
@@ -2337,7 +2337,7 @@ create table sms_flash_promotion (
     start_date  date         default null,
     end_date    date         default null,
     status      int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     primary key (id)
 );
 comment on table sms_flash_promotion is '限时购表';
@@ -2447,7 +2447,7 @@ create table sms_flash_promotion_session (
     start_time  time         default null,
     end_time    time         default null,
     status      int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     primary key (id)
 );
 comment on table sms_flash_promotion_session is '限时购场次表';
@@ -2657,7 +2657,7 @@ create table ums_admin (
     email       varchar(100) default null,
     nick_name   varchar(200) default null,
     note        varchar(500) default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     login_time  date         default null,
     status      int          default '1',
     primary key (id)
@@ -2679,7 +2679,7 @@ drop table if exists ums_admin_login_log;
 create table ums_admin_login_log (
     id          serial not null,
     admin_id    bigint       default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     ip          varchar(64)  default null,
     address     varchar(100) default null,
     user_agent  varchar(100) default null,
@@ -2708,7 +2708,8 @@ create table ums_admin_role_relation (
     id       serial not null,
     admin_id bigint default null,
     role_id  bigint default null,
-    primary key (id)
+    primary key (id),
+    unique (admin_id, role_id)
 );
 comment on table ums_admin_role_relation is '后台用户和角色关系表';
 
@@ -2716,7 +2717,7 @@ comment on table ums_admin_role_relation is '后台用户和角色关系表';
 -- Records of ums_admin_role_relation
 -- ----------------------------
 insert into ums_admin_role_relation(admin_id, role_id)
-values (1, 5);
+values (1, 3);
 
 -- ----------------------------
 -- Table structure for ums_growth_change_history
@@ -2783,7 +2784,7 @@ values (100, 50, 100, 1);
 -- ----------------------------
 drop table if exists ums_member;
 create table ums_member (
-    id                     bigint not null,
+    id                     serial not null,
     member_level_id        bigint       default null,
     username               varchar(64)  default null,
     password               varchar(64)  default null,
@@ -2811,29 +2812,37 @@ comment on table ums_member is '会员表';
 -- ----------------------------
 -- Records of ums_member
 -- ----------------------------
-insert into ums_member
-values ('1', '4', 'test', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'windir', '18061581849', '1', '2018-08-02 10:35:44', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'test', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'windir', '18061581849', '1', '2018-08-02 10:35:44', null,
         '1', '2009-06-01', '上海', '学生', 'test', null, '5000', null, null, null);
-insert into ums_member
-values ('3', '4', 'windy', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'windy', '18061581848', '1', '2018-08-03 16:46:38', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'windy', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'windy', '18061581848', '1', '2018-08-03 16:46:38', null,
         null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('4', '4', 'zhengsan', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'zhengsan', '18061581847', '1', '2018-11-12 14:12:04',
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'zhengsan', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'zhengsan', '18061581847', '1', '2018-11-12 14:12:04',
         null, null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('5', '4', 'lisi', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lisi', '18061581841', '1', '2018-11-12 14:12:38', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'lisi', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lisi', '18061581841', '1', '2018-11-12 14:12:38', null,
         null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('6', '4', 'wangwu', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'wangwu', '18061581842', '1', '2018-11-12 14:13:09', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'wangwu', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'wangwu', '18061581842', '1', '2018-11-12 14:13:09', null,
         null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('7', '4', 'lion', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lion', '18061581845', '1', '2018-11-12 14:21:39', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'lion', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lion', '18061581845', '1', '2018-11-12 14:21:39', null,
         null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('8', '4', 'shari', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'shari', '18061581844', '1', '2018-11-12 14:22:00', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'shari', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'shari', '18061581844', '1', '2018-11-12 14:22:00', null,
         null, null, null, null, null, null, null, null, null, null);
-insert into ums_member
-values ('9', '4', 'aewen', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'aewen', '18061581843', '1', '2018-11-12 14:22:55', null,
+insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
+                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
+values ('4', 'aewen', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'aewen', '18061581843', '1', '2018-11-12 14:22:55', null,
         null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
@@ -2885,7 +2894,7 @@ drop table if exists ums_member_login_log;
 create table ums_member_login_log (
     id          serial not null,
     member_id   bigint      default null,
-    create_time date        default null,
+    create_time timestamp   default null,
     ip          varchar(64) default null,
     city        varchar(64) default null,
     login_type  int         default null,
@@ -2923,7 +2932,7 @@ comment on table ums_member_product_category_relation is '会员与产品分类�
 -- ----------------------------
 drop table if exists ums_member_receive_address;
 create table ums_member_receive_address (
-    id             bigint not null,
+    id             serial not null,
     member_id      bigint       default null,
     name           varchar(100) default null,
     phone_number   varchar(64)  default null,
@@ -2940,12 +2949,12 @@ comment on table ums_member_receive_address is '会员收货地址表';
 -- ----------------------------
 -- Records of ums_member_receive_address
 -- ----------------------------
-insert into ums_member_receive_address
-values ('1', '1', '大梨', '18033441849', '0', '518000', '广东省', '深圳市', '南山区', '科兴科学园');
-insert into ums_member_receive_address
-values ('3', '1', '大梨', '18033441849', '0', '518000', '广东省', '深圳市', '福田区', '清水河街道');
-insert into ums_member_receive_address
-values ('4', '1', '大梨', '18033441849', '1', '518000', '广东省', '深圳市', '福田区', '东晓街道');
+insert into ums_member_receive_address (member_id, name, phone_number, default_status, post_code, province, city, region, detail_address)
+values ('1', '大梨', '18033441849', '0', '518000', '广东省', '深圳市', '南山区', '科兴科学园');
+insert into ums_member_receive_address (member_id, name, phone_number, default_status, post_code, province, city, region, detail_address)
+values ('1', '大梨', '18033441849', '0', '518000', '广东省', '深圳市', '福田区', '清水河街道');
+insert into ums_member_receive_address (member_id, name, phone_number, default_status, post_code, province, city, region, detail_address)
+values ('1', '大梨', '18033441849', '1', '518000', '广东省', '深圳市', '福田区', '东晓街道');
 
 -- ----------------------------
 -- Table structure for ums_member_rule_setting
@@ -3022,7 +3031,7 @@ drop table if exists ums_menu;
 create table ums_menu (
     id          serial not null,
     parent_id   bigint       default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     title       varchar(100) default null,
     level       int          default null,
     sort        int          default null,
@@ -3098,7 +3107,7 @@ create table ums_permission (
     type        int          default null,
     uri         varchar(200) default null,
     status      int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     sort        int          default null,
     primary key (id)
 );
@@ -3150,7 +3159,7 @@ values ('0', '首页', null, null, '0', null, '1', '2018-09-29 16:51:57', '0');
 drop table if exists ums_resource;
 create table ums_resource (
     id          serial not null,
-    create_time date         default null,
+    create_time timestamp    default null,
     name        varchar(200) default null,
     url         varchar(200) default null,
     description varchar(500) default null,
@@ -3231,7 +3240,7 @@ values ('2021-08-03 00:17:30', '会员用户等级列表', '/memberLevel/list', 
 drop table if exists ums_resource_category;
 create table ums_resource_category (
     id          serial not null,
-    create_time date         default null,
+    create_time timestamp    default null,
     name        varchar(200) default null,
     sort        int          default null,
     primary key (id)
@@ -3263,7 +3272,7 @@ create table ums_role (
     name        varchar(100) default null,
     description varchar(500) default null,
     admin_count int          default null,
-    create_time date         default null,
+    create_time timestamp    default null,
     status      int          default '1',
     sort        int          default '0',
     primary key (id)
@@ -3273,12 +3282,12 @@ comment on table ums_role is '后台用户角色表';
 -- ----------------------------
 -- Records of ums_role
 -- ----------------------------
-insert into ums_role
-values ('1', '商品管理员', '只能查看及操作商品', '0', '2020-02-03 16:50:37', '1', '0');
-insert into ums_role
-values ('2', '订单管理员', '只能查看及操作订单', '0', '2018-09-30 15:53:45', '1', '0');
-insert into ums_role
-values ('5', '超级管理员', '拥有所有查看和操作功能', '0', '2020-02-02 15:11:05', '1', '0');
+insert into ums_role (name, description, admin_count, create_time, status, sort)
+values ('商品管理员', '只能查看及操作商品', '0', '2020-02-03 16:50:37', '1', '0');
+insert into ums_role (name, description, admin_count, create_time, status, sort)
+values ('订单管理员', '只能查看及操作订单', '0', '2018-09-30 15:53:45', '1', '0');
+insert into ums_role (name, description, admin_count, create_time, status, sort)
+values ('超级管理员', '拥有所有查看和操作功能', '0', '2020-02-02 15:11:05', '1', '0');
 
 -- ----------------------------
 -- Table structure forums_role_menu_relation
@@ -3288,7 +3297,8 @@ create table ums_role_menu_relation (
     id      serial not null,
     role_id bigint default null,
     menu_id bigint default null,
-    primary key (id)
+    primary key (id),
+    unique (role_id, menu_id)
 );
 comment on table ums_role_menu_relation is '后台角色菜单关系表';
 
@@ -3318,53 +3328,53 @@ values ('2', '10');
 insert into ums_role_menu_relation (role_id, menu_id)
 values ('2', '11');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '1');
+values ('3', '1');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '2');
+values ('3', '2');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '3');
+values ('3', '3');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '4');
+values ('3', '4');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '5');
+values ('3', '5');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '6');
+values ('3', '6');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '7');
+values ('3', '7');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '8');
+values ('3', '8');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '9');
+values ('3', '9');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '10');
+values ('3', '10');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '11');
+values ('3', '11');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '12');
+values ('3', '12');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '13');
+values ('3', '13');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '14');
+values ('3', '14');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '16');
+values ('3', '16');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '17');
+values ('3', '17');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '18');
+values ('3', '18');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '19');
+values ('3', '19');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '20');
+values ('3', '20');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '21');
+values ('3', '21');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '22');
+values ('3', '22');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '23');
+values ('3', '23');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '24');
+values ('3', '24');
 insert into ums_role_menu_relation (role_id, menu_id)
-values ('5', '25');
+values ('3', '25');
 
 -- ----------------------------
 -- Table structure forums_role_permission_relation
@@ -3374,7 +3384,8 @@ create table ums_role_permission_relation (
     id            serial not null,
     role_id       bigint default null,
     permission_id bigint default null,
-    primary key (id)
+    primary key (id),
+    unique (role_id, permission_id)
 );
 comment on table ums_role_permission_relation is '后台用户角色和权限关系表';
 
@@ -3402,19 +3413,19 @@ values ('2', '11');
 insert into ums_role_permission_relation (role_id, permission_id)
 values ('3', '5');
 insert into ums_role_permission_relation (role_id, permission_id)
+values ('3', '6');
+insert into ums_role_permission_relation (role_id, permission_id)
 values ('3', '12');
 insert into ums_role_permission_relation (role_id, permission_id)
 values ('3', '13');
 insert into ums_role_permission_relation (role_id, permission_id)
 values ('3', '14');
 insert into ums_role_permission_relation (role_id, permission_id)
-values ('4', '6');
+values ('3', '15');
 insert into ums_role_permission_relation (role_id, permission_id)
-values ('4', '15');
+values ('3', '16');
 insert into ums_role_permission_relation (role_id, permission_id)
-values ('4', '16');
-insert into ums_role_permission_relation (role_id, permission_id)
-values ('4', '17');
+values ('3', '17');
 
 -- ----------------------------
 -- Table structure forums_role_resource_relation
@@ -3431,80 +3442,6 @@ comment on table ums_role_resource_relation is '后台角色资源关系表';
 -- ----------------------------
 -- Records of ums_role_resource_relation
 -- ----------------------------
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '1');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '2');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '3');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '4');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '5');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '6');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '8');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '9');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '10');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '11');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '12');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '13');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '14');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '15');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '16');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '17');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '18');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '19');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '20');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '21');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '22');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '23');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '24');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '25');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '26');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '27');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '28');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '29');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '31');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('5', '32');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '8');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '9');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '10');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '11');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '12');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '31');
-insert into ums_role_resource_relation (role_id, resource_id)
-values ('2', '32');
 insert into ums_role_resource_relation (role_id, resource_id)
 values ('1', '1');
 insert into ums_role_resource_relation (role_id, resource_id)
@@ -3525,3 +3462,77 @@ insert into ums_role_resource_relation (role_id, resource_id)
 values ('1', '31');
 insert into ums_role_resource_relation (role_id, resource_id)
 values ('1', '32');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '8');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '9');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '10');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '11');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '12');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '31');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('2', '32');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '1');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '2');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '3');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '4');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '5');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '6');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '8');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '9');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '10');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '11');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '12');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '13');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '14');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '15');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '16');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '17');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '18');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '19');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '20');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '21');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '22');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '23');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '24');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '25');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '26');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '27');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '28');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '29');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '31');
+insert into ums_role_resource_relation (role_id, resource_id)
+values ('3', '32');

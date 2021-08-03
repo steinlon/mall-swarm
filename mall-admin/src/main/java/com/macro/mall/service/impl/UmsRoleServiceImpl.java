@@ -95,12 +95,12 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         example.createCriteria().andRoleIdEqualTo(roleId);
         roleMenuRelationMapper.deleteByExample(example);
         //批量插入新关系
-        for (Long menuId : menuIds) {
+        menuIds.forEach(menuId -> {
             final UmsRoleMenuRelation relation = new UmsRoleMenuRelation();
             relation.setRoleId(roleId);
             relation.setMenuId(menuId);
             roleMenuRelationMapper.insert(relation);
-        }
+        });
         return menuIds.size();
     }
 
@@ -111,12 +111,12 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         example.createCriteria().andRoleIdEqualTo(roleId);
         roleResourceRelationMapper.deleteByExample(example);
         //批量插入新关系
-        for (Long resourceId : resourceIds) {
+        resourceIds.forEach(resourceId -> {
             final UmsRoleResourceRelation relation = new UmsRoleResourceRelation();
             relation.setRoleId(roleId);
             relation.setResourceId(resourceId);
             roleResourceRelationMapper.insert(relation);
-        }
+        });
         resourceService.initResourceRolesMap();
         return resourceIds.size();
     }
