@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Map;
+
 /**
  * Oauth2获取Token返回信息封装
  */
@@ -21,4 +23,6 @@ public class Oauth2TokenDto {
     private String tokenHead;
     @ApiModelProperty("有效时间（秒）")
     private int expiresIn;
+    @ApiModelProperty("额外信息")
+    private Map<String, Object> additionalInformation;
 }

@@ -4,25 +4,27 @@ import com.macro.mall.common.api.IErrorCode;
 
 /**
  * 自定义API异常
- * Created by macro on 2020/2/27.
  */
 public class ApiException extends RuntimeException {
+
+    private static final long serialVersionUID = 3552758239539524972L;
+
     private IErrorCode errorCode;
 
-    public ApiException(IErrorCode errorCode) {
+    public ApiException(final IErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
 
-    public ApiException(String message) {
+    public ApiException(final String message) {
         super(message);
     }
 
-    public ApiException(Throwable cause) {
+    public ApiException(final Throwable cause) {
         super(cause);
     }
 
-    public ApiException(String message, Throwable cause) {
+    public ApiException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
