@@ -9,11 +9,11 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * 商品属性参数
- * Created by macro on 2018/4/26.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class PmsProductAttributeParam {
+
     @NotEmpty
     @ApiModelProperty("属性分类ID")
     private Long productAttributeCategoryId;

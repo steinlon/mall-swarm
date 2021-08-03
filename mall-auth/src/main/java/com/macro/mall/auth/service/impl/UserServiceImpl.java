@@ -30,9 +30,10 @@ public class UserServiceImpl implements UserDetailsService {
     private final HttpServletRequest request;
 
     @Override
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) {
         final String clientId = request.getParameter("client_id");
         final boolean isAdminClient = AuthConstant.ADMIN_CLIENT_ID.equals(clientId);
+        //根据微服务响应不同用户的登录
         final UserDto userDto = isAdminClient ? adminService.loadUserByUsername(username) : memberService.loadUserByUsername(username);
         if (userDto == null) {
             throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);

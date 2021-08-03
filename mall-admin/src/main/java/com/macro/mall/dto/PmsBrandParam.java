@@ -14,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class PmsBrandParam {
+
     @NotEmpty
     @ApiModelProperty(value = "品牌名称",required = true)
     private String name;
