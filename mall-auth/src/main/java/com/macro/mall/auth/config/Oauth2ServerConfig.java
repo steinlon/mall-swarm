@@ -1,6 +1,7 @@
 package com.macro.mall.auth.config;
 
 import com.macro.mall.auth.component.JwtTokenEnhancer;
+import com.macro.mall.common.constant.AuthConstant;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,14 +39,14 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("admin-app")
+                .withClient(AuthConstant.ADMIN_CLIENT_ID)
                 .secret(passwordEncoder.encode("123456"))
                 .scopes("all")
                 .authorizedGrantTypes("password", "refresh_token")
                 .accessTokenValiditySeconds(3600 * 24)
                 .refreshTokenValiditySeconds(3600 * 24 * 7)
                 .and()
-                .withClient("portal-app")
+                .withClient(AuthConstant.PORTAL_CLIENT_ID)
                 .secret(passwordEncoder.encode("123456"))
                 .scopes("all")
                 .authorizedGrantTypes("password", "refresh_token")
@@ -55,8 +56,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-        List<TokenEnhancer> delegates = new ArrayList<>();
+        final TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+        final List<TokenEnhancer> delegates = new ArrayList<>();
         delegates.add(jwtTokenEnhancer);
         delegates.add(accessTokenConverter());
         //配置JWT的内容增强器
