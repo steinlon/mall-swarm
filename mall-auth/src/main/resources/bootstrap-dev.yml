@@ -3,6 +3,7 @@ spring:
     nacos:
       discovery:
         server-addr: http://localhost:8848
+        group: mall-group
       config:
         server-addr: http://localhost:8848
         file-extension: yaml
