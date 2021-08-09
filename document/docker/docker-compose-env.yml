@@ -33,6 +33,7 @@ services:
   redis:
     image: redis:6.2.5
     container_name: redis
+    hostname: redis
     command: redis-server --appendonly yes
     volumes:
       - ./mydata/redis/data:/data #数据文件挂载
@@ -41,19 +42,17 @@ services:
     ports:
       - 6379:6379
 
-  # 需要手动在页面上添加连接到其他的redis服务器的地址，以local-redis为例子
-  # 运行命令 docker network inspect springlearn_default获取local-redis的ip地址
-  # 打开localhost:8190
+  # 需要手动在页面上添加连接到其他的redis服务器的地址，以redis为例子
+  # 运行命令 docker network inspect docker_default获取redis的ip地址
+  # 打开localhost:8081
   # 在Add Server中添加redis的ip地址，port为6379，密码为redis
   redis-commander:
     container_name: redis-commander
+    hostname: redis-commander
     image: rediscommander/redis-commander:latest
     restart: always
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_DB=mall
-      - REDIS_PASSWORD=redis
+      - REDIS_HOSTS=local:redis:6379
     ports:
       - "8081:8081"
 
