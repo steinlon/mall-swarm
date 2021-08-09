@@ -50,7 +50,7 @@
         <admin-starter-server.version>2.2.3</admin-starter-server.version>
         <minio.version>8.3.0</minio.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <nimbus-jose-jwt.version>8.19</nimbus-jose-jwt.version>
+        <nimbus-jose-jwt.version>9.11.3</nimbus-jose-jwt.version>
         <mall-common.version>1.0-SNAPSHOT</mall-common.version>
         <mall-mbg.version>1.0-SNAPSHOT</mall-mbg.version>
     </properties>
