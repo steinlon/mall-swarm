@@ -10,21 +10,21 @@ import java.util.Enumeration;
 
 /**
  * 用于Feign传递请求头的拦截器
- * Created by macro on 2019/10/18.
  */
 public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
-    public void apply(RequestTemplate requestTemplate) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-                .getRequestAttributes();
+    public void apply(final RequestTemplate requestTemplate) {
+        final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes != null) {
-            HttpServletRequest request = attributes.getRequest();
-            Enumeration<String> headerNames = request.getHeaderNames();
+            final HttpServletRequest request = attributes.getRequest();
+            final Enumeration<String> headerNames = request.getHeaderNames();
             if (headerNames != null) {
                 while (headerNames.hasMoreElements()) {
-                    String name = headerNames.nextElement();
-                    String values = request.getHeader(name);
-                    requestTemplate.header(name, values);
+                    final String name = headerNames.nextElement();
+                    requestTemplate.header(
+                            headerNames.nextElement(),
+                            request.getHeader(name)
+                    );
                 }
             }
         }
