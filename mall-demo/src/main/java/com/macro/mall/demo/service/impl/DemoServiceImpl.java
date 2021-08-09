@@ -6,8 +6,8 @@ import com.macro.mall.demo.service.DemoService;
 import com.macro.mall.mapper.PmsBrandMapper;
 import com.macro.mall.model.PmsBrand;
 import com.macro.mall.model.PmsBrandExample;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,10 @@ import java.util.List;
  * DemoService实现类
  */
 @Service
+@AllArgsConstructor
 public class DemoServiceImpl implements DemoService {
-    @Autowired
-    private PmsBrandMapper brandMapper;
+
+    private final PmsBrandMapper brandMapper;
 
     @Override
     public List<PmsBrand> listAllBrand() {
@@ -26,16 +27,16 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public int createBrand(PmsBrandDto pmsBrandDto) {
-        PmsBrand pmsBrand = new PmsBrand();
-        BeanUtils.copyProperties(pmsBrandDto,pmsBrand);
+    public int createBrand(final PmsBrandDto pmsBrandDto) {
+        final PmsBrand pmsBrand = new PmsBrand();
+        BeanUtils.copyProperties(pmsBrandDto, pmsBrand);
         return brandMapper.insertSelective(pmsBrand);
     }
 
     @Override
-    public int updateBrand(Long id, PmsBrandDto pmsBrandDto) {
+    public int updateBrand(final Long id, final PmsBrandDto pmsBrandDto) {
         PmsBrand pmsBrand = new PmsBrand();
-        BeanUtils.copyProperties(pmsBrandDto,pmsBrand);
+        BeanUtils.copyProperties(pmsBrandDto, pmsBrand);
         pmsBrand.setId(id);
         return brandMapper.updateByPrimaryKeySelective(pmsBrand);
     }

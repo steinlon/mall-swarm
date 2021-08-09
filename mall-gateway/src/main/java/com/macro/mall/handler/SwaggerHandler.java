@@ -42,7 +42,8 @@ public class SwaggerHandler {
     public Mono<ResponseEntity<SecurityConfiguration>> securityConfiguration() {
         return Mono.just(
                 new ResponseEntity<>(
-                        Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build()),
+                        Optional.ofNullable(securityConfiguration)
+                                .orElse(SecurityConfigurationBuilder.builder().build()),
                         HttpStatus.OK)
         );
     }
@@ -54,7 +55,8 @@ public class SwaggerHandler {
     public Mono<ResponseEntity<UiConfiguration>> uiConfiguration() {
         return Mono.just(
                 new ResponseEntity<>(
-                        Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()),
+                        Optional.ofNullable(uiConfiguration)
+                                .orElse(UiConfigurationBuilder.builder().build()),
                         HttpStatus.OK)
         );
     }
