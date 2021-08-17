@@ -7,4 +7,5 @@ spring:
         cluster-name: mall-cluster
       config:
         server-addr: http://localhost:8848
+        group: mall-group
         file-extension: yaml
