@@ -111,6 +111,9 @@ mall
 | nginx           | 1.10     | http://nginx.org/en/download.html                            |
 | nacos           | v2.0.3   | https://nacos.io/en-us/index.html                            |
 
+### Nacos配置中心
+[Nacos配置中心](https://mp.weixin.qq.com/s/N9eAMHuDEJq7kCCJPEEJqw)
+
 ### 搭建步骤
 
 > 数据库部署

@@ -1,9 +1,8 @@
 package com.macro.mall.common.service.impl;
 
 import com.macro.mall.common.service.RedisService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -13,10 +12,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis操作实现类
  */
+@AllArgsConstructor
 public class RedisServiceImpl implements RedisService {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public void set(String key, Object value, long time) {
