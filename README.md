@@ -109,6 +109,9 @@ mall
 | RabbitMq      | 3.10.5 | http://www.rabbitmq.com/download.html                        |
 | nginx         | 1.22   | http://nginx.org/en/download.html                            |
 
+### Nacos配置中心
+[Nacos配置中心](https://mp.weixin.qq.com/s/N9eAMHuDEJq7kCCJPEEJqw)
+
 ### 搭建步骤
 
 > 数据库部署

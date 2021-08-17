@@ -1,3 +1,5 @@
+info:
+  profile: development
 aliyun:
   oss:
     endpoint: oss-cn-shenzhen.aliyuncs.com # oss对外服务的访问域名
@@ -21,6 +23,11 @@ spring:
     port: 6379 # Redis服务器连接端口
     password: # Redis服务器连接密码（默认为空）
     timeout: 3000ms # 连接超时时间（毫秒）
+  rabbitmq: #rabbitmq相关配置
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 minio:
   endpoint: http://localhost:9000 #MinIO服务所在地址
   bucketName: mall #存储桶名称
