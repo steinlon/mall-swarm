@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/serviceInstances").permitAll()
+                .antMatchers("/configs").permitAll()
                 .anyRequest().authenticated();
     }
 
