@@ -53,14 +53,17 @@ public class BaseRedisConfig {
         final RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
         //设置Redis缓存有效期为1天
         final RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer())).entryTtl(Duration.ofDays(1));
+                .serializeValuesWith(
+                        RedisSerializationContext
+                                .SerializationPair
+                                .fromSerializer(redisSerializer()))
+                .entryTtl(Duration.ofDays(1));
         return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 
-
     @Bean
-    public RedisService redisService() {
-        return new RedisServiceImpl();
+    public RedisService redisService(final RedisTemplate<String, Object> template) {
+        return new RedisServiceImpl(template);
     }
 
 }
