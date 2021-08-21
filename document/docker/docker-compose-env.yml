@@ -30,6 +30,22 @@ services:
     depends_on:
       - mall-postgres
 
+  nacos-mysql:
+    image: mysql:5.7
+    container_name: nacos-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nacos
+      MYSQL_USER: nacos
+      MYSQL_PASSWORD: nacos
+    ports:
+      - "3333:3306"
+    volumes:
+      - ./mydata/mysql:/var/lib/mysql
+      - ./nacos:/docker-entrypoint-initdb.d/
+    restart: always
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
   redis:
     image: redis:7
     container_name: redis
@@ -42,10 +58,6 @@ services:
     ports:
       - 6379:6379
 
-  # 需要手动在页面上添加连接到其他的redis服务器的地址，以redis为例子
-  # 运行命令 docker network inspect docker_default获取redis的ip地址
-  # 打开localhost:8081
-  # 在Add Server中添加redis的ip地址，port为6379，密码为redis
   redis-commander:
     container_name: redis-commander
     hostname: redis-commander
@@ -128,10 +140,22 @@ services:
     ports:
       - 27017:27017
 
+  # If mysql does not have table defined in ./nacos/init.sql.
+  # Need to run ./nacos/init.sql in mysql then restart the nacos registry
   nacos-registry:
     image: nacos/nacos-server:v2.1.0
     container_name: nacos-registry
     environment:
-      - "MODE=standalone"
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=nacos-mysql
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=nacos
+      - MYSQL_SERVICE_PASSWORD=nacos
     ports:
       - 8848:8848
+    depends_on:
+      - nacos-mysql
+    restart: on-failure
