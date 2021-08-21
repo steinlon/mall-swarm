@@ -1,30 +1,34 @@
-package com.macro.mall.system;
+package com.macro.mall.auth.system;
 
+import com.macro.mall.common.constant.ServiceConstant;
 import com.macro.mall.common.propertirs.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RefreshScope
-public class MallGatewayConfigController {
+public class SystemConfigController {
 
     private final SystemProperties systemProperties;
+    private final DiscoveryClient discoveryClient;
 
     @Autowired
-    public MallGatewayConfigController(
-            final RedisProperties redisProperties,
-            final OAuth2ResourceServerProperties oAuth2ResourceServerProperties,
+    public SystemConfigController(
             final WebEndpointProperties webEndpointProperties,
-            @Value("${info.profile}") final String profile) {
+            @Value("${info.profile}") final String profile,
+            final DiscoveryClient discoveryClient) {
+        this.discoveryClient = discoveryClient;
         this.systemProperties = new SystemProperties(
-                redisProperties,
-                oAuth2ResourceServerProperties,
+                null,
+                null,
                 null,
                 null,
                 webEndpointProperties,
@@ -35,5 +39,10 @@ public class MallGatewayConfigController {
     @GetMapping("/configs")
     public SystemProperties getProfile() {
         return this.systemProperties;
+    }
+
+    @GetMapping("/serviceInstances")
+    public List<ServiceInstance> getDiscoveryClient() {
+        return this.discoveryClient.getInstances(ServiceConstant.AUTH_SERVICE);
     }
 }
