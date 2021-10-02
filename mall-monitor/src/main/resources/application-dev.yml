@@ -3,3 +3,4 @@ spring:
     nacos:
       discovery:
         server-addr: http://localhost:8848
+        group: mall-group
