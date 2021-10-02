@@ -34,7 +34,7 @@
         <skipTests>true</skipTests>
         <docker.host>http://192.168.3.101:2375</docker.host>
         <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
-        <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
         <spring-security-oauth2.version>2.5.1.RELEASE</spring-security-oauth2.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -51,7 +51,7 @@
         <admin-starter-server.version>2.5.1</admin-starter-server.version>
         <minio.version>8.3.0</minio.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <nimbus-jose-jwt.version>9.15.1</nimbus-jose-jwt.version>
+        <nimbus-jose-jwt.version>9.15.2</nimbus-jose-jwt.version>
         <mall-common.version>${project.version}</mall-common.version>
         <mall-mbg.version>${project.version}</mall-mbg.version>
         <javax.version>2.3.1</javax.version>
