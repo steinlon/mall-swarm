@@ -77,9 +77,7 @@ public abstract class BaseSwaggerConfig {
     private List<SecurityReference> defaultAuth() {
         final List<SecurityReference> result = new ArrayList<>();
         final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        result.add(new SecurityReference("Authorization", authorizationScopes));
+        result.add(new SecurityReference("Authorization", new AuthorizationScope[]{authorizationScope}));
         return result;
     }
 
