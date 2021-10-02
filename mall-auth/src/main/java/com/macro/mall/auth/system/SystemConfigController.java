@@ -45,4 +45,9 @@ public class SystemConfigController {
     public List<ServiceInstance> getDiscoveryClient() {
         return this.discoveryClient.getInstances(ServiceConstant.AUTH_SERVICE);
     }
+
+    @GetMapping("/discoveryClient")
+    public DiscoveryClient getClient() {
+        return this.discoveryClient;
+    }
 }
