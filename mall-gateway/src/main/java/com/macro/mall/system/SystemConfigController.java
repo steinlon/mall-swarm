@@ -13,7 +13,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class SystemConfigController {
     private final SystemProperties systemProperties;
     private final DiscoveryClient discoveryClient;
     private final LoadBalancerClient loadBalancerClient;
+    private final WebClient.Builder webClientBuilder;
 
     @Autowired
     public SystemConfigController(
@@ -32,9 +34,11 @@ public class SystemConfigController {
             final WebEndpointProperties webEndpointProperties,
             @Value("${info.profile}") final String profile,
             final DiscoveryClient discoveryClient,
-            final LoadBalancerClient loadBalancerClient) {
+            final LoadBalancerClient loadBalancerClient,
+            final WebClient.Builder webClientBuilder) {
         this.discoveryClient = discoveryClient;
         this.loadBalancerClient = loadBalancerClient;
+        this.webClientBuilder = webClientBuilder;
         this.systemProperties = new SystemProperties(
                 redisProperties,
                 oAuth2ResourceServerProperties,
@@ -61,14 +65,22 @@ public class SystemConfigController {
     }
 
     @GetMapping("/adminServices")
-    public String getAdminLoadBalancerClient() {
+    public Mono<String> getAdminLoadBalancerClient() {
         final ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceConstant.ADMIN_SERVICE);
-        return new RestTemplate().getForObject(serviceInstance.getUri() + "/serviceInstances", String.class);
+        return webClientBuilder.build()
+                .get()
+                .uri(serviceInstance.getUri() + "/serviceInstances")
+                .retrieve()
+                .bodyToMono(String.class);
     }
 
     @GetMapping("/authServices")
-    public String getAuthLoadBalancerClient() {
+    public Mono<String> getAuthLoadBalancerClient() {
         final ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceConstant.AUTH_SERVICE);
-        return new RestTemplate().getForObject(serviceInstance.getUri() + "/serviceInstances", String.class);
+        return webClientBuilder.build()
+                .get()
+                .uri(serviceInstance.getUri() + "/serviceInstances")
+                .retrieve()
+                .bodyToMono(String.class);
     }
 }

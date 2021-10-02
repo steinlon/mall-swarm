@@ -20,7 +20,7 @@ public class GlobalCorsConfig {
         config.addAllowedMethod("*");
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(false);
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
         source.registerCorsConfiguration("/**", config);
         return new CorsWebFilter(source);
