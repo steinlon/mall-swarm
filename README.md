@@ -21,7 +21,7 @@
 
 ## 系统架构图
 
-![系统架构图](document/resource/mall_micro_service_arch.jpg)
+![系统架构图](./document/resource/mall_micro_service_arch.jpg)
 
 ## 组织结构
 
@@ -155,7 +155,7 @@ mall
 
 - Redis Commander可视化工具管理，访问地址：http://192.168.2.101:8101
 
-![](document/resource/redis_commander.png)
+![](./document/resource/redis_commander.png)
 
 - API文档信息(本地运行)，访问地址：http://localhost:8201/doc.html
 - API文档信息，访问地址：http://192.168.3.101:8201
