@@ -4,6 +4,7 @@ import com.macro.mall.common.service.RedisService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,8 +44,13 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public Boolean expire(String key, long time) {
-        return redisTemplate.expire(key, time, TimeUnit.SECONDS);
+    public Boolean expire(String key, long seconds) {
+        return redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Boolean expireAt(final String key, final Date date) {
+        return redisTemplate.expireAt(key, date);
     }
 
     @Override
