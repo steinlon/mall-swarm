@@ -1,16 +1,15 @@
 package com.macro.mall.service;
 
 import com.macro.mall.model.UmsAdmin;
-import com.macro.mall.model.UmsResource;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * 后台用户缓存操作类
  */
 public interface UmsAdminCacheService {
     /**
-     * 删除后台用户缓存
+     * 删除后台用户缓存已经登出系统
      */
     void delAdmin(Long adminId);
 
@@ -22,5 +21,5 @@ public interface UmsAdminCacheService {
     /**
      * 设置缓存后台用户信息
      */
-    void setAdmin(UmsAdmin admin);
+    void setAdmin(UmsAdmin admin, Date expire);
 }

@@ -9,6 +9,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.HttpAuthenticationScheme;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
@@ -51,6 +52,7 @@ public abstract class BaseSwaggerConfig {
         //设置请求头信息
         final List<SecurityScheme> result = new ArrayList<>();
         final ApiKey apiKey = new ApiKey("Authorization", "Authorization", "header");
+        final HttpAuthenticationScheme jwt = HttpAuthenticationScheme.JWT_BEARER_BUILDER.name("JWT").build();
         result.add(apiKey);
         return result;
     }
@@ -70,6 +72,7 @@ public abstract class BaseSwaggerConfig {
         final List<SecurityReference> result = new ArrayList<>();
         final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         result.add(new SecurityReference("Authorization", new AuthorizationScope[]{authorizationScope}));
+        result.add(new SecurityReference("JWT", new AuthorizationScope[]{authorizationScope}));
         return result;
     }
 

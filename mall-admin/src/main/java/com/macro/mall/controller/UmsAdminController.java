@@ -79,6 +79,7 @@ public class UmsAdminController {
     @PostMapping(value = "/logout")
     @ResponseBody
     public CommonResult<?> logout() {
+        adminService.logout();
         return CommonResult.success(null);
     }
 
