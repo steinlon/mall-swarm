@@ -1,5 +1,6 @@
 package com.macro.mall.common.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +38,12 @@ public interface RedisService {
     /**
      * 设置过期时间
      */
-    Boolean expire(String key, long time);
+    Boolean expire(String key, long seconds);
+
+    /**
+     * 设置到固定的过期时间
+     */
+    Boolean expireAt(String key, Date date);
 
     /**
      * 获取过期时间

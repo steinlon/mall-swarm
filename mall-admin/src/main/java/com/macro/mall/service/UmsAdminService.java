@@ -34,6 +34,8 @@ public interface UmsAdminService {
      */
     CommonResult<?> login(String username, String password);
 
+    void logout();
+
     /**
      * 根据用户id获取用户
      */
