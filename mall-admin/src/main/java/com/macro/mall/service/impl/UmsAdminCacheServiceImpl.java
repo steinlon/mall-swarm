@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * UmsAdminCacheService实现类
  */
@@ -15,18 +17,15 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
 
     private final RedisService redisService;
     private final String redisDataBase;
-    private final Long redisExpire;
     private final String redisKeyAdmin;
 
     @Autowired
     public UmsAdminCacheServiceImpl(
             final RedisService redisService,
             @Value("${redis.database}") final String redisDataBase,
-            @Value("${redis.expire.common}") final Long redisExpire,
             @Value("${redis.key.admin}") final String redisKeyAdmin) {
         this.redisService = redisService;
         this.redisDataBase = redisDataBase;
-        this.redisExpire = redisExpire;
         this.redisKeyAdmin = redisKeyAdmin;
     }
 
@@ -43,8 +42,9 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     }
 
     @Override
-    public void setAdmin(final UmsAdmin admin) {
+    public void setAdmin(final UmsAdmin admin, final Date expire) {
         final String key = redisDataBase + ":" + redisKeyAdmin + ":" + admin.getId();
-        redisService.set(key, admin, redisExpire);
+        redisService.set(key, admin);
+        redisService.expireAt(key, expire);
     }
 }

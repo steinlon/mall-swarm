@@ -1,8 +1,6 @@
 package com.macro.mall.auth.controller;
 
-import com.macro.mall.auth.domain.Oauth2TokenDto;
 import com.macro.mall.common.api.CommonResult;
-import com.macro.mall.common.constant.AuthConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -41,19 +39,11 @@ public class AuthController {
             @ApiImplicitParam(name = "password", value = "登录密码")
     })
     @PostMapping(value = "/token")
-    public CommonResult<Oauth2TokenDto> postAccessToken(
+    public CommonResult<OAuth2AccessToken> postAccessToken(
             @ApiIgnore final Principal principal,
             @ApiIgnore @RequestParam final Map<String, String> parameters)
             throws HttpRequestMethodNotSupportedException {
         final OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
-        final Oauth2TokenDto oauth2TokenDto = Oauth2TokenDto.builder()
-                .token(oAuth2AccessToken.getValue())
-                .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
-                .expiresIn(oAuth2AccessToken.getExpiresIn())
-                .tokenHead(AuthConstant.JWT_TOKEN_PREFIX)
-                .additionalInformation(oAuth2AccessToken.getAdditionalInformation())
-                .build();
-
-        return CommonResult.success(oauth2TokenDto);
+        return CommonResult.success(oAuth2AccessToken);
     }
 }

@@ -109,6 +109,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         return restResult;
     }
 
+    @Override
+    public void logout() {
+        final String userStr = request.getHeader(AuthConstant.USER_TOKEN_HEADER);
+        if (StrUtil.isEmpty(userStr)) {
+            Asserts.fail(ResultCode.UNAUTHORIZED);
+        }
+        final UserDto userDto = JSONUtil.toBean(userStr, UserDto.class);
+        adminCacheService.delAdmin(userDto.getId());
+    }
+
     /**
      * 添加登录记录
      */
@@ -262,7 +272,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         UmsAdmin admin = adminCacheService.getAdmin(userDto.getId());
         if (admin == null) {
             admin = adminMapper.selectByPrimaryKey(userDto.getId());
-            adminCacheService.setAdmin(admin);
+            adminCacheService.setAdmin(admin, new Date(userDto.getExp() * 1000L));
         }
         return admin;
     }

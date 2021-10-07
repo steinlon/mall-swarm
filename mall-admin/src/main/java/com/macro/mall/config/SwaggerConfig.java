@@ -5,6 +5,8 @@ import com.macro.mall.common.domain.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static com.macro.mall.common.constant.ServiceConstant.SWAGGER_VERSION;
+
 /**
  * Swagger API文档相关配置
  */
@@ -19,7 +21,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
                 .title("mall后台系统")
                 .description("mall后台相关接口文档")
                 .contactName("macro")
-                .version("1.0")
+                .version(SWAGGER_VERSION)
                 .enableSecurity(true)
                 .build();
     }

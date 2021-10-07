@@ -61,6 +61,7 @@ secure:
       - "/swagger-resources/**"
       - "/swagger/**"
       - "/*/v2/api-docs"
+      - "/*/v3/api-docs"
       - "/*/*.js"
       - "/*/*.css"
       - "/*/*.png"

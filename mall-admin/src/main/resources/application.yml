@@ -46,8 +46,6 @@ redis:
   database: mall
   key:
     admin: 'ums:admin'
-  expire:
-    common: 86400 # 24小时
 #aliyun:
 #  oss:
 #    endpoint: oss-cn-shenzhen.aliyuncs.com # oss对外服务的访问域名
