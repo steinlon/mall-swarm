@@ -13,6 +13,8 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.macro.mall.common.constant.ServiceConstant.SWAGGER_VERSION;
+
 /**
  * Swagger资源配置
  */
@@ -49,11 +51,11 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
     }
 
     private SwaggerResource swaggerResource(final String name, final String location) {
-        log.info("name:{},location:{}", name, location);
+        log.info("name:{}, location:{}", name, location);
         final SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion("2.0");
+        swaggerResource.setSwaggerVersion(SWAGGER_VERSION);
         return swaggerResource;
     }
 }

@@ -7,4 +7,6 @@ public interface ServiceConstant {
     String GATEWAY_SERVICE = "mall-gateway";
     String PORTAL_SERVICE = "mall-portal";
     String SEARCH_SERVICE = "mall-search";
+
+    String SWAGGER_VERSION = "2.0";
 }

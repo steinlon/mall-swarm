@@ -18,6 +18,7 @@ public class UserDto {
     private String username;
     private String password;
     private Integer status;
+    private Integer exp;
     private String clientId;
     private List<String> roles;
 
