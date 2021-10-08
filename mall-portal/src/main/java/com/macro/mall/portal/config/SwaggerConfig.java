@@ -11,7 +11,6 @@ import static com.macro.mall.common.constant.ServiceConstant.SWAGGER_VERSION;
 
 /**
  * Swagger API文档相关配置
- * Created by macro on 2018/4/26.
  */
 @Configuration
 @EnableSwagger2
