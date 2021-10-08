@@ -15,6 +15,6 @@ import java.util.Map;
 public interface AuthService {
 
     @PostMapping(value = "/oauth/token")
-    CommonResult getAccessToken(@RequestParam Map<String, String> parameters);
+    CommonResult<?> getAccessToken(@RequestParam Map<String, String> parameters);
 
 }
