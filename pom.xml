@@ -49,7 +49,7 @@
         <aliyun-oss.version>3.13.1</aliyun-oss.version>
         <logstash-logback.version>6.6</logstash-logback.version>
         <admin-starter-server.version>2.5.2</admin-starter-server.version>
-        <minio.version>8.3.0</minio.version>
+        <minio.version>8.3.1</minio.version>
         <knife4j.version>3.0.3</knife4j.version>
         <nimbus-jose-jwt.version>9.15.2</nimbus-jose-jwt.version>
         <mall-common.version>${project.version}</mall-common.version>
