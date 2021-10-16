@@ -5,6 +5,7 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.common.domain.WebLog;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import net.logstash.logback.marker.Markers;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -39,8 +40,8 @@ import java.util.Map;
 @Aspect
 @Component
 @Order(1)
+@Slf4j
 public class WebLogAspect {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
     @Pointcut("execution(public * com.macro.mall.controller.*.*(..))||execution(public * com.macro.mall.*.controller.*.*(..))")
     public void webLog() {
@@ -87,8 +88,8 @@ public class WebLogAspect {
         logMap.put("parameter", webLog.getParameter());
         logMap.put("spendTime", webLog.getSpendTime());
         logMap.put("description", webLog.getDescription());
-        LOGGER.info("{}", JSONUtil.parse(webLog));
-        LOGGER.info(Markers.appendEntries(logMap), JSONUtil.parse(webLog).toString());
+        log.info("{}", JSONUtil.parse(webLog));
+        log.info(Markers.appendEntries(logMap), JSONUtil.parse(webLog).toString());
         return result;
     }
 

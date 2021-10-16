@@ -66,10 +66,6 @@ public class SwaggerHandler {
      */
     @GetMapping("/swagger-resources")
     public Mono<ResponseEntity<List<SwaggerResource>>> swaggerResources() {
-        return Mono.just(
-                new ResponseEntity<>(
-                        swaggerResources.get(),
-                        HttpStatus.OK)
-        );
+        return Mono.just(new ResponseEntity<>(swaggerResources.get(), HttpStatus.OK));
     }
 }

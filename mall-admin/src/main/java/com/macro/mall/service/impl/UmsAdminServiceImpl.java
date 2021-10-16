@@ -61,13 +61,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public UmsAdmin getAdminByUsername(final String username) {
-        final UmsAdminExample example = new UmsAdminExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        final List<UmsAdmin> adminList = adminMapper.selectByExample(example);
-        if (adminList != null && adminList.size() > 0) {
-            return adminList.get(0);
-        }
-        return null;
+        return adminMapper.selectByUsername(username);
     }
 
     @Override
