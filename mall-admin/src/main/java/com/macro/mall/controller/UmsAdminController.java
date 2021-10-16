@@ -29,13 +29,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.macro.mall.constant.UrlConstant.ADMIN;
+
 /**
  * 后台用户管理
  */
 @Controller
 @AllArgsConstructor
 @Api(tags = "UmsAdminController", description = "后台用户管理")
-@RequestMapping("/admin")
+@RequestMapping(ADMIN)
 public class UmsAdminController {
 
     private final UmsAdminService adminService;
