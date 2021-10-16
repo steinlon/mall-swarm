@@ -2824,26 +2824,6 @@ insert into ums_member (member_level_id, username, password, nickname, phone, st
                         personalized_signature, source_type, integration, growth, lucky_count, history_integration)
 values ('4', 'zhengsan', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'zhengsan', '18061581847', '1', '2018-11-12 14:12:04',
         null, null, null, null, null, null, null, null, null, null, null);
-insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
-                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
-values ('4', 'lisi', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lisi', '18061581841', '1', '2018-11-12 14:12:38', null,
-        null, null, null, null, null, null, null, null, null, null);
-insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
-                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
-values ('4', 'wangwu', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'wangwu', '18061581842', '1', '2018-11-12 14:13:09', null,
-        null, null, null, null, null, null, null, null, null, null);
-insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
-                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
-values ('4', 'lion', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'lion', '18061581845', '1', '2018-11-12 14:21:39', null,
-        null, null, null, null, null, null, null, null, null, null);
-insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
-                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
-values ('4', 'shari', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'shari', '18061581844', '1', '2018-11-12 14:22:00', null,
-        null, null, null, null, null, null, null, null, null, null);
-insert into ums_member (member_level_id, username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job,
-                        personalized_signature, source_type, integration, growth, lucky_count, history_integration)
-values ('4', 'aewen', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG', 'aewen', '18061581843', '1', '2018-11-12 14:22:55', null,
-        null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for ums_member_level
@@ -3287,7 +3267,7 @@ values ('商品管理员', '只能查看及操作商品', '0', '2020-02-03 16:50
 insert into ums_role (name, description, admin_count, create_time, status, sort)
 values ('订单管理员', '只能查看及操作订单', '0', '2018-09-30 15:53:45', '1', '0');
 insert into ums_role (name, description, admin_count, create_time, status, sort)
-values ('超级管理员', '拥有所有查看和操作功能', '0', '2020-02-02 15:11:05', '1', '0');
+values ('超级管理员', '拥有所有查看和操作功能', '1', '2020-02-02 15:11:05', '1', '0');
 
 -- ----------------------------
 -- Table structure forums_role_menu_relation
