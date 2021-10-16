@@ -19,13 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static com.macro.mall.constant.UrlConstant.MENU;
+
 /**
  * 后台菜单管理Controller
  */
 @Controller
 @AllArgsConstructor
-@Api(tags = "UmsMenuController", description = "后台菜单管理")
-@RequestMapping("/menu")
+@Api(tags = "UmsMenuController", value = "后台菜单管理")
+@RequestMapping(MENU)
 public class UmsMenuController {
 
     private final UmsMenuService menuService;

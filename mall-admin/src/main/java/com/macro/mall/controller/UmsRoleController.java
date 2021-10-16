@@ -20,13 +20,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static com.macro.mall.constant.UrlConstant.ROLE;
+
 /**
  * 后台用户角色管理
  */
 @Controller
 @AllArgsConstructor
 @Api(tags = "UmsRoleController", description = "后台用户角色管理")
-@RequestMapping("/role")
+@RequestMapping(ROLE)
 public class UmsRoleController {
 
     private final UmsRoleService roleService;
