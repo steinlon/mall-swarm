@@ -31,7 +31,6 @@ import com.macro.mall.model.UmsMemberReceiveAddress;
 import com.macro.mall.portal.component.CancelOrderSender;
 import com.macro.mall.portal.dao.PortalOrderDao;
 import com.macro.mall.portal.dao.PortalOrderItemDao;
-import com.macro.mall.portal.dao.SmsCouponHistoryDao;
 import com.macro.mall.portal.domain.CartPromotionItem;
 import com.macro.mall.portal.domain.ConfirmOrderResult;
 import com.macro.mall.portal.domain.OmsOrderDetail;
@@ -68,7 +67,6 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     private final UmsMemberCouponService memberCouponService;
     private final UmsIntegrationConsumeSettingMapper integrationConsumeSettingMapper;
     private final PmsSkuStockMapper skuStockMapper;
-    private final SmsCouponHistoryDao couponHistoryDao;
     private final OmsOrderMapper orderMapper;
     private final PortalOrderItemDao orderItemDao;
     private final SmsCouponHistoryMapper couponHistoryMapper;
@@ -88,7 +86,6 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
             final UmsMemberCouponService memberCouponService,
             final UmsIntegrationConsumeSettingMapper integrationConsumeSettingMapper,
             final PmsSkuStockMapper skuStockMapper,
-            final SmsCouponHistoryDao couponHistoryDao,
             final OmsOrderMapper orderMapper,
             final PortalOrderItemDao orderItemDao,
             final SmsCouponHistoryMapper couponHistoryMapper,
@@ -105,7 +102,6 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         this.memberCouponService = memberCouponService;
         this.integrationConsumeSettingMapper = integrationConsumeSettingMapper;
         this.skuStockMapper = skuStockMapper;
-        this.couponHistoryDao = couponHistoryDao;
         this.orderMapper = orderMapper;
         this.orderItemDao = orderItemDao;
         this.couponHistoryMapper = couponHistoryMapper;
