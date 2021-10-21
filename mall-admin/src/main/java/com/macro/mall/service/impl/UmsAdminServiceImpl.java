@@ -97,7 +97,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         params.put("password", password);
         final CommonResult<?> restResult = authService.getAccessToken(params);
         if (ResultCode.SUCCESS == restResult.getErrorCode() && restResult.getData() != null) {
-            insertUserLoginLog(username);
+            upsertUserLoginLog(username);
         } else {
             updateLoginWithErrorCode(username, restResult.getErrorCode());
         }
@@ -117,11 +117,12 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     /**
      * 添加登录记录
      */
-    private void insertUserLoginLog(final String username) {
+    private void upsertUserLoginLog(final String username) {
         final UmsAdmin admin = getAdminByUsername(username);
         if (admin == null) {
             return;
         }
+        admin.setLoginTime(new Date());
         final UmsAdminLoginLog loginLog = new UmsAdminLoginLog();
         loginLog.setAdminId(admin.getId());
         loginLog.setCreateTime(new Date());
@@ -130,6 +131,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             final HttpServletRequest request = attributes.getRequest();
             loginLog.setIp(request.getRemoteAddr());
         }
+        adminMapper.updateByPrimaryKeySelective(admin);
         loginLogMapper.insert(loginLog);
     }
 
