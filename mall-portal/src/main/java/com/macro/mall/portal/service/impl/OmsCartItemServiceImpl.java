@@ -15,7 +15,6 @@ import com.macro.mall.portal.service.UmsMemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -57,7 +56,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         final OmsCartItemExample example = new OmsCartItemExample();
         OmsCartItemExample.Criteria criteria = example.createCriteria().andMemberIdEqualTo(cartItem.getMemberId())
                 .andProductIdEqualTo(cartItem.getProductId()).andDeleteStatusEqualTo(0);
-        if (!StringUtils.isEmpty(cartItem.getProductSkuId())) {
+        if (cartItem.getProductSkuId() != null) {
             criteria.andProductSkuIdEqualTo(cartItem.getProductSkuId());
         }
         final List<OmsCartItem> cartItemList = cartItemMapper.selectByExample(example);

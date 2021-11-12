@@ -1,6 +1,5 @@
 package com.macro.mall.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.service.RedisService;
@@ -17,6 +16,7 @@ import com.macro.mall.service.UmsResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -92,10 +92,10 @@ public class UmsResourceServiceImpl implements UmsResourceService {
         if (categoryId != null) {
             criteria.andCategoryIdEqualTo(categoryId);
         }
-        if (StrUtil.isNotEmpty(nameKeyword)) {
+        if (StringUtils.hasLength(nameKeyword)) {
             criteria.andNameLike('%' + nameKeyword + '%');
         }
-        if (StrUtil.isNotEmpty(urlKeyword)) {
+        if (StringUtils.hasLength(urlKeyword)) {
             criteria.andUrlLike('%' + urlKeyword + '%');
         }
         return resourceMapper.selectByExample(example);
