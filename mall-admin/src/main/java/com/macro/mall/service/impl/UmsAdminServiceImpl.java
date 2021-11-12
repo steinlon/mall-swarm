@@ -1,7 +1,6 @@
 package com.macro.mall.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
@@ -86,7 +85,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public CommonResult<?> login(final String username, final String password) {
-        if (StrUtil.isEmpty(username) || StrUtil.isEmpty(password)) {
+        if (!StringUtils.hasLength(username) || !StringUtils.hasLength(password)) {
             Asserts.fail("用户名或密码不能为空！");
         }
         final Map<String, String> params = new HashMap<>(5);
@@ -107,7 +106,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public void logout() {
         final String userStr = request.getHeader(AuthConstant.USER_TOKEN_HEADER);
-        if (StrUtil.isEmpty(userStr)) {
+        if (!StringUtils.hasLength(userStr)) {
             Asserts.fail(ResultCode.UNAUTHORIZED);
         }
         final UserDto userDto = JSONUtil.toBean(userStr, UserDto.class);
@@ -154,7 +153,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         PageHelper.startPage(pageNum, pageSize);
         final UmsAdminExample example = new UmsAdminExample();
         UmsAdminExample.Criteria criteria = example.createCriteria();
-        if (!StringUtils.isEmpty(keyword)) {
+        if (StringUtils.hasLength(keyword)) {
             criteria.andUsernameLike("%" + keyword + "%");
             example.or(example.createCriteria().andNickNameLike("%" + keyword + "%"));
         }
@@ -170,7 +169,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             admin.setPassword(null);
         } else {
             //与原加密密码不同的需要加密修改
-            if (StrUtil.isEmpty(admin.getPassword())) {
+            if (!StringUtils.hasLength(admin.getPassword())) {
                 admin.setPassword(null);
             } else {
                 admin.setPassword(BCrypt.hashpw(admin.getPassword()));
@@ -221,9 +220,9 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public int updatePassword(final UpdateAdminPasswordParam param) {
-        if (StrUtil.isEmpty(param.getUsername())
-                || StrUtil.isEmpty(param.getOldPassword())
-                || StrUtil.isEmpty(param.getNewPassword())) {
+        if (!StringUtils.hasLength(param.getUsername())
+                || !StringUtils.hasLength(param.getOldPassword())
+                || !StringUtils.hasLength(param.getNewPassword())) {
             return -1;
         }
         final UmsAdminExample example = new UmsAdminExample();
@@ -262,7 +261,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public UmsAdmin getCurrentAdmin() {
         final String userStr = request.getHeader(AuthConstant.USER_TOKEN_HEADER);
-        if (StrUtil.isEmpty(userStr)) {
+        if (!StringUtils.hasLength(userStr)) {
             Asserts.fail(ResultCode.UNAUTHORIZED);
         }
         UserDto userDto = JSONUtil.toBean(userStr, UserDto.class);

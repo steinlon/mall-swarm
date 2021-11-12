@@ -1,7 +1,6 @@
 package com.macro.mall.authorization;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.domain.UserDto;
@@ -20,6 +19,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -60,7 +60,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         final String token = request.getHeaders().getFirst(AuthConstant.JWT_TOKEN_HEADER);
         //不同用户体系登录不允许互相访问
         try {
-            if (StrUtil.isEmpty(token)) {
+            if (!StringUtils.hasLength(token)) {
                 return Mono.just(new AuthorizationDecision(false));
             }
             final String realToken = token.replace(AuthConstant.JWT_TOKEN_PREFIX, "");
