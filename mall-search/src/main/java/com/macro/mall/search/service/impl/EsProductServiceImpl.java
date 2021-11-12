@@ -125,7 +125,7 @@ public class EsProductServiceImpl implements EsProductService {
             nativeSearchQueryBuilder.withFilter(boolQueryBuilder);
         }
         //搜索
-        if (StringUtils.isEmpty(keyword)) {
+        if (!StringUtils.hasLength(keyword)) {
             nativeSearchQueryBuilder.withQuery(QueryBuilders.matchAllQuery());
         } else {
             List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
@@ -223,7 +223,7 @@ public class EsProductServiceImpl implements EsProductService {
     public EsProductRelatedInfo searchRelatedInfo(String keyword) {
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
         //搜索条件
-        if (StringUtils.isEmpty(keyword)) {
+        if (!StringUtils.hasLength(keyword)) {
             builder.withQuery(QueryBuilders.matchAllQuery());
         } else {
             builder.withQuery(QueryBuilders.multiMatchQuery(keyword, "name", "subTitle", "keywords"));

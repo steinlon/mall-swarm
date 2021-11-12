@@ -2,7 +2,6 @@ package com.macro.mall.portal.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.common.api.CommonResult;
@@ -19,7 +18,7 @@ import com.macro.mall.model.UmsMemberLevelExample;
 import com.macro.mall.portal.service.AuthService;
 import com.macro.mall.portal.service.UmsMemberCacheService;
 import com.macro.mall.portal.service.UmsMemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -34,6 +33,7 @@ import java.util.Random;
 /**
  * 会员管理Service实现类
  */
+@AllArgsConstructor
 @Service
 public class UmsMemberServiceImpl implements UmsMemberService {
 
@@ -41,21 +41,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     private final UmsMemberLevelMapper memberLevelMapper;
     private final UmsMemberCacheService memberCacheService;
     private final AuthService authService;
-
     private final HttpServletRequest request;
-
-    @Autowired
-    public UmsMemberServiceImpl(
-            final UmsMemberMapper memberMapper,
-            final UmsMemberLevelMapper memberLevelMapper,
-            final UmsMemberCacheService memberCacheService,
-            final AuthService authService, final HttpServletRequest request) {
-        this.memberMapper = memberMapper;
-        this.memberLevelMapper = memberLevelMapper;
-        this.memberCacheService = memberCacheService;
-        this.authService = authService;
-        this.request = request;
-    }
 
     @Override
     public UmsMember getByUsername(final String username) {
@@ -137,7 +123,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     @Override
     public UmsMember getCurrentMember() {
         final String userStr = request.getHeader(AuthConstant.USER_TOKEN_HEADER);
-        if (StrUtil.isEmpty(userStr)) {
+        if (!StringUtils.hasLength(userStr)) {
             Asserts.fail(ResultCode.UNAUTHORIZED);
         }
         final UserDto userDto = JSONUtil.toBean(userStr, UserDto.class);
@@ -172,7 +158,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
     @Override
     public CommonResult<?> login(final String username, final String password) {
-        if (StrUtil.isEmpty(username) || StrUtil.isEmpty(password)) {
+        if (!StringUtils.hasLength(username) || !StringUtils.hasLength(password)) {
             Asserts.fail("用户名或密码不能为空！");
         }
         final Map<String, String> params = new HashMap<>();
