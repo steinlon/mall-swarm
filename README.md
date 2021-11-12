@@ -110,6 +110,7 @@ mall
 | nginx         | 1.22   | http://nginx.org/en/download.html                            |
 
 ### Nacos配置中心
+
 [Nacos配置中心](https://mp.weixin.qq.com/s/N9eAMHuDEJq7kCCJPEEJqw)
 
 ### 搭建步骤
@@ -183,3 +184,23 @@ Copyright (c) 2018-2021
 [Bootstrap issue](https://stackoverflow.com/questions/64994034/bootstrap-yml-configuration-not-processed-anymore-with-spring-cloud-2020-0)  
 [Load balance issue](https://blog.csdn.net/qq_33220089/article/details/115940165)   
 [Nacos load balance issue](https://blog.csdn.net/SirLZF/article/details/117127361)
+
+## ELK 搭建
+
+[ELK](https://mp.weixin.qq.com/s/ll_A6ddBaU99LSYmKdttYw)
+
+## Modules Learning
+
+| 模块        | 子模块                 | 重构                              |
+| ---------- | --------------------  | ------------------------------   |
+| UMS        | UmsRole               | yes                              |
+| UMS        | UmsResource           |                                  |
+| UMS        | UmsResourceCategory   |                                  |
+| UMS        | UmsMenu               | yes                              |
+| UMS        | UmsMemberLevel        |                                  |
+| UMS        | UmsAdmin              | yes                              |
+| UMS        | UmsAdminCache         | yes                              |
+| SMS        |                       |                                  |
+| PMS        |                       |                                  |
+| OMS        |                       |                                  |
+| CMS        |                       |                                  |

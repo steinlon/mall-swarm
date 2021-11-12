@@ -125,7 +125,7 @@ public class PmsProductServiceImpl implements PmsProductService {
         }
         for (int i = 0; i < skuStockList.size(); i++) {
             PmsSkuStock skuStock = skuStockList.get(i);
-            if (StringUtils.isEmpty(skuStock.getSkuCode())) {
+            if (!StringUtils.hasLength(skuStock.getSkuCode())) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 StringBuilder sb = new StringBuilder();
                 //日期
@@ -242,10 +242,10 @@ public class PmsProductServiceImpl implements PmsProductService {
         if (productQueryParam.getVerifyStatus() != null) {
             criteria.andVerifyStatusEqualTo(productQueryParam.getVerifyStatus());
         }
-        if (!StringUtils.isEmpty(productQueryParam.getKeyword())) {
+        if (StringUtils.hasLength(productQueryParam.getKeyword())) {
             criteria.andNameLike("%" + productQueryParam.getKeyword() + "%");
         }
-        if (!StringUtils.isEmpty(productQueryParam.getProductSn())) {
+        if (StringUtils.hasLength(productQueryParam.getProductSn())) {
             criteria.andProductSnEqualTo(productQueryParam.getProductSn());
         }
         if (productQueryParam.getBrandId() != null) {
@@ -320,7 +320,7 @@ public class PmsProductServiceImpl implements PmsProductService {
         PmsProductExample productExample = new PmsProductExample();
         PmsProductExample.Criteria criteria = productExample.createCriteria();
         criteria.andDeleteStatusEqualTo(0);
-        if (!StringUtils.isEmpty(keyword)) {
+        if (StringUtils.hasLength(keyword)) {
             criteria.andNameLike("%" + keyword + "%");
             productExample.or().andDeleteStatusEqualTo(0).andProductSnLike("%" + keyword + "%");
         }

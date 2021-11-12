@@ -39,3 +39,5 @@ logging:
     com.macro.mall: debug
 logstash:
   host: localhost
+  log:
+    path: ./tmp
