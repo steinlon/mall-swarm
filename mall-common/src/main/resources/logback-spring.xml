@@ -133,7 +133,7 @@
         </connectionStrategy>
     </appender>
 
-    <!--业务日志输出到LogStash-->
+    <!--业务日志输出到LogStash, 即包com.macro.mall下的日志-->
     <appender name="LOG_STASH_BUSINESS" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>${LOG_STASH_HOST}:4562</destination>
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
