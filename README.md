@@ -164,7 +164,8 @@ mall
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_05.png)
 
 - 日志收集系统信息，访问地址：http://192.168.3.101:5601
-
+- logstash-plugin install logstash-codec-json_lines
+- Install elasticsearch-header plugin from Google Chrome extension
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_06.png)
 
 - 可视化容器管理，访问地址：http://192.168.3.101:9000
@@ -186,8 +187,9 @@ Copyright (c) 2018-2021
 [Nacos load balance issue](https://blog.csdn.net/SirLZF/article/details/117127361)
 
 ## ELK 搭建
-
-[ELK](https://mp.weixin.qq.com/s/ll_A6ddBaU99LSYmKdttYw)
+[ELK](https://mp.weixin.qq.com/s/ll_A6ddBaU99LSYmKdttYw)  
+[Logstash概念](https://blog.csdn.net/UbuntuTouch/article/details/105973985)  
+[Logstash](https://www.jianshu.com/p/ef6a57309c72)
 
 ## Modules Learning
 
