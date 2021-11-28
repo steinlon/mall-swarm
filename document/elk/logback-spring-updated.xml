@@ -212,7 +212,7 @@
         <appender-ref ref="LOG_STASH_ERROR"/>
     </root>
 
-    <logger name="com.macro.mall.common.log.WebLogAspect" level="DEBUG">
+    <logger name="WebLogAspect" level="DEBUG">
         <appender-ref ref="LOG_STASH_RECORD"/>
     </logger>
 
