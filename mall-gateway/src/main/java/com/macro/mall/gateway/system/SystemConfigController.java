@@ -1,4 +1,4 @@
-package com.macro.mall.system;
+package com.macro.mall.gateway.system;
 
 import com.macro.mall.common.constant.ServiceConstant;
 import com.macro.mall.common.propertirs.SystemProperties;

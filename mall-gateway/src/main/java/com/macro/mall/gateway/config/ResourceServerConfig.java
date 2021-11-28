@@ -1,11 +1,11 @@
-package com.macro.mall.config;
+package com.macro.mall.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.macro.mall.authorization.AuthorizationManager;
+import com.macro.mall.gateway.authorization.AuthorizationManager;
+import com.macro.mall.gateway.component.RestAuthenticationEntryPoint;
+import com.macro.mall.gateway.component.RestfulAccessDeniedHandler;
 import com.macro.mall.common.constant.AuthConstant;
-import com.macro.mall.component.RestAuthenticationEntryPoint;
-import com.macro.mall.component.RestfulAccessDeniedHandler;
-import com.macro.mall.filter.IgnoreUrlsRemoveJwtFilter;
+import com.macro.mall.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
