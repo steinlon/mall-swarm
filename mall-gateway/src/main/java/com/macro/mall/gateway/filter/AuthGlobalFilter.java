@@ -1,4 +1,4 @@
-package com.macro.mall.filter;
+package com.macro.mall.gateway.filter;
 
 import com.macro.mall.common.constant.AuthConstant;
 import com.nimbusds.jose.JWSObject;

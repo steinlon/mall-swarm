@@ -1,7 +1,7 @@
-package com.macro.mall.filter;
+package com.macro.mall.gateway.filter;
 
 import com.macro.mall.common.constant.AuthConstant;
-import com.macro.mall.config.IgnoreUrlsConfig;
+import com.macro.mall.gateway.config.IgnoreUrlsConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
