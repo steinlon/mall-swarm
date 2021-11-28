@@ -1,4 +1,4 @@
-package com.macro.mall.config;
+package com.macro.mall.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

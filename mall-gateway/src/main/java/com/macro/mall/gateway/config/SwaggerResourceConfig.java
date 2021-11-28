@@ -1,4 +1,4 @@
-package com.macro.mall.config;
+package com.macro.mall.gateway.config;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
