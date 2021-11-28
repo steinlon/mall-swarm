@@ -1,4 +1,4 @@
-package com.macro.mall.handler;
+package com.macro.mall.gateway.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

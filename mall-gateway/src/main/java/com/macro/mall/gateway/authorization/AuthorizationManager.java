@@ -1,10 +1,10 @@
-package com.macro.mall.authorization;
+package com.macro.mall.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.domain.UserDto;
-import com.macro.mall.config.IgnoreUrlsConfig;
+import com.macro.mall.gateway.config.IgnoreUrlsConfig;
 import com.nimbusds.jose.JWSObject;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
