@@ -1,10 +1,11 @@
 # mall-swarm
 
 <p>
-  <a href="https://github.com/macrozheng/mall-learning"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B-mall--learning-green.svg" alt="学习教程"></a>
-  <a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
-  <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
-  <a href="https://gitee.com/macrozheng/mall-swarm"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
+  <a href="https://github.com/steinlon/mall-learning"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B-mall--learning-green.svg" alt="学习教程"></a>
+  <a href="https://github.com/steinlon/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
+  <a href="https://github.com/steinlon/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
+  <a href="https://github.com/steinlon/mall-swarm"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
+  <a href="https://github.com/steinlon/mall-swarm"><img src="https://github.com/steinlon/mall-swarm/workflows/Mall%20Swarm%20Build%20CI/badge.svg" alt="CI"></a>
 </p>
 
 ## 友情提示
@@ -25,7 +26,7 @@
 
 ## 组织结构
 
-``` lua
+```
 mall
 ├── mall-common -- 工具类及通用代码模块
 ├── mall-mbg -- MyBatisGenerator生成的数据库操作代码模块
@@ -36,7 +37,8 @@ mall
 ├── mall-search -- 基于Elasticsearch的商品搜索系统服务
 ├── mall-portal -- 移动端商城系统服务
 ├── mall-demo -- 微服务远程调用测试服务
-└── config -- 配置中心存储的配置
+├── config -- 配置中心存储的配置
+└── document -- 其他配置文件
 ```
 
 ## 项目文档
@@ -60,7 +62,7 @@ mall
 | Spring Cloud           | 微服务框架           | https://spring.io/projects/spring-cloud              |
 | Spring Cloud Alibaba   | 微服务框架           | https://github.com/alibaba/spring-cloud-alibaba      |
 | Spring Boot            | 容器+MVC框架         | https://spring.io/projects/spring-boot               |
-| Spring Security Oauth2 | 认证和授权框架       | https://spring.io/projects/spring-security-oauth     |
+| Spring Security OAuth2 | 认证和授权框架       | https://spring.io/projects/spring-security-oauth     |
 | MyBatis                | ORM框架              | http://www.mybatis.org/mybatis-3/zh/index.html       |
 | MyBatisGenerator       | 数据层代码生成       | http://www.mybatis.org/generator/index.html          |
 | PageHelper             | MyBatis物理分页插件  | http://git.oschina.net/free/Mybatis_PageHelper       |
@@ -77,8 +79,8 @@ mall
 | LogStash               | 日志收集             | https://github.com/logstash/logstash-logback-encoder |
 | Lombok                 | 简化对象封装工具     | https://github.com/rzwitserloot/lombok               |
 | Seata                  | 全局事务管理框架     | https://github.com/seata/seata                       |
-| Portainer              | 可视化Docker容器管理 | https://github.com/portainer/portainer               |
-| Jenkins                | 自动化部署工具       | https://github.com/jenkinsci/jenkins                 |
+| Portainer              | 可视化Docker容器管理 | https://github.com/portainer/portainer and https://hub.docker.com/r/portainer/portainer-ce           |
+| GitHub CI              | 自动化部署工具       | https://docs.github.com/cn/actions/learn-github-actions                 |
 | Kubernetes             | 应用容器管理平台     | https://kubernetes.io/                               |
 
 ### 前端技术
@@ -100,6 +102,7 @@ mall
 | ------------- | ------ | ------------------------------------------------------------ |
 | JDK           | 11    | https://www.oracle.com/java/technologies/javase-jdk11-downloads.html |
 | Postgres      | 13.3   | https://www.postgresql.org                                   |
+| Flyway          | 8.3.0    | https://www.flywaydb.org/                                     |
 | Redis         | 7.0    | https://redis.io/download                                    |
 | Redis Commander | latest   | https://registry.hub.docker.com/r/rediscommander/redis-commander |
 | Elasticsearch | 7.17.3 | https://www.elastic.co/cn/downloads/elasticsearch            |
@@ -185,6 +188,10 @@ Copyright (c) 2018-2021
 [Bootstrap issue](https://stackoverflow.com/questions/64994034/bootstrap-yml-configuration-not-processed-anymore-with-spring-cloud-2020-0)  
 [Load balance issue](https://blog.csdn.net/qq_33220089/article/details/115940165)   
 [Nacos load balance issue](https://blog.csdn.net/SirLZF/article/details/117127361)
+
+### Nacos配置中心
+
+[Nacos配置中心](https://mp.weixin.qq.com/s/N9eAMHuDEJq7kCCJPEEJqw)
 
 ## ELK 搭建
 [ELK](https://mp.weixin.qq.com/s/ll_A6ddBaU99LSYmKdttYw)  
