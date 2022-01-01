@@ -102,17 +102,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.macro.mall.model.UmsResource">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_resource_id_seq
-        </selectKey>
         insert into ums_resource (create_time, name, url, description, category_id)
         values (#{createTime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
-        #{description,jdbcType=VARCHAR},#{categoryId,jdbcType=BIGINT})
+                #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT})
     </insert>
     <insert id="insertSelective" parameterType="com.macro.mall.model.UmsResource">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_resource_id_seq
-        </selectKey>
         insert into ums_resource
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="createTime != null">

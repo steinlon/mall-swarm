@@ -19,13 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
+import static com.macro.mall.common.constant.UrlConstant.RESOURCE;
+
 /**
  * 后台资源管理Controller
  */
 @Controller
 @AllArgsConstructor
 @Api(tags = "UmsResourceController", description = "后台资源管理")
-@RequestMapping("/resource")
+@RequestMapping(RESOURCE)
 public class UmsResourceController {
 
     private final UmsResourceService resourceService;

@@ -12,14 +12,18 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+import static com.macro.mall.common.constant.UrlConstant.SYSTEM;
+
 @RestController
 @RefreshScope
+@RequestMapping(SYSTEM)
 public class SystemConfigController {
 
     private final SystemProperties systemProperties;
@@ -69,7 +73,7 @@ public class SystemConfigController {
         final ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceConstant.ADMIN_SERVICE);
         return webClientBuilder.build()
                 .get()
-                .uri(serviceInstance.getUri() + "/serviceInstances")
+                .uri(serviceInstance.getUri() + SYSTEM + "/serviceInstances")
                 .retrieve()
                 .bodyToMono(String.class);
     }
@@ -79,7 +83,7 @@ public class SystemConfigController {
         final ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceConstant.AUTH_SERVICE);
         return webClientBuilder.build()
                 .get()
-                .uri(serviceInstance.getUri() + "/serviceInstances")
+                .uri(serviceInstance.getUri() + SYSTEM + "/serviceInstances")
                 .retrieve()
                 .bodyToMono(String.class);
     }
