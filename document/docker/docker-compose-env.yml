@@ -2,7 +2,7 @@ version: '3'
 services:
 
   mall-postgres:
-    image: postgres:13.3
+    image: postgres:14.1
     container_name: mall-postgres
     command: [ "postgres", "-c", "log_statement=all" ]
     environment:
@@ -21,7 +21,7 @@ services:
       retries: 5
 
   mall-flyway:
-    image: flyway/flyway:7.11.1
+    image: flyway/flyway:8.3.0
     container_name: mall-flyway
     command: migrate
     volumes:
@@ -31,7 +31,7 @@ services:
       - mall-postgres
 
   nacos-mysql:
-    image: mysql:5.7
+    image: mysql:8
     container_name: nacos-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -160,3 +160,13 @@ services:
     depends_on:
       - nacos-mysql
     restart: on-failure
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./mydata/portainer/data:/data
+    ports:
+      - "9000:9000"

@@ -12,23 +12,24 @@
     <!--LogStash访问host-->
     <springProperty name="LOG_STASH_HOST" scope="context" source="logstash.host" defaultValue="localhost"/>
 
+<!--TODO Temporary Stop ELK System-->
     <!--Gateway App日志输出到LogStash-->
-    <appender name="LOG_GATEWAY_SERVICE" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${LOG_STASH_HOST}:4564</destination>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
-        </filter>
-        <encoder>
-            <!--设置为默认的文件日志格式-->
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <connectionStrategy>
-            <roundRobin>
-                <connectionTTL>5 minutes</connectionTTL>
-            </roundRobin>
-        </connectionStrategy>
-    </appender>
+<!--    <appender name="LOG_GATEWAY_SERVICE" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>${LOG_STASH_HOST}:4564</destination>-->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>INFO</level>-->
+<!--        </filter>-->
+<!--        <encoder>-->
+<!--            &lt;!&ndash;设置为默认的文件日志格式&ndash;&gt;-->
+<!--            <pattern>${FILE_LOG_PATTERN}</pattern>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+<!--        <connectionStrategy>-->
+<!--            <roundRobin>-->
+<!--                <connectionTTL>5 minutes</connectionTTL>-->
+<!--            </roundRobin>-->
+<!--        </connectionStrategy>-->
+<!--    </appender>-->
 
     <!--控制框架输出日志-->
     <logger name="org.slf4j" level="INFO"/>
@@ -40,6 +41,6 @@
 
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="LOG_GATEWAY_SERVICE"/>
+<!--        <appender-ref ref="LOG_GATEWAY_SERVICE"/>-->
     </root>
 </configuration>
