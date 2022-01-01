@@ -12448,8 +12448,8 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o668">
 <a:ObjectID>F451866B-0691-4BD0-885F-8F8AC6BB07B6</a:ObjectID>
-<a:Name>luckey_count</a:Name>
-<a:Code>luckey_count</a:Code>
+<a:Name>lucky_count</a:Name>
+<a:Code>lucky_count</a:Code>
 <a:CreationDate>1522389179</a:CreationDate>
 <a:Creator>zhenghong</a:Creator>
 <a:ModificationDate>1522389203</a:ModificationDate>

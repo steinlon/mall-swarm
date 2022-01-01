@@ -112,30 +112,14 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.macro.mall.model.UmsAdmin">
-<!--        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">-->
-<!--            select-->
-<!--            case when max(id) is null-->
-<!--            then 1 else max(id) + 1-->
-<!--            end-->
-<!--            from ums_admin-->
-<!--        </selectKey>-->
         insert into ums_admin (username, password, icon,
-        email, nick_name, note,
-        create_time, login_time, status
-        )
+                               email, nick_name, note,
+                               create_time, login_time, status)
         values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
-        #{email,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
-        #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
-        )
+                #{email,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.macro.mall.model.UmsAdmin">
-<!--        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">-->
-<!--            select-->
-<!--            case when max(id) is null-->
-<!--            then 1 else max(id) + 1-->
-<!--            end-->
-<!--            from ums_admin-->
-<!--        </selectKey>-->
         insert into ums_admin
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="username != null">

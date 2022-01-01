@@ -3,13 +3,14 @@ package com.macro.mall.auth.config;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static com.macro.mall.common.constant.UrlConstant.SYSTEM;
 
 /**
  * SpringSecurity配置
@@ -25,9 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rsa/publicKey").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/oauth/token").permitAll()
-                .antMatchers("/serviceInstances").permitAll()
-                .antMatchers("/discoveryClient").permitAll()
-                .antMatchers("/configs").permitAll()
+                .antMatchers(SYSTEM + "/serviceInstances").permitAll()
+                .antMatchers(SYSTEM + "/discoveryClient").permitAll()
+                .antMatchers(SYSTEM + "/configs").permitAll()
                 .anyRequest().authenticated();
     }
 

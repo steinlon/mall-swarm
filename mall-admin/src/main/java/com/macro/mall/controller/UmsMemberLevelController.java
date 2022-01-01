@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static com.macro.mall.common.constant.UrlConstant.MEMBER_LEVEL;
+
 /**
  * 会员等级管理Controller
  */
 @Controller
 @AllArgsConstructor
 @Api(tags = "UmsMemberLevelController", description = "会员等级管理")
-@RequestMapping("/memberLevel")
+@RequestMapping(MEMBER_LEVEL)
 public class UmsMemberLevelController {
 
     private final UmsMemberLevelService memberLevelService;
