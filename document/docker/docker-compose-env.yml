@@ -2,7 +2,7 @@ version: '3'
 services:
 
   mall-postgres:
-    image: postgres:13.3
+    image: postgres:14.1
     container_name: mall-postgres
     command: [ "postgres", "-c", "log_statement=all" ]
     environment:
@@ -21,7 +21,7 @@ services:
       retries: 5
 
   mall-flyway:
-    image: flyway/flyway:7.11.1
+    image: flyway/flyway:8.3.0
     container_name: mall-flyway
     command: migrate
     volumes:
@@ -31,7 +31,7 @@ services:
       - mall-postgres
 
   nacos-mysql:
-    image: mysql:5.7
+    image: mysql:8
     container_name: nacos-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -47,7 +47,7 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   redis:
-    image: redis:6.2.5
+    image: redis:6.2.6
     container_name: redis
     hostname: redis
     command: redis-server --appendonly yes
@@ -88,58 +88,59 @@ services:
       - 5672:5672
       - 15672:15672
 
-  elasticsearch:
-    image: elasticsearch:7.14.2
-    container_name: elasticsearch
-    user: root
-    environment:
-      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
-      - "discovery.type=single-node" #以单一节点模式启动
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" #设置使用jvm内存大小
-    volumes:
-      - ./mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins
-      - ./mydata/elasticsearch/data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-      - 9300:9300
+###TODO Temporary Stop ELK System
+#  elasticsearch:
+#    image: elasticsearch:7.14.2
+#    container_name: elasticsearch
+#    user: root
+#    environment:
+#      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
+#      - "discovery.type=single-node" #以单一节点模式启动
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" #设置使用jvm内存大小
+#    volumes:
+#      - ./mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+#      - ./mydata/elasticsearch/data:/usr/share/elasticsearch/data
+#    ports:
+#      - 9200:9200
+#      - 9300:9300
+#
+#  logstash:
+#    image: logstash:7.14.2
+#    container_name: logstash
+#    environment:
+#      - TZ=Asia/Shanghai
+#    volumes:
+#      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+#    depends_on:
+#      - elasticsearch
+#    links:
+#      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+#    ports:
+#      - 4560:4560
+#      - 4561:4561
+#      - 4562:4562
+#      - 4563:4563
+#      - 4564:4564
+#
+#  kibana:
+#    image: kibana:7.14.2
+#    container_name: kibana
+#    links:
+#      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+#    depends_on:
+#      - elasticsearch
+#    environment:
+#      - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
+#    ports:
+#      - 5601:5601
 
-  logstash:
-    image: logstash:7.14.2
-    container_name: logstash
-    environment:
-      - TZ=Asia/Shanghai
-    volumes:
-      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
-    depends_on:
-      - elasticsearch
-    links:
-      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
-    ports:
-      - 4560:4560
-      - 4561:4561
-      - 4562:4562
-      - 4563:4563
-      - 4564:4564
-
-  kibana:
-    image: kibana:7.14.2
-    container_name: kibana
-    links:
-      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
-    depends_on:
-      - elasticsearch
-    environment:
-      - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
-    ports:
-      - 5601:5601
-
-  mongo:
-    image: mongo:5.0.3
-    container_name: mongo
-    volumes:
-      - ./mydata/mongo/db:/data/db #数据文件挂载
-    ports:
-      - 27017:27017
+#  mongo:
+#    image: mongo:5.0.3
+#    container_name: mongo
+#    volumes:
+#      - ./mydata/mongo/db:/data/db #数据文件挂载
+#    ports:
+#      - 27017:27017
 
   # If mysql does not have table defined in ./nacos/init.sql.
   # Need to run ./nacos/init.sql in mysql then restart the nacos registry
@@ -160,3 +161,13 @@ services:
     depends_on:
       - nacos-mysql
     restart: on-failure
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./mydata/portainer/data:/data
+    ports:
+      - "9000:9000"
