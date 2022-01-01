@@ -201,12 +201,13 @@ Copyright (c) 2018-2021
 | 模块        | 子模块                 | 重构                              |
 | ---------- | --------------------  | ------------------------------   |
 | UMS        | UmsRole               | yes                              |
-| UMS        | UmsResource           |                                  |
-| UMS        | UmsResourceCategory   |                                  |
+| UMS        | UmsResource           | yes                              |
+| UMS        | UmsResourceCategory   | yes                              |
 | UMS        | UmsMenu               | yes                              |
-| UMS        | UmsMemberLevel        |                                  |
+| UMS        | UmsMemberLevel        | yes                              |
 | UMS        | UmsAdmin              | yes                              |
 | UMS        | UmsAdminCache         | yes                              |
+| UMS        | UmsPermission         |                                  |
 | SMS        |                       |                                  |
 | PMS        |                       |                                  |
 | OMS        |                       |                                  |

@@ -3357,7 +3357,7 @@ create table `ums_member` (
     `source_type`            int(1)       default null comment '用户来源',
     `integration`            int(11)      default null comment '积分',
     `growth`                 int(11)      default null comment '成长值',
-    `luckey_count`           int(11)      default null comment '剩余抽奖次数',
+    `lucky_count`           int(11)      default null comment '剩余抽奖次数',
     `history_integration`    int(11)      default null comment '历史积分数量',
     primary key (`id`),
     unique key `idx_username`(`username`),

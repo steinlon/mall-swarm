@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.macro.mall.constant.UrlConstant.ADMIN;
+import static com.macro.mall.common.constant.UrlConstant.ADMIN;
 
 /**
  * 后台用户管理
