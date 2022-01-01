@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-import static com.macro.mall.constant.UrlConstant.ROLE;
+import static com.macro.mall.common.constant.UrlConstant.ROLE;
 
 /**
  * 后台用户角色管理
