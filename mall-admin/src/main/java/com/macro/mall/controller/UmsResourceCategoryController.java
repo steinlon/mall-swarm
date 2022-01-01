@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static com.macro.mall.common.constant.UrlConstant.RESOURCE_CATEGORY;
+
 /**
  * 后台资源分类管理Controller
  */
 @Controller
 @AllArgsConstructor
 @Api(tags = "UmsResourceCategoryController", description = "后台资源分类管理")
-@RequestMapping("/resourceCategory")
+@RequestMapping(RESOURCE_CATEGORY)
 public class UmsResourceCategoryController {
 
     private final UmsResourceCategoryService resourceCategoryService;

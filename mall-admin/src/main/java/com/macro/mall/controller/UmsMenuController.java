@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-import static com.macro.mall.constant.UrlConstant.MENU;
+import static com.macro.mall.common.constant.UrlConstant.MENU;
 
 /**
  * 后台菜单管理Controller
