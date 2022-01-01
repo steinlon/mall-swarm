@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ develop, master ]
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
 
@@ -18,11 +22,6 @@ jobs:
 
     steps:
 
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.5.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Check Out Branch
         uses: actions/checkout@v2
 
@@ -33,7 +32,7 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - name: Set up Docker
-        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq nacos-registry
+        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq
 
       - name: Get Date
         id: get-date
