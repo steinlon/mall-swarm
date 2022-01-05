@@ -102,17 +102,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.macro.mall.model.UmsAdminLoginLog">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_admin_id_seq
-        </selectKey>
         insert into ums_admin_login_log (admin_id, create_time, ip, address, user_agent)
         values (#{adminId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},
         #{address,jdbcType=VARCHAR}, #{userAgent,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.macro.mall.model.UmsAdminLoginLog">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_admin_id_seq
-        </selectKey>
         insert into ums_admin_login_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="adminId != null">

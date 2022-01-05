@@ -207,7 +207,7 @@ Copyright (c) 2018-2021
 | UMS        | UmsMemberLevel        | yes                              |
 | UMS        | UmsAdmin              | yes                              |
 | UMS        | UmsAdminCache         | yes                              |
-| UMS        | UmsPermission         |                                  |
+| UMS        | UmsPermission         | yes                              |
 | SMS        |                       |                                  |
 | PMS        |                       |                                  |
 | OMS        |                       |                                  |

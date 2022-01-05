@@ -99,16 +99,10 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.macro.mall.model.UmsAdminRoleRelation">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_admin_role_relation_id_seq
-        </selectKey>
         insert into ums_admin_role_relation (admin_id, role_id)
         values (#{adminId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
     </insert>
     <insert id="insertSelective" parameterType="com.macro.mall.model.UmsAdminRoleRelation">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            select last_value from ums_admin_role_relation_id_seq
-        </selectKey>
         insert into ums_admin_role_relation
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="adminId != null">
