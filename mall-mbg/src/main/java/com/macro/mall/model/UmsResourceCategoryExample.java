@@ -40,13 +40,13 @@ public class UmsResourceCategoryExample {
     }
 
     public Criteria or() {
-        Criteria criteria = createCriteriaInternal();
+        final Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
     public Criteria createCriteria() {
-        Criteria criteria = createCriteriaInternal();
+        final Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
@@ -54,8 +54,7 @@ public class UmsResourceCategoryExample {
     }
 
     protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
+        return new Criteria();
     }
 
     public void clear() {

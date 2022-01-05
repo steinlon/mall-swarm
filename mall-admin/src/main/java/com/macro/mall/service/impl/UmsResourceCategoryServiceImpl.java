@@ -22,7 +22,7 @@ public class UmsResourceCategoryServiceImpl implements UmsResourceCategoryServic
     @Override
     public List<UmsResourceCategory> listAll() {
         final UmsResourceCategoryExample example = new UmsResourceCategoryExample();
-        example.setOrderByClause("sort desc");
+        example.setOrderByClause("sort desc, id");
         return resourceCategoryMapper.selectByExample(example);
     }
 
