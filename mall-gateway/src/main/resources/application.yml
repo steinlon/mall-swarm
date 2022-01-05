@@ -54,7 +54,8 @@ spring:
 #    password:
 secure:
   ignore:
-    urls: #配置白名单路径
+    #white list without permission check
+    urls:
       - "/doc.html"
       - "/system/**"
       - "/swagger-resources/**"
@@ -69,9 +70,7 @@ secure:
       - "/actuator/**"
       - "/mall-auth/oauth/token"
       - "/mall-auth/rsa/publicKey"
-      - "/mall-auth/system/configs"
-      - "/mall-auth/system/discoveryClient"
-      - "/mall-auth/system/serviceInstances"
+#      - "/mall-auth/system/**"
       - "/mall-search/**"
       - "/mall-portal/sso/login"
       - "/mall-portal/sso/register"
@@ -82,9 +81,7 @@ secure:
       - "/mall-admin/admin/login"
       - "/mall-admin/admin/register"
       - "/mall-admin/minio/upload"
-      - "/mall-admin/system/configs"
-      - "/mall-admin/system/discoveryClient"
-      - "/mall-admin/system/serviceInstances"
+#      - "/mall-admin/system/**"
 management: #开启SpringBoot Admin的监控
   endpoints:
     web:
