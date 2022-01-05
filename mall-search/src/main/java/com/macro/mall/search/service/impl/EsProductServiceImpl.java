@@ -5,6 +5,8 @@ import com.macro.mall.search.domain.EsProduct;
 import com.macro.mall.search.domain.EsProductRelatedInfo;
 import com.macro.mall.search.repository.EsProductRepository;
 import com.macro.mall.search.service.EsProductService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.lucene.search.function.FunctionScoreQuery;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -21,9 +23,6 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -46,19 +45,15 @@ import java.util.stream.Collectors;
 
 /**
  * 商品搜索管理Service实现类
- * Created by macro on 2018/6/19.
  */
+@Slf4j
+@AllArgsConstructor
 @Service
 public class EsProductServiceImpl implements EsProductService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EsProductServiceImpl.class);
-
-    @Autowired
-    private EsProductDao productDao;
-    @Autowired
-    private EsProductRepository productRepository;
-    @Autowired
-    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final EsProductDao productDao;
+    private final EsProductRepository productRepository;
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Override
     public int importAll() {
@@ -163,7 +158,7 @@ public class EsProductServiceImpl implements EsProductService {
         }
         nativeSearchQueryBuilder.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));
         NativeSearchQuery searchQuery = nativeSearchQueryBuilder.build();
-        LOGGER.info("DSL:{}", searchQuery.getQuery().toString());
+        log.info("DSL:{}", searchQuery.getQuery());
         SearchHits<EsProduct> searchHits = elasticsearchRestTemplate.search(searchQuery, EsProduct.class);
         if (searchHits.getTotalHits() <= 0) {
             return new PageImpl<>(null, pageable, 0);
@@ -209,7 +204,7 @@ public class EsProductServiceImpl implements EsProductService {
             builder.withFilter(boolQueryBuilder);
             builder.withPageable(pageable);
             NativeSearchQuery searchQuery = builder.build();
-            LOGGER.info("DSL:{}", searchQuery.getQuery().toString());
+            log.info("DSL:{}", searchQuery.getQuery());
             SearchHits<EsProduct> searchHits = elasticsearchRestTemplate.search(searchQuery, EsProduct.class);
             if (searchHits.getTotalHits() <= 0) {
                 return new PageImpl<>(null, pageable, 0);
