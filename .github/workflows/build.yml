@@ -1,19 +1,17 @@
-name: Mall Swarm Build CI
+name: Mall Swarm CI
 
 on:
   push:
     branches: [ develop, master ]
-  pull_request:
-    branches: [ develop, master ]
 
 concurrency:
   group: ${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
 
-    name: Mall Swarm Build
+    name: Build CI
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -32,7 +30,7 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - name: Set up Docker
-        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq
+        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq mongo
 
       - name: Get Date
         id: get-date
