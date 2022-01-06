@@ -31,7 +31,7 @@ services:
       - mall-postgres
 
   nacos-mysql:
-    image: mysql:8
+    image: mysql:5.7
     container_name: nacos-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -66,7 +66,7 @@ services:
     environment:
       - REDIS_HOSTS=local:redis:6379
     ports:
-      - "8085:8081"
+      - "8095:8081"
 
   #  nginx:
   #    image: nginx:1.10
@@ -79,16 +79,20 @@ services:
   #      - 80:80
 
   rabbitmq:
-    image: rabbitmq:3.9.8
+    image: rabbitmq:3.9.14-management
     container_name: rabbitmq
     volumes:
       - ./mydata/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
       - ./mydata/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    environment:
+      - RABBITMQ_DEFAULT_USER=mall
+      - RABBITMQ_DEFAULT_PASS=mall
+      - RABBITMQ_DEFAULT_VHOST=mall
     ports:
       - 5672:5672
       - 15672:15672
 
-###TODO Temporary Stop ELK System
+###TODO Temporary Stop ELK System and Search Micro Service
 #  elasticsearch:
 #    image: elasticsearch:7.14.2
 #    container_name: elasticsearch
@@ -134,13 +138,13 @@ services:
 #    ports:
 #      - 5601:5601
 
-#  mongo:
-#    image: mongo:5.0.3
-#    container_name: mongo
-#    volumes:
-#      - ./mydata/mongo/db:/data/db #数据文件挂载
-#    ports:
-#      - 27017:27017
+  mongo:
+    image: mongo:5.0.3
+    container_name: mongo
+    volumes:
+      - ./mydata/mongo/db:/data/db #数据文件挂载
+    ports:
+      - 27017:27017
 
   # If mysql does not have table defined in ./nacos/init.sql.
   # Need to run ./nacos/init.sql in mysql then restart the nacos registry
@@ -162,12 +166,12 @@ services:
       - nacos-mysql
     restart: on-failure
 
-  portainer:
-    image: portainer/portainer-ce
-    container_name: portainer
-    restart: always
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ./mydata/portainer/data:/data
-    ports:
-      - "9000:9000"
+#  portainer:
+#    image: portainer/portainer-ce
+#    container_name: portainer
+#    restart: always
+#    volumes:
+#    - /var/run/docker.sock:/var/run/docker.sock
+#    - ./mydata/portainer/data:/data
+#    ports:
+#      - "9000:9000"

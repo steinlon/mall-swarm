@@ -1,3 +1,5 @@
+info:
+  profile: development
 spring:
   datasource:
     url: jdbc:postgresql://localhost:9999/mall

@@ -141,19 +141,25 @@ mall
 
 - 本项目使用Kubernetes部署请参考：[mall-swarm微服务项目在K8S下的实践！](http://www.macrozheng.com/#/deploy/mall_swarm_deploy_k8s)
 
+> 构建项目
+- mvn clean compile
+- mvn clean package
+- mvn clean package -DskipTests
+- mvn clean package -Dmaven.test.skip=true
+
 ## 运行效果展示
 
 - 查看注册中心注册服务信息，访问地址：http://192.168.3.101:8848/nacos/
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_01.png)
+![](./document/resource/mall_swarm_run_01.png)
 
 - 监控中心应用信息，访问地址：http://192.168.3.101:8101
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_02.png)
+![](./document/resource/mall_swarm_run_02.png)
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_03.png)
+![](./document/resource/mall_swarm_run_03.png)
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_04.png)
+![](./document/resource/mall_swarm_run_04.png)
 
 - Redis Commander可视化工具管理，访问地址：http://192.168.2.101:8101
 
@@ -162,24 +168,18 @@ mall
 - API文档信息(本地运行)，访问地址：http://localhost:8201/doc.html
 - API文档信息，访问地址：http://192.168.3.101:8201
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_05.png)
+![](./document/resource/mall_swarm_run_05.png)
 
 - 日志收集系统信息，访问地址：http://192.168.3.101:5601
 - logstash-plugin install logstash-codec-json_lines
 - Install elasticsearch-header plugin from Google Chrome extension
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_06.png)
+![](./document/resource/mall_swarm_run_06.png)
 
 - 可视化容器管理，访问地址：http://192.168.3.101:9000
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_07.png)
+![](./document/resource/mall_swarm_run_07.png)
 
-![](http://img.macrozheng.com/mall/project/mall_swarm_run_08.png)
-
-## 许可证
-
-[Apache License 2.0](https://github.com/macrozheng/mall-swarm/blob/master/LICENSE)
-
-Copyright (c) 2018-2021
+![](./document/resource/mall_swarm_run_08.png)
 
 ## Spring Cloud Upgrade
 
@@ -212,3 +212,9 @@ Copyright (c) 2018-2021
 | PMS        |                       |                                  |
 | OMS        |                       |                                  |
 | CMS        |                       |                                  |
+
+## 许可证
+
+[Apache License 2.0](https://github.com/macrozheng/mall-swarm/blob/master/LICENSE)
+
+Copyright (c) 2018-2025
