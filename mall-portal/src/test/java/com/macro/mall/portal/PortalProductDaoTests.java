@@ -5,7 +5,6 @@ import com.macro.mall.portal.domain.PromotionProduct;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,8 @@ public class PortalProductDaoTests {
     private PortalProductDao portalProductDao;
 
     @Test
-    public void testGetPromotionProductList() {
-        List<Long> ids = new ArrayList<>();
+    public void getPromotionProductList_success() {
+        final List<Long> ids = new ArrayList<>();
         ids.add(26L);
         ids.add(27L);
         ids.add(28L);

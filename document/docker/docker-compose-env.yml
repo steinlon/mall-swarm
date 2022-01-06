@@ -66,7 +66,7 @@ services:
     environment:
       - REDIS_HOSTS=local:redis:6379
     ports:
-      - "8085:8081"
+      - "8095:8081"
 
   nginx:
     image: nginx:1.22
@@ -84,6 +84,10 @@ services:
     volumes:
       - ./mydata/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
       - ./mydata/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    environment:
+      - RABBITMQ_DEFAULT_USER=mall
+      - RABBITMQ_DEFAULT_PASS=mall
+      - RABBITMQ_DEFAULT_VHOST=mall
     ports:
       - 5672:5672
       - 15672:15672
@@ -161,12 +165,12 @@ services:
       - nacos-mysql
     restart: on-failure
 
-  portainer:
-    image: portainer/portainer-ce
-    container_name: portainer
-    restart: always
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - ./mydata/portainer/data:/data
-    ports:
-      - "9000:9000"
+#  portainer:
+#    image: portainer/portainer-ce
+#    container_name: portainer
+#    restart: always
+#    volumes:
+#    - /var/run/docker.sock:/var/run/docker.sock
+#    - ./mydata/portainer/data:/data
+#    ports:
+#      - "9000:9000"
