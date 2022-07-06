@@ -46,7 +46,7 @@
         <mybatis.version>3.5.10</mybatis.version>
         <spring-data-commons.version>2.7.0</spring-data-commons.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <aliyun-oss.version>3.15.0</aliyun-oss.version>
+        <aliyun-oss.version>3.15.1</aliyun-oss.version>
         <logstash-logback.version>7.2</logstash-logback.version>
         <admin-starter-server.version>2.6.7</admin-starter-server.version>
         <minio.version>8.4.2</minio.version>
