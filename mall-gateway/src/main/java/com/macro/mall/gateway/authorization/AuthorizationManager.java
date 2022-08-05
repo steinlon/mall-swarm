@@ -2,6 +2,7 @@ package com.macro.mall.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
+import com.google.common.collect.Sets;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.domain.UserDto;
 import com.macro.mall.gateway.config.IgnoreUrlsConfig;
@@ -24,10 +25,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -84,14 +85,16 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         //管理端路径需校验权限
         final Map<Object, Object> resourceRolesMap = redisTemplate.opsForHash().entries(AuthConstant.RESOURCE_ROLES_MAP_KEY);
         final Iterator<Object> iterator = resourceRolesMap.keySet().iterator();
-        List<String> authorities = new ArrayList<>();
+        final Set<String> roles = Sets.newHashSet();
         while (iterator.hasNext()) {
             final String pattern = (String) iterator.next();
             if (pathMatcher.match(pattern, uri.getPath())) {
-                authorities.addAll(Convert.toList(String.class, resourceRolesMap.get(pattern)));
+                roles.addAll(Convert.toSet(String.class, resourceRolesMap.get(pattern)));
             }
         }
-        authorities = authorities.stream().map(i -> i = AuthConstant.AUTHORITY_PREFIX + i).collect(Collectors.toList());
+        final List<String> authorities = roles.stream()
+                .map(authority -> authority = AuthConstant.AUTHORITY_PREFIX + authority)
+                .collect(Collectors.toList());
         //认证通过且角色匹配的用户可访问当前路径
         return mono
                 .filter(Authentication::isAuthenticated)

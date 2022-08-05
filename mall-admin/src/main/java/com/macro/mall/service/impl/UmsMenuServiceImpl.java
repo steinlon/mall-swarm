@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 /**
  * 后台菜单管理Service实现类
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class UmsMenuServiceImpl implements UmsMenuService {
 
     private final UmsMenuMapper menuMapper;

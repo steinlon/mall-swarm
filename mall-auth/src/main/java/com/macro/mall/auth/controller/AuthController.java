@@ -2,6 +2,7 @@ package com.macro.mall.auth.controller;
 
 import com.macro.mall.auth.domain.Oauth2TokenDto;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.common.constant.AuthConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -54,7 +54,7 @@ spring:
 #    password:
 secure:
   ignore:
-    #white list without permission check
+    # White list without checking authorization
     urls:
       - "/doc.html"
       - "/system/**"

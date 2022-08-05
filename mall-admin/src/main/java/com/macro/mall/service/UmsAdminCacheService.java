@@ -2,8 +2,6 @@ package com.macro.mall.service;
 
 import com.macro.mall.model.UmsAdmin;
 
-import java.util.Date;
-
 /**
  * 后台用户缓存操作类
  */
@@ -21,5 +19,5 @@ public interface UmsAdminCacheService {
     /**
      * 设置缓存后台用户信息
      */
-    void setAdmin(UmsAdmin admin, Date expire);
+    void setAdmin(UmsAdmin admin);
 }
