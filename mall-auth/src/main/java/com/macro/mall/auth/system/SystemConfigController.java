@@ -1,6 +1,7 @@
 package com.macro.mall.auth.system;
 
 import com.macro.mall.common.constant.ServiceConstant;
+import com.macro.mall.common.constant.SystemController;
 import com.macro.mall.common.propertirs.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,7 @@ import static com.macro.mall.common.constant.UrlConstant.SYSTEM;
 @RestController
 @RefreshScope
 @RequestMapping(SYSTEM)
-public class SystemConfigController {
+public class SystemConfigController implements SystemController {
 
     private final SystemProperties systemProperties;
     private final DiscoveryClient discoveryClient;
@@ -40,18 +41,21 @@ public class SystemConfigController {
         );
     }
 
+    @Override
     @GetMapping("/configs")
     public SystemProperties getProfile() {
         return this.systemProperties;
     }
 
-    @GetMapping("/serviceInstances")
-    public List<ServiceInstance> getDiscoveryClient() {
-        return this.discoveryClient.getInstances(ServiceConstant.AUTH_SERVICE);
+    @Override
+    @GetMapping("/discoveryClient")
+    public DiscoveryClient getDiscoveryClient() {
+        return this.discoveryClient;
     }
 
-    @GetMapping("/discoveryClient")
-    public DiscoveryClient getClient() {
-        return this.discoveryClient;
+    @Override
+    @GetMapping("/serviceInstances")
+    public List<ServiceInstance> getDiscoveryClientServiceInstances() {
+        return this.discoveryClient.getInstances(ServiceConstant.AUTH_SERVICE);
     }
 }
