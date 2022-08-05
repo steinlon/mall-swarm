@@ -1,6 +1,7 @@
 package com.macro.mall.system;
 
 import com.macro.mall.common.constant.ServiceConstant;
+import com.macro.mall.common.constant.SystemController;
 import com.macro.mall.common.propertirs.AliyunProperties;
 import com.macro.mall.common.propertirs.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import static com.macro.mall.common.constant.UrlConstant.SYSTEM;
 @RefreshScope
 @EnableConfigurationProperties({AliyunProperties.class})
 @RequestMapping(SYSTEM)
-public class SystemConfigController {
+public class SystemConfigController implements SystemController {
 
     private final SystemProperties systemProperties;
     private final DiscoveryClient discoveryClient;
@@ -48,18 +49,21 @@ public class SystemConfigController {
         );
     }
 
+    @Override
     @GetMapping("/configs")
     public SystemProperties getProfile() {
         return this.systemProperties;
     }
 
+    @Override
     @GetMapping("/discoveryClient")
-    public DiscoveryClient getClient() {
+    public DiscoveryClient getDiscoveryClient() {
         return this.discoveryClient;
     }
 
+    @Override
     @GetMapping("/serviceInstances")
-    public List<ServiceInstance> getDiscoveryClient() {
+    public List<ServiceInstance> getDiscoveryClientServiceInstances() {
         return this.discoveryClient.getInstances(ServiceConstant.ADMIN_SERVICE);
     }
 }

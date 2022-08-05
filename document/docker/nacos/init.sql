@@ -18,7 +18,8 @@
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info   */
 /******************************************/
-create table `config_info` (
+create table `config_info`
+(
     `id`           bigint(20)   not null auto_increment comment 'id',
     `data_id`      varchar(255) not null comment 'data_id',
     `group_id`     varchar(255)          default null,
@@ -36,8 +37,8 @@ create table `config_info` (
     `type`         varchar(64)           default null,
     `c_schema`     text,
     primary key (`id`),
-    unique key `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`)
-    )
+    unique key `uk_configinfo_datagrouptenant` (`data_id`, `group_id`, `tenant_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='config_info';
@@ -46,7 +47,8 @@ create table `config_info` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info_aggr   */
 /******************************************/
-create table `config_info_aggr` (
+create table `config_info_aggr`
+(
     `id`           bigint(20)   not null auto_increment comment 'id',
     `data_id`      varchar(255) not null comment 'data_id',
     `group_id`     varchar(255) not null comment 'group_id',
@@ -56,8 +58,8 @@ create table `config_info_aggr` (
     `app_name`     varchar(128) default null,
     `tenant_id`    varchar(128) default '' comment '租户字段',
     primary key (`id`),
-    unique key `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`)
-    )
+    unique key `uk_configinfoaggr_datagrouptenantdatum` (`data_id`, `group_id`, `tenant_id`, `datum_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='增加租户字段';
@@ -67,7 +69,8 @@ create table `config_info_aggr` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info_beta   */
 /******************************************/
-create table `config_info_beta` (
+create table `config_info_beta`
+(
     `id`           bigint(20)   not null auto_increment comment 'id',
     `data_id`      varchar(255) not null comment 'data_id',
     `group_id`     varchar(128) not null comment 'group_id',
@@ -81,8 +84,8 @@ create table `config_info_beta` (
     `src_ip`       varchar(50)           default null comment 'source ip',
     `tenant_id`    varchar(128)          default '' comment '租户字段',
     primary key (`id`),
-    unique key `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`)
-    )
+    unique key `uk_configinfobeta_datagrouptenant` (`data_id`, `group_id`, `tenant_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='config_info_beta';
@@ -91,7 +94,8 @@ create table `config_info_beta` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info_tag   */
 /******************************************/
-create table `config_info_tag` (
+create table `config_info_tag`
+(
     `id`           bigint(20)   not null auto_increment comment 'id',
     `data_id`      varchar(255) not null comment 'data_id',
     `group_id`     varchar(128) not null comment 'group_id',
@@ -105,8 +109,8 @@ create table `config_info_tag` (
     `src_user`     text comment 'source user',
     `src_ip`       varchar(50)           default null comment 'source ip',
     primary key (`id`),
-    unique key `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`)
-    )
+    unique key `uk_configinfotag_datagrouptenanttag` (`data_id`, `group_id`, `tenant_id`, `tag_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='config_info_tag';
@@ -115,7 +119,8 @@ create table `config_info_tag` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_tags_relation   */
 /******************************************/
-create table `config_tags_relation` (
+create table `config_tags_relation`
+(
     `id`        bigint(20)   not null comment 'id',
     `tag_name`  varchar(128) not null comment 'tag_name',
     `tag_type`  varchar(64)  default null comment 'tag_type',
@@ -124,9 +129,9 @@ create table `config_tags_relation` (
     `tenant_id` varchar(128) default '' comment 'tenant_id',
     `nid`       bigint(20)   not null auto_increment,
     primary key (`nid`),
-    unique key `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`),
-    key `idx_tenant_id`(`tenant_id`)
-    )
+    unique key `uk_configtagrelation_configidtag` (`id`, `tag_name`, `tag_type`),
+    key `idx_tenant_id` (`tenant_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='config_tag_relation';
@@ -135,7 +140,8 @@ create table `config_tags_relation` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = group_capacity   */
 /******************************************/
-create table `group_capacity` (
+create table `group_capacity`
+(
     `id`                bigint(20) unsigned not null auto_increment comment '主键ID',
     `group_id`          varchar(128)        not null default '' comment 'Group ID，空字符表示整个集群',
     `quota`             int(10) unsigned    not null default '0' comment '配额，0表示使用默认值',
@@ -147,8 +153,8 @@ create table `group_capacity` (
     `gmt_create`        datetime            not null default current_timestamp comment '创建时间',
     `gmt_modified`      datetime            not null default current_timestamp comment '修改时间',
     primary key (`id`),
-    unique key `uk_group_id`(`group_id`)
-    )
+    unique key `uk_group_id` (`group_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='集群、各Group容量信息表';
@@ -157,7 +163,8 @@ create table `group_capacity` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = his_config_info   */
 /******************************************/
-create table `his_config_info` (
+create table `his_config_info`
+(
     `id`           bigint(64) unsigned not null,
     `nid`          bigint(20) unsigned not null auto_increment,
     `data_id`      varchar(255)        not null,
@@ -172,10 +179,10 @@ create table `his_config_info` (
     `op_type`      char(10)                     default null,
     `tenant_id`    varchar(128)                 default '' comment '租户字段',
     primary key (`nid`),
-    key `idx_gmt_create`(`gmt_create`),
-    key `idx_gmt_modified`(`gmt_modified`),
-    key `idx_did`(`data_id`)
-    )
+    key `idx_gmt_create` (`gmt_create`),
+    key `idx_gmt_modified` (`gmt_modified`),
+    key `idx_did` (`data_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='多租户改造';
@@ -185,7 +192,8 @@ create table `his_config_info` (
 /*   数据库全名 = nacos_config   */
 /*   表名称 = tenant_capacity   */
 /******************************************/
-create table `tenant_capacity` (
+create table `tenant_capacity`
+(
     `id`                bigint(20) unsigned not null auto_increment comment '主键ID',
     `tenant_id`         varchar(128)        not null default '' comment 'Tenant ID',
     `quota`             int(10) unsigned    not null default '0' comment '配额，0表示使用默认值',
@@ -197,14 +205,15 @@ create table `tenant_capacity` (
     `gmt_create`        datetime            not null default current_timestamp comment '创建时间',
     `gmt_modified`      datetime            not null default current_timestamp comment '修改时间',
     primary key (`id`),
-    unique key `uk_tenant_id`(`tenant_id`)
-    )
+    unique key `uk_tenant_id` (`tenant_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='租户容量信息表';
 
 
-create table `tenant_info` (
+create table `tenant_info`
+(
     `id`            bigint(20)   not null auto_increment comment 'id',
     `kp`            varchar(128) not null comment 'kp',
     `tenant_id`     varchar(128) default '' comment 'tenant_id',
@@ -214,34 +223,44 @@ create table `tenant_info` (
     `gmt_create`    bigint(20)   not null comment '创建时间',
     `gmt_modified`  bigint(20)   not null comment '修改时间',
     primary key (`id`),
-    unique key `uk_tenant_info_kptenantid`(`kp`, `tenant_id`),
-    key `idx_tenant_id`(`tenant_id`)
-    )
+    unique key `uk_tenant_info_kptenantid` (`kp`, `tenant_id`),
+    key `idx_tenant_id` (`tenant_id`)
+)
     engine = InnoDB
     default charset = utf8
     collate = utf8_bin comment ='tenant_info';
 
-create table `users` (
+create table `users`
+(
     `username` varchar(50)  not null primary key,
     `password` varchar(500) not null,
     `enabled`  boolean      not null
-    );
+);
 
-create table `roles` (
+create table `roles`
+(
     `username` varchar(50) not null,
     `role`     varchar(50) not null,
-    unique index `idx_user_role`(`username` asc, `role` asc) using btree
-    );
+    unique index `idx_user_role` (`username` asc, `role` asc) using btree
+);
 
-create table `permissions` (
+create table `permissions`
+(
     `role`     varchar(50)  not null,
     `resource` varchar(255) not null,
     `action`   varchar(8)   not null,
-    unique index `uk_role_permission`(`role`, `resource`, `action`) using btree
-    );
+    unique index `uk_role_permission` (`role`, `resource`, `action`) using btree
+);
 
 insert into users (username, password, enabled)
 values ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', true);
 
 insert into roles (username, role)
 values ('nacos', 'ROLE_ADMIN');
+
+alter table config_info
+    add column `encrypted_data_key` text not null comment '秘钥';
+alter table config_info_beta
+    add column `encrypted_data_key` text not null comment '秘钥';
+alter table his_config_info
+    add column `encrypted_data_key` text not null comment '秘钥';
