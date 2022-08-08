@@ -50,7 +50,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
         <logstash-logback.version>5.3</logstash-logback.version>
-        <admin-starter-server.version>2.7.0</admin-starter-server.version>
+        <admin-starter-server.version>2.7.4</admin-starter-server.version>
         <minio.version>8.4.1</minio.version>
         <knife4j.version>3.0.3</knife4j.version>
         <nimbus-jose-jwt.version>9.23</nimbus-jose-jwt.version>
