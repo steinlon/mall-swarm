@@ -49,7 +49,7 @@
         <spring-data-commons.version>2.7.2</spring-data-commons.version>
         <jjwt.version>0.9.1</jjwt.version>
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
-        <logstash-logback.version>5.3</logstash-logback.version>
+        <logstash-logback.version>7.2</logstash-logback.version>
         <admin-starter-server.version>2.7.4</admin-starter-server.version>
         <minio.version>8.4.3</minio.version>
         <knife4j.version>3.0.3</knife4j.version>
