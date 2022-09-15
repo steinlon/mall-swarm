@@ -21,12 +21,14 @@ services:
       retries: 5
 
   mall-flyway:
-    image: flyway/flyway:8.5.2-alpine
+    build:
+      context: flyway
+    image: "flyway:m1"
     container_name: mall-flyway
     command: migrate
-    volumes:
-      - ./flyway/conf:/flyway/conf
-      - ./flyway/migration:/flyway/sql
+#    volumes:
+#      - ./flyway/conf:/flyway/conf
+#      - ./flyway/migration:/flyway/sql
     depends_on:
       - mall-postgres
 
@@ -42,7 +44,7 @@ services:
       - "3333:3306"
     volumes:
       - ./mydata/mysql:/var/lib/mysql
-      - ./nacos:/docker-entrypoint-initdb.d/
+#      - ./nacos:/docker-entrypoint-initdb.d/
     restart: always
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
@@ -87,7 +89,7 @@ services:
 #      - 80:80
 
   rabbitmq:
-    image: rabbitmq:3.9-management
+    image: rabbitmq:3.9-management-alpine
     container_name: rabbitmq
     volumes:
       - ./mydata/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
@@ -100,7 +102,7 @@ services:
       - 5672:5672
       - 15672:15672
 
-# TODO
+#
 #  elasticsearch:
 #    image: elasticsearch:7.17.3
 #    container_name: elasticsearch
@@ -146,18 +148,20 @@ services:
 #    ports:
 #      - 5601:5601
 #
-  mongo:
-    image: mongo:4
-    container_name: mongo
-    volumes:
-      - ./mydata/mongo/db:/data/db #数据文件挂载
-    ports:
-      - 27017:27017
+#  mongo:
+#    image: mongo:4
+#    container_name: mongo
+#    volumes:
+#      - ./mydata/mongo/db:/data/db #数据文件挂载
+#    ports:
+#      - 27017:27017
 
   # If mysql does not have table defined in ./nacos/init.sql.
   # Need to run ./nacos/init.sql in mysql then restart the nacos registry
   nacos-registry:
-    image: nacos/nacos-server:v2.1.0
+    build:
+      context: nacos
+    image: "nacos-server:m1"
     container_name: nacos-registry
     environment:
       - PREFER_HOST_MODE=hostname

@@ -1,4 +1,5 @@
-
+info:
+  profile: auth
 server:
   port: 8401
 spring:
