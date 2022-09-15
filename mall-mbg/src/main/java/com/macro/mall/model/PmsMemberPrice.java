@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class PmsMemberPrice implements Serializable {
+
     private Long id;
 
     private Long productId;

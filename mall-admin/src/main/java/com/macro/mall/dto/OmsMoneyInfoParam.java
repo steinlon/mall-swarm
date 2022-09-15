@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 
 /**
  * 修改订单费用信息参数
- * Created by macro on 2018/10/29.
  */
 @Getter
 @Setter
 public class OmsMoneyInfoParam {
+
     @ApiModelProperty("订单ID")
     private Long orderId;
     @ApiModelProperty("运费金额")

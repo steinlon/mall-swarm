@@ -12,15 +12,15 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 /**
  * Jackson相关配置类
  * json不返回null的字段
- * Created by macro on 2018/8/2.
  */
 @Configuration
 public class JacksonConfig {
+    
     @Bean
     @Primary
     @ConditionalOnMissingBean(ObjectMapper.class)
-    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
-        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+    public ObjectMapper jacksonObjectMapper(final Jackson2ObjectMapperBuilder builder) {
+        final ObjectMapper objectMapper = builder.createXmlMapper(false).build();
 
         // 通过该方法对mapper对象进行设置，所有序列化的对象都将按改规则进行系列化
         // Include.Include.ALWAYS 默认

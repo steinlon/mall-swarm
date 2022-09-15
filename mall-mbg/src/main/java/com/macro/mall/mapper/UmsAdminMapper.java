@@ -2,10 +2,12 @@ package com.macro.mall.mapper;
 
 import com.macro.mall.model.UmsAdmin;
 import com.macro.mall.model.UmsAdminExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UmsAdminMapper {
+
     long countByExample(UmsAdminExample example);
 
     int deleteByExample(UmsAdminExample example);
@@ -19,6 +21,8 @@ public interface UmsAdminMapper {
     List<UmsAdmin> selectByExample(UmsAdminExample example);
 
     UmsAdmin selectByPrimaryKey(Long id);
+
+    UmsAdmin selectByUsername(String username);
 
     int updateByExampleSelective(@Param("record") UmsAdmin record, @Param("example") UmsAdminExample example);
 

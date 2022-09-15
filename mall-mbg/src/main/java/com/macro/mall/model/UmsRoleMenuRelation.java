@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 public class UmsRoleMenuRelation implements Serializable {
+
     private Long id;
 
     @ApiModelProperty(value = "角色ID")
