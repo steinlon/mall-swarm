@@ -1232,63 +1232,63 @@ public class UmsMemberExample {
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountIsNull() {
-            addCriterion("luckey_count is null");
+        public Criteria andLuckyCountIsNull() {
+            addCriterion("lucky_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountIsNotNull() {
-            addCriterion("luckey_count is not null");
+        public Criteria andLuckyCountIsNotNull() {
+            addCriterion("lucky_count is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountEqualTo(Integer value) {
-            addCriterion("luckey_count =", value, "luckeyCount");
+        public Criteria andLuckyCountEqualTo(Integer value) {
+            addCriterion("lucky_count =", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountNotEqualTo(Integer value) {
-            addCriterion("luckey_count <>", value, "luckeyCount");
+        public Criteria andLuckyCountNotEqualTo(Integer value) {
+            addCriterion("lucky_count <>", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountGreaterThan(Integer value) {
-            addCriterion("luckey_count >", value, "luckeyCount");
+        public Criteria andLuckyCountGreaterThan(Integer value) {
+            addCriterion("lucky_count >", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("luckey_count >=", value, "luckeyCount");
+        public Criteria andLuckyCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lucky_count >=", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountLessThan(Integer value) {
-            addCriterion("luckey_count <", value, "luckeyCount");
+        public Criteria andLuckyCountLessThan(Integer value) {
+            addCriterion("lucky_count <", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountLessThanOrEqualTo(Integer value) {
-            addCriterion("luckey_count <=", value, "luckeyCount");
+        public Criteria andLuckyCountLessThanOrEqualTo(Integer value) {
+            addCriterion("lucky_count <=", value, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountIn(List<Integer> values) {
-            addCriterion("luckey_count in", values, "luckeyCount");
+        public Criteria andLuckyCountIn(List<Integer> values) {
+            addCriterion("lucky_count in", values, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountNotIn(List<Integer> values) {
-            addCriterion("luckey_count not in", values, "luckeyCount");
+        public Criteria andLuckyCountNotIn(List<Integer> values) {
+            addCriterion("lucky_count not in", values, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountBetween(Integer value1, Integer value2) {
-            addCriterion("luckey_count between", value1, value2, "luckeyCount");
+        public Criteria andLuckyCountBetween(Integer value1, Integer value2) {
+            addCriterion("lucky_count between", value1, value2, "luckyCount");
             return (Criteria) this;
         }
 
-        public Criteria andLuckeyCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("luckey_count not between", value1, value2, "luckeyCount");
+        public Criteria andLuckyCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("lucky_count not between", value1, value2, "luckyCount");
             return (Criteria) this;
         }
 

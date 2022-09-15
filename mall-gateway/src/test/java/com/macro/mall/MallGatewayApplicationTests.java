@@ -1,14 +1,22 @@
 package com.macro.mall;
 
+import com.macro.mall.base.MetaTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.context.ApplicationContext;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class MallGatewayApplicationTests {
+public class MallGatewayApplicationTests implements MetaTest {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Test
     public void contextLoads() {
+        assertNotNull(applicationContext);
     }
 
 }

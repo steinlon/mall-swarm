@@ -1,0 +1,7 @@
+info:
+  profile: test
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

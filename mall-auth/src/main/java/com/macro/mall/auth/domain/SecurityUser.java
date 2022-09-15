@@ -2,58 +2,41 @@ package com.macro.mall.auth.domain;
 
 import com.macro.mall.common.domain.UserDto;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * 登录用户信息
- * Created by macro on 2020/6/19.
  */
+@NoArgsConstructor
 @Data
 public class SecurityUser implements UserDetails {
 
-    /**
-     * ID
-     */
+    private static final long serialVersionUID = -7437029180031844097L;
+
     private Long id;
-    /**
-     * 用户名
-     */
     private String username;
-    /**
-     * 用户密码
-     */
     private String password;
-    /**
-     * 用户状态
-     */
     private Boolean enabled;
-    /**
-     * 登录客户端ID
-     */
     private String clientId;
-    /**
-     * 权限数据
-     */
     private Collection<SimpleGrantedAuthority> authorities;
 
-    public SecurityUser() {
-
-    }
-
-    public SecurityUser(UserDto userDto) {
+    public SecurityUser(final UserDto userDto) {
         this.setId(userDto.getId());
         this.setUsername(userDto.getUsername());
         this.setPassword(userDto.getPassword());
         this.setEnabled(userDto.getStatus() == 1);
         this.setClientId(userDto.getClientId());
         if (userDto.getRoles() != null) {
-            authorities = new ArrayList<>();
-            userDto.getRoles().forEach(item -> authorities.add(new SimpleGrantedAuthority(item)));
+            authorities = userDto.getRoles()
+                    .stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
         }
     }
 

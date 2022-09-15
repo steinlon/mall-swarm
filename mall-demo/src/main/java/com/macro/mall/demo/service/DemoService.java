@@ -9,6 +9,7 @@ import java.util.List;
  * DemoService接口
  */
 public interface DemoService {
+
     List<PmsBrand> listAllBrand();
 
     int createBrand(PmsBrandDto pmsBrandDto);

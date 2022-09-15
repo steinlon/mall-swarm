@@ -10,21 +10,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.macro.mall.common.constant.UrlConstant.SYSTEM;
+
 /**
  * SpringSecurity配置
- * Created by macro on 2020/6/19.
  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/rsa/publicKey").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/oauth/token").permitAll()
+                .antMatchers(SYSTEM + "/serviceInstances").permitAll()
+                .antMatchers(SYSTEM + "/discoveryClient").permitAll()
+                .antMatchers(SYSTEM + "/configs").permitAll()
                 .anyRequest().authenticated();
     }
 

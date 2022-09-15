@@ -21,22 +21,22 @@ public class UmsMemberLevel implements Serializable {
     private Integer commentGrowthPoint;
 
     @ApiModelProperty(value = "是否有免邮特权")
-    private Integer priviledgeFreeFreight;
+    private Integer privilegeFreeFreight;
 
     @ApiModelProperty(value = "是否有签到特权")
-    private Integer priviledgeSignIn;
+    private Integer privilegeSignIn;
 
     @ApiModelProperty(value = "是否有评论获奖励特权")
-    private Integer priviledgeComment;
+    private Integer privilegeComment;
 
     @ApiModelProperty(value = "是否有专享活动特权")
-    private Integer priviledgePromotion;
+    private Integer privilegePromotion;
 
     @ApiModelProperty(value = "是否有会员价格特权")
-    private Integer priviledgeMemberPrice;
+    private Integer privilegeMemberPrice;
 
     @ApiModelProperty(value = "是否有生日特权")
-    private Integer priviledgeBirthday;
+    private Integer privilegeBirthday;
 
     private String note;
 
@@ -90,52 +90,52 @@ public class UmsMemberLevel implements Serializable {
         this.commentGrowthPoint = commentGrowthPoint;
     }
 
-    public Integer getPriviledgeFreeFreight() {
-        return priviledgeFreeFreight;
+    public Integer getPrivilegeFreeFreight() {
+        return privilegeFreeFreight;
     }
 
-    public void setPriviledgeFreeFreight(Integer priviledgeFreeFreight) {
-        this.priviledgeFreeFreight = priviledgeFreeFreight;
+    public void setPrivilegeFreeFreight(Integer privilegeFreeFreight) {
+        this.privilegeFreeFreight = privilegeFreeFreight;
     }
 
-    public Integer getPriviledgeSignIn() {
-        return priviledgeSignIn;
+    public Integer getPrivilegeSignIn() {
+        return privilegeSignIn;
     }
 
-    public void setPriviledgeSignIn(Integer priviledgeSignIn) {
-        this.priviledgeSignIn = priviledgeSignIn;
+    public void setPrivilegeSignIn(Integer privilegeSignIn) {
+        this.privilegeSignIn = privilegeSignIn;
     }
 
-    public Integer getPriviledgeComment() {
-        return priviledgeComment;
+    public Integer getPrivilegeComment() {
+        return privilegeComment;
     }
 
-    public void setPriviledgeComment(Integer priviledgeComment) {
-        this.priviledgeComment = priviledgeComment;
+    public void setPrivilegeComment(Integer privilegeComment) {
+        this.privilegeComment = privilegeComment;
     }
 
-    public Integer getPriviledgePromotion() {
-        return priviledgePromotion;
+    public Integer getPrivilegePromotion() {
+        return privilegePromotion;
     }
 
-    public void setPriviledgePromotion(Integer priviledgePromotion) {
-        this.priviledgePromotion = priviledgePromotion;
+    public void setPrivilegePromotion(Integer privilegePromotion) {
+        this.privilegePromotion = privilegePromotion;
     }
 
-    public Integer getPriviledgeMemberPrice() {
-        return priviledgeMemberPrice;
+    public Integer getPrivilegeMemberPrice() {
+        return privilegeMemberPrice;
     }
 
-    public void setPriviledgeMemberPrice(Integer priviledgeMemberPrice) {
-        this.priviledgeMemberPrice = priviledgeMemberPrice;
+    public void setPrivilegeMemberPrice(Integer privilegeMemberPrice) {
+        this.privilegeMemberPrice = privilegeMemberPrice;
     }
 
-    public Integer getPriviledgeBirthday() {
-        return priviledgeBirthday;
+    public Integer getPrivilegeBirthday() {
+        return privilegeBirthday;
     }
 
-    public void setPriviledgeBirthday(Integer priviledgeBirthday) {
-        this.priviledgeBirthday = priviledgeBirthday;
+    public void setPrivilegeBirthday(Integer privilegeBirthday) {
+        this.privilegeBirthday = privilegeBirthday;
     }
 
     public String getNote() {
@@ -158,12 +158,12 @@ public class UmsMemberLevel implements Serializable {
         sb.append(", defaultStatus=").append(defaultStatus);
         sb.append(", freeFreightPoint=").append(freeFreightPoint);
         sb.append(", commentGrowthPoint=").append(commentGrowthPoint);
-        sb.append(", priviledgeFreeFreight=").append(priviledgeFreeFreight);
-        sb.append(", priviledgeSignIn=").append(priviledgeSignIn);
-        sb.append(", priviledgeComment=").append(priviledgeComment);
-        sb.append(", priviledgePromotion=").append(priviledgePromotion);
-        sb.append(", priviledgeMemberPrice=").append(priviledgeMemberPrice);
-        sb.append(", priviledgeBirthday=").append(priviledgeBirthday);
+        sb.append(", privilegeFreeFreight=").append(privilegeFreeFreight);
+        sb.append(", privilegeSignIn=").append(privilegeSignIn);
+        sb.append(", privilegeComment=").append(privilegeComment);
+        sb.append(", privilegePromotion=").append(privilegePromotion);
+        sb.append(", privilegeMemberPrice=").append(privilegeMemberPrice);
+        sb.append(", privilegeBirthday=").append(privilegeBirthday);
         sb.append(", note=").append(note);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
