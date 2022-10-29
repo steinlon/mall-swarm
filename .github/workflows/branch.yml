@@ -1,65 +1,65 @@
-#name: Mall Swarm Branch Build CI
-#
-#on:
-#  pull_request:
-#    branches: [ develop, master ]
-#
-#concurrency:
-#  group: ${{ github.ref }}
-#  cancel-in-progress: true
-#
-#jobs:
-#  build:
-#
-#    name: Branch Build
-#    runs-on: ubuntu-latest
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        java: [ 11, 17 ]
-#
-#    steps:
-#
-#      - name: Check Out Branch
-#        uses: actions/checkout@v2
-#
-#      - name: Install JDK ${{ matrix.java }}
-#        # Uses sha for added security since tags can be updated
-#        uses: joschi/setup-jdk@e87a7cec853d2dd7066adf837fe12bf0f3d45e52
-#        with:
-#          java-version: ${{ matrix.java }}
-#
-#      - name: Set up Docker
-#        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq mongo
-#
-#      - name: Get Date
-#        id: get-date
-#        run: |
-#          echo "::set-output name=date::$(/bin/date -u "+%Y-%m")"
-#        shell: bash
-#
-#      - name: Cache Maven Repository
-#        id: cache-maven
-#        uses: actions/cache@v2
-#        with:
-#          path: ~/.m2/repository
-#          key: deploy-snapshots-${{ steps.get-date.outputs.date }}
-#
-#      - name: Build Backend
-#        run: mvn clean package
-#
-#      - name: Shut Down Docker
-#        if: ${{ always() }}
-#        run: docker-compose -f document/docker/docker-compose-env.yml down --remove-orphans
-#
-#      - name: Slack Notification
-#        if: failure()
-#        uses: rtCamp/action-slack-notify@v2
-#        env:
-#          SLACK_CHANNEL: mall-pr
-#          SLACK_COLOR: ${{ job.status }}
-#          SLACK_MESSAGE: ${{ job.status }}
-#          SLACK_USERNAME: GitHub Actions
-#          SLACK_TITLE: Build Result
-#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-#          SLACK_ICON_EMOJI: ":gear:"
+name: Mall Swarm Branch Build CI
+
+on:
+  pull_request:
+    branches: [ develop, master ]
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+
+    name: Branch Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [ 11, 17 ]
+
+    steps:
+
+      - name: Check Out Branch
+        uses: actions/checkout@v2
+
+      - name: Install JDK ${{ matrix.java }}
+        # Uses sha for added security since tags can be updated
+        uses: joschi/setup-jdk@e87a7cec853d2dd7066adf837fe12bf0f3d45e52
+        with:
+          java-version: ${{ matrix.java }}
+
+      - name: Set up Docker
+        run: docker-compose -f document/docker/docker-compose-env.yml up -d mall-postgres mall-flyway redis rabbitmq mongo
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y-%m")"
+        shell: bash
+
+      - name: Cache Maven Repository
+        id: cache-maven
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: deploy-snapshots-${{ steps.get-date.outputs.date }}
+
+      - name: Build Backend
+        run: mvn clean package
+
+      - name: Shut Down Docker
+        if: ${{ always() }}
+        run: docker-compose -f document/docker/docker-compose-env.yml down --remove-orphans
+
+      - name: Slack Notification
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: mall-pr
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_MESSAGE: ${{ job.status }}
+          SLACK_USERNAME: GitHub Actions
+          SLACK_TITLE: Build Result
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON_EMOJI: ":gear:"
