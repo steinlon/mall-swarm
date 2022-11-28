@@ -41,7 +41,7 @@
         <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
         <pagehelper-starter.version>1.4.6</pagehelper-starter.version>
         <pagehelper.version>5.3.2</pagehelper.version>
-        <druid.version>1.2.14</druid.version>
+        <druid.version>1.2.15</druid.version>
         <hutool.version>5.8.10</hutool.version>
         <mybatis-generator.version>1.4.1</mybatis-generator.version>
         <mybatis.version>3.5.11</mybatis.version>
