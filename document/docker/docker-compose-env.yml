@@ -2,7 +2,7 @@ version: '3'
 services:
 
   mall-postgres:
-    image: postgres:14.1
+    image: postgres:13.2-alpine
     container_name: mall-postgres
     command: [ "postgres", "-c", "log_statement=all" ]
     environment:
@@ -21,7 +21,7 @@ services:
       retries: 5
 
   mall-flyway:
-    image: flyway/flyway:8.3.0
+    image: flyway/flyway:8.5.2-alpine
     container_name: mall-flyway
     command: migrate
     volumes:
@@ -31,7 +31,7 @@ services:
       - mall-postgres
 
   nacos-mysql:
-    image: mysql:8
+    image: mysql:5.7
     container_name: nacos-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -47,7 +47,7 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   redis:
-    image: redis:7
+    image: redis:7.0.4-alpine
     container_name: redis
     hostname: redis
     command: redis-server --appendonly yes
@@ -58,16 +58,24 @@ services:
     ports:
       - 6379:6379
 
-  redis-commander:
-    container_name: redis-commander
-    hostname: redis-commander
-    image: rediscommander/redis-commander:latest
-    restart: always
-    environment:
-      - REDIS_HOSTS=local:redis:6379
+  mall-redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: mall-redis-insight
     ports:
-      - "8095:8081"
+      - '8095:8001'
+    volumes:
+      - ./mydata/redisinsight:/db
 
+#  redis-commander:
+#    container_name: redis-commander
+#    hostname: redis-commander
+#    image: rediscommander/redis-commander:latest
+#    restart: always
+#    environment:
+#      - REDIS_HOSTS=local:redis:6379
+#    ports:
+#      - "8095:8081"
+#
 #  nginx:
 #    image: nginx:1.22
 #    container_name: nginx
