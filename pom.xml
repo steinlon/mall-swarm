@@ -36,7 +36,7 @@
         <docker.maven.plugin.version>0.40.3</docker.maven.plugin.version>
         <java.version>1.8</java.version>
         <spring-boot.version>2.7.5</spring-boot.version>
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud.version>2022.0.1</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
         <pagehelper-starter.version>1.4.6</pagehelper-starter.version>
