@@ -2,9 +2,10 @@ package com.macro.mall.common.api;
 
 /**
  * 通用返回对象
- * Created by macro on 2019/4/19.
  */
 public class CommonResult<T> {
+
+    private IErrorCode errorCode;
     private long code;
     private String message;
     private T data;
@@ -12,8 +13,9 @@ public class CommonResult<T> {
     protected CommonResult() {
     }
 
-    protected CommonResult(long code, String message, T data) {
-        this.code = code;
+    protected CommonResult(final IErrorCode errorCode, final String message, final T data) {
+        this.errorCode = errorCode;
+        this.code = errorCode.getCode();
         this.message = message;
         this.data = data;
     }
@@ -23,43 +25,39 @@ public class CommonResult<T> {
      *
      * @param data 获取的数据
      */
-    public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
+    public static <T> CommonResult<T> success(final T data) {
+        return new CommonResult<T>(ResultCode.SUCCESS, ResultCode.SUCCESS.getMessage(), data);
     }
 
     /**
      * 成功返回结果
      *
-     * @param data 获取的数据
-     * @param  message 提示信息
-     */
-    public static <T> CommonResult<T> success(T data, String message) {
-        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), message, data);
-    }
-
-    /**
-     * 失败返回结果
-     * @param errorCode 错误码
-     */
-    public static <T> CommonResult<T> failed(IErrorCode errorCode) {
-        return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
-    }
-
-    /**
-     * 失败返回结果
-     * @param errorCode 错误码
-     * @param message 错误信息
-     */
-    public static <T> CommonResult<T> failed(IErrorCode errorCode,String message) {
-        return new CommonResult<T>(errorCode.getCode(), message, null);
-    }
-
-    /**
-     * 失败返回结果
+     * @param data    获取的数据
      * @param message 提示信息
      */
-    public static <T> CommonResult<T> failed(String message) {
-        return new CommonResult<T>(ResultCode.FAILED.getCode(), message, null);
+    public static <T> CommonResult<T> success(final T data, final String message) {
+        return new CommonResult<T>(ResultCode.SUCCESS, message, data);
+    }
+
+    /**
+     * 失败返回结果
+     */
+    public static <T> CommonResult<T> failed(final IErrorCode errorCode) {
+        return new CommonResult<T>(errorCode, errorCode.getMessage(), null);
+    }
+
+    /**
+     * 失败返回结果
+     */
+    public static <T> CommonResult<T> failed(final ResultCode errorCode, final String message) {
+        return new CommonResult<T>(errorCode, message, null);
+    }
+
+    /**
+     * 失败返回结果
+     */
+    public static <T> CommonResult<T> failed(final String message) {
+        return new CommonResult<T>(ResultCode.FAILED, message, null);
     }
 
     /**
@@ -78,32 +76,37 @@ public class CommonResult<T> {
 
     /**
      * 参数验证失败返回结果
+     *
      * @param message 提示信息
      */
-    public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<T>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+    public static <T> CommonResult<T> validateFailed(final String message) {
+        return new CommonResult<T>(ResultCode.VALIDATE_FAILED, message, null);
     }
 
     /**
      * 未登录返回结果
      */
-    public static <T> CommonResult<T> unauthorized(T data) {
-        return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
+    public static <T> CommonResult<T> unauthorized(final T data) {
+        return new CommonResult<T>(ResultCode.UNAUTHORIZED, ResultCode.UNAUTHORIZED.getMessage(), data);
     }
 
     /**
      * 未授权返回结果
      */
-    public static <T> CommonResult<T> forbidden(T data) {
-        return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
+    public static <T> CommonResult<T> forbidden(final T data) {
+        return new CommonResult<T>(ResultCode.FORBIDDEN, ResultCode.FORBIDDEN.getMessage(), data);
+    }
+
+    public IErrorCode getErrorCode() {
+        return errorCode;
     }
 
     public long getCode() {
         return code;
     }
 
-    public void setCode(long code) {
-        this.code = code;
+    public void setErrorCode(ResultCode errorCode) {
+        this.errorCode = errorCode;
     }
 
     public String getMessage() {

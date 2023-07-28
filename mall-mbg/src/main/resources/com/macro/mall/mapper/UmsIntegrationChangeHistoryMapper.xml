@@ -104,9 +104,6 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.macro.mall.model.UmsIntegrationChangeHistory">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ums_integration_change_history (member_id, create_time, change_type, 
       change_count, operate_man, operate_note, 
       source_type)
@@ -115,9 +112,6 @@
       #{sourceType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.macro.mall.model.UmsIntegrationChangeHistory">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ums_integration_change_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="memberId != null">

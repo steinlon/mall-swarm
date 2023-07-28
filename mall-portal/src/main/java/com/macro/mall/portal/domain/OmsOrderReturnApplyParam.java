@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 
 /**
  * 申请退货参数
- * Created by macro on 2018/10/17.
  */
 @Getter
 @Setter
 public class OmsOrderReturnApplyParam {
+
     @ApiModelProperty("订单id")
     private Long orderId;
     @ApiModelProperty("退货商品id")
