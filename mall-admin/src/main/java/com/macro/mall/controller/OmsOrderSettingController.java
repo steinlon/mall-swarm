@@ -5,37 +5,41 @@ import com.macro.mall.model.OmsOrderSetting;
 import com.macro.mall.service.OmsOrderSettingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 订单设置Controller
- * Created by macro on 2018/10/16.
  */
 @Controller
+@AllArgsConstructor
 @Api(tags = "OmsOrderSettingController", description = "订单设置管理")
 @RequestMapping("/orderSetting")
 public class OmsOrderSettingController {
-    @Autowired
-    private OmsOrderSettingService orderSettingService;
+
+    private final OmsOrderSettingService orderSettingService;
 
     @ApiOperation("获取指定订单设置")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ResponseBody
-    public CommonResult<OmsOrderSetting> getItem(@PathVariable Long id) {
-        OmsOrderSetting orderSetting = orderSettingService.getItem(id);
+    public CommonResult<OmsOrderSetting> getItem(@PathVariable final Long id) {
+        final OmsOrderSetting orderSetting = orderSettingService.getItem(id);
         return CommonResult.success(orderSetting);
     }
 
     @ApiOperation("修改指定订单设置")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/update/{id}")
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody OmsOrderSetting orderSetting) {
-        int count = orderSettingService.update(id,orderSetting);
-        if(count>0){
-            return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+    public CommonResult<?> update(
+            @PathVariable final Long id,
+            @RequestBody final OmsOrderSetting orderSetting) {
+        final int count = orderSettingService.update(id, orderSetting);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 }

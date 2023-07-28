@@ -9,7 +9,13 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMappi
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.*;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.HttpAuthenticationScheme;
+import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -23,14 +29,13 @@ import java.util.stream.Collectors;
 
 /**
  * Swagger基础配置
- * Created by macro on 2020/7/16.
  */
 public abstract class BaseSwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
-        SwaggerProperties swaggerProperties = swaggerProperties();
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+        final SwaggerProperties swaggerProperties = swaggerProperties();
+        final Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo(swaggerProperties))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getApiBasePackage()))
@@ -42,7 +47,7 @@ public abstract class BaseSwaggerConfig {
         return docket;
     }
 
-    private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
+    private ApiInfo apiInfo(final SwaggerProperties swaggerProperties) {
         return new ApiInfoBuilder()
                 .title(swaggerProperties.getTitle())
                 .description(swaggerProperties.getDescription())
@@ -55,30 +60,28 @@ public abstract class BaseSwaggerConfig {
         //设置请求头信息
         List<SecurityScheme> result = new ArrayList<>();
         ApiKey apiKey = new ApiKey("Authorization", "Authorization", "header");
+        final HttpAuthenticationScheme jwt = HttpAuthenticationScheme.JWT_BEARER_BUILDER.name("JWT").build();
         result.add(apiKey);
+        result.add(jwt);
         return result;
     }
 
     private List<SecurityContext> securityContexts() {
         //设置需要登录认证的路径
-        List<SecurityContext> result = new ArrayList<>();
-        result.add(getContextByPath("/*/.*"));
+        final List<SecurityContext> result = new ArrayList<>();
+        final SecurityContext context = SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex("/*/.*"))
+                .build();
+        result.add(context);
         return result;
     }
 
-    private SecurityContext getContextByPath(String pathRegex) {
-        return SecurityContext.builder()
-                .securityReferences(defaultAuth())
-                .forPaths(PathSelectors.regex(pathRegex))
-                .build();
-    }
-
     private List<SecurityReference> defaultAuth() {
-        List<SecurityReference> result = new ArrayList<>();
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        result.add(new SecurityReference("Authorization", authorizationScopes));
+        final List<SecurityReference> result = new ArrayList<>();
+        final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        result.add(new SecurityReference("Authorization", new AuthorizationScope[]{authorizationScope}));
+        result.add(new SecurityReference("JWT", new AuthorizationScope[]{authorizationScope}));
         return result;
     }
 

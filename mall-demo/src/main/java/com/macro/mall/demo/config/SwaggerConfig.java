@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static com.macro.mall.common.constant.ServiceConstant.SWAGGER_VERSION;
+
 /**
  * Swagger API文档相关配置
- * Created by macro on 2019/4/8.
  */
 @Configuration
 @EnableSwagger2
@@ -22,7 +23,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
                 .title("mall-demo系统")
                 .description("SpringCloud版本中的一些示例")
                 .contactName("macro")
-                .version("1.0")
+                .version(SWAGGER_VERSION)
                 .enableSecurity(true)
                 .build();
     }

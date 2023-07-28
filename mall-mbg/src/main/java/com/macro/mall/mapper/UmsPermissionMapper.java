@@ -2,10 +2,12 @@ package com.macro.mall.mapper;
 
 import com.macro.mall.model.UmsPermission;
 import com.macro.mall.model.UmsPermissionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UmsPermissionMapper {
+
     long countByExample(UmsPermissionExample example);
 
     int deleteByExample(UmsPermissionExample example);

@@ -133,7 +133,7 @@ gif录制工具 | https://www.screentogif.com/
 - 添加商品参数：参数传入List<PmsProductAttributeValue>
 - 添加自定义商品规格：参数传入List<PmsProductAttributeValue>
 - 关联专题:参数传入List<CmsSubjectProductRelation>关系
-- 关联优选:参数传入List<CmsPrefrenceAreaProductRelation>关系
+- 关联优选:参数传入List<CmsPreferenceAreaProductRelation>关系
 
 > **修改商品**
 

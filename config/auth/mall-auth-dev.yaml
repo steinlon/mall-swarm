@@ -1,0 +1,11 @@
+info:
+  profile: development
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logstash:
+  host: localhost
+  log:
+    path: ./tmp

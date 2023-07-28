@@ -2,7 +2,6 @@ package com.macro.mall.portal.service.impl;
 
 import com.macro.mall.common.annotation.CacheException;
 import com.macro.mall.common.service.RedisService;
-import com.macro.mall.mapper.UmsMemberMapper;
 import com.macro.mall.model.UmsMember;
 import com.macro.mall.portal.service.UmsMemberCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,52 +10,62 @@ import org.springframework.stereotype.Service;
 
 /**
  * UmsMemberCacheService实现类
- * Created by macro on 2020/3/14.
  */
 @Service
 public class UmsMemberCacheServiceImpl implements UmsMemberCacheService {
+
+    private final RedisService redisService;
+    private final String REDIS_DATABASE;
+    private final Long REDIS_EXPIRE;
+    private final Long REDIS_EXPIRE_AUTH_CODE;
+    private final String REDIS_KEY_MEMBER;
+    private final String REDIS_KEY_AUTH_CODE;
+
     @Autowired
-    private RedisService redisService;
-    @Value("${redis.database}")
-    private String REDIS_DATABASE;
-    @Value("${redis.expire.common}")
-    private Long REDIS_EXPIRE;
-    @Value("${redis.expire.authCode}")
-    private Long REDIS_EXPIRE_AUTH_CODE;
-    @Value("${redis.key.member}")
-    private String REDIS_KEY_MEMBER;
-    @Value("${redis.key.authCode}")
-    private String REDIS_KEY_AUTH_CODE;
+    public UmsMemberCacheServiceImpl(
+            final RedisService redisService,
+            @Value("${redis.database}") final String redisDatabase,
+            @Value("${redis.expire.common}") final Long redisExpire,
+            @Value("${redis.expire.authCode}") final Long redisExpireAuthCode,
+            @Value("${redis.key.member}") final String redisKeyMember,
+            @Value("${redis.key.authCode}") final String redisKeyAuthCode) {
+        this.redisService = redisService;
+        this.REDIS_DATABASE = redisDatabase;
+        this.REDIS_EXPIRE = redisExpire;
+        this.REDIS_EXPIRE_AUTH_CODE = redisExpireAuthCode;
+        this.REDIS_KEY_MEMBER = redisKeyMember;
+        this.REDIS_KEY_AUTH_CODE = redisKeyAuthCode;
+    }
 
     @Override
-    public void delMember(Long memberId) {
-        String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + memberId;
+    public void delMember(final Long memberId) {
+        final String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + memberId;
         redisService.del(key);
     }
 
     @Override
-    public UmsMember getMember(Long memberId) {
-        String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + memberId;
+    public UmsMember getMember(final Long memberId) {
+        final String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + memberId;
         return (UmsMember) redisService.get(key);
     }
 
     @Override
-    public void setMember(UmsMember member) {
-        String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + member.getId();
+    public void setMember(final UmsMember member) {
+        final String key = REDIS_DATABASE + ":" + REDIS_KEY_MEMBER + ":" + member.getId();
         redisService.set(key, member, REDIS_EXPIRE);
     }
 
     @CacheException
     @Override
-    public void setAuthCode(String telephone, String authCode) {
-        String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTH_CODE + ":" + telephone;
+    public void setAuthCode(final String telephone, final String authCode) {
+        final String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTH_CODE + ":" + telephone;
         redisService.set(key, authCode, REDIS_EXPIRE_AUTH_CODE);
     }
 
     @CacheException
     @Override
-    public String getAuthCode(String telephone) {
-        String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTH_CODE + ":" + telephone;
+    public String getAuthCode(final String telephone) {
+        final String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTH_CODE + ":" + telephone;
         return (String) redisService.get(key);
     }
 }

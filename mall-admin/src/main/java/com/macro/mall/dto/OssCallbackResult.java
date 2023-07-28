@@ -6,11 +6,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * oss上传文件的回调结果
- * Created by macro on 2018/5/17.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class OssCallbackResult {
+
     @ApiModelProperty("文件名称")
     private String filename;
     @ApiModelProperty("文件大小")

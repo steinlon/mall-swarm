@@ -7,96 +7,91 @@ import com.macro.mall.model.UmsMenu;
 import com.macro.mall.service.UmsMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static com.macro.mall.common.constant.UrlConstant.MENU;
+
 /**
  * 后台菜单管理Controller
- * Created by macro on 2020/2/4.
  */
 @Controller
-@Api(tags = "UmsMenuController", description = "后台菜单管理")
-@RequestMapping("/menu")
+@AllArgsConstructor
+@Api(tags = "UmsMenuController", value = "后台菜单管理")
+@RequestMapping(MENU)
 public class UmsMenuController {
 
-    @Autowired
-    private UmsMenuService menuService;
+    private final UmsMenuService menuService;
 
     @ApiOperation("添加后台菜单")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     @ResponseBody
-    public CommonResult create(@RequestBody UmsMenu umsMenu) {
-        int count = menuService.create(umsMenu);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
+    public CommonResult<?> create(@RequestBody final UmsMenu umsMenu) {
+        final int count = menuService.create(umsMenu);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("修改后台菜单")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/update/{id}")
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
-                               @RequestBody UmsMenu umsMenu) {
-        int count = menuService.update(id, umsMenu);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
+    public CommonResult<?> update(
+            @PathVariable final Long id,
+            @RequestBody final UmsMenu umsMenu) {
+        final int count = menuService.update(id, umsMenu);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("根据ID获取菜单详情")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ResponseBody
-    public CommonResult<UmsMenu> getItem(@PathVariable Long id) {
-        UmsMenu umsMenu = menuService.getItem(id);
+    public CommonResult<UmsMenu> getItem(@PathVariable final Long id) {
+        final UmsMenu umsMenu = menuService.getItem(id);
         return CommonResult.success(umsMenu);
     }
 
     @ApiOperation("根据ID删除后台菜单")
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/delete/{id}")
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
-        int count = menuService.delete(id);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
+    public CommonResult<?> delete(@PathVariable final Long id) {
+        final int count = menuService.delete(id);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 
     @ApiOperation("分页查询后台菜单")
-    @RequestMapping(value = "/list/{parentId}", method = RequestMethod.GET)
+    @GetMapping(value = "/list/{parentId}")
     @ResponseBody
-    public CommonResult<CommonPage<UmsMenu>> list(@PathVariable Long parentId,
-                                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<UmsMenu> menuList = menuService.list(parentId, pageSize, pageNum);
+    public CommonResult<CommonPage<UmsMenu>> list(
+            @PathVariable final Long parentId,
+            @RequestParam(value = "pageSize", defaultValue = "5") final Integer pageSize,
+            @RequestParam(value = "pageNum", defaultValue = "1") final Integer pageNum) {
+        final List<UmsMenu> menuList = menuService.list(parentId, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(menuList));
     }
 
     @ApiOperation("树形结构返回所有菜单列表")
-    @RequestMapping(value = "/treeList", method = RequestMethod.GET)
+    @GetMapping(value = "/treeList")
     @ResponseBody
     public CommonResult<List<UmsMenuNode>> treeList() {
-        List<UmsMenuNode> list = menuService.treeList();
+        final List<UmsMenuNode> list = menuService.treeList();
         return CommonResult.success(list);
     }
 
     @ApiOperation("修改菜单显示状态")
-    @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/updateHidden/{id}")
     @ResponseBody
-    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
-        int count = menuService.updateHidden(id, hidden);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
+    public CommonResult<?> updateHidden(
+            @PathVariable final Long id,
+            @RequestParam("hidden") final Integer hidden) {
+        final int count = menuService.updateHidden(id, hidden);
+        return count > 0 ? CommonResult.success(count) : CommonResult.failed();
     }
 }
