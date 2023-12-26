@@ -105,9 +105,6 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.macro.mall.model.UmsPermission">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ums_permission (pid, name, value, 
       icon, type, uri, status, 
       create_time, sort)
@@ -116,9 +113,6 @@
       #{createTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.macro.mall.model.UmsPermission">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ums_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">

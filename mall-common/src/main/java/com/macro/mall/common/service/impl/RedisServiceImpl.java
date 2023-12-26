@@ -1,10 +1,10 @@
 package com.macro.mall.common.service.impl;
 
 import com.macro.mall.common.service.RedisService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * redis操作实现类
- * Created by macro on 2020/3/3.
  */
+@AllArgsConstructor
 public class RedisServiceImpl implements RedisService {
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public void set(String key, Object value, long time) {
@@ -44,8 +44,13 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public Boolean expire(String key, long time) {
-        return redisTemplate.expire(key, time, TimeUnit.SECONDS);
+    public Boolean expire(String key, long seconds) {
+        return redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Boolean expireAt(final String key, final Date date) {
+        return redisTemplate.expireAt(key, date);
     }
 
     @Override

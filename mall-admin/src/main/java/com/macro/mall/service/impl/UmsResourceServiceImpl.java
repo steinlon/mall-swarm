@@ -1,79 +1,102 @@
 package com.macro.mall.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.constant.AuthConstant;
 import com.macro.mall.common.service.RedisService;
 import com.macro.mall.mapper.UmsResourceMapper;
 import com.macro.mall.mapper.UmsRoleMapper;
 import com.macro.mall.mapper.UmsRoleResourceRelationMapper;
-import com.macro.mall.model.*;
-import com.macro.mall.service.UmsAdminCacheService;
+import com.macro.mall.model.UmsResource;
+import com.macro.mall.model.UmsResourceExample;
+import com.macro.mall.model.UmsRole;
+import com.macro.mall.model.UmsRoleExample;
+import com.macro.mall.model.UmsRoleResourceRelation;
+import com.macro.mall.model.UmsRoleResourceRelationExample;
 import com.macro.mall.service.UmsResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
  * 后台资源管理Service实现类
- * Created by macro on 2020/2/2.
  */
 @Service
 public class UmsResourceServiceImpl implements UmsResourceService {
+
+    private final UmsResourceMapper resourceMapper;
+    private final UmsRoleMapper roleMapper;
+    private final UmsRoleResourceRelationMapper roleResourceRelationMapper;
+    private final RedisService redisService;
+    private final String applicationName;
+
     @Autowired
-    private UmsResourceMapper resourceMapper;
-    @Autowired
-    private UmsRoleMapper roleMapper;
-    @Autowired
-    private UmsRoleResourceRelationMapper roleResourceRelationMapper;
-    @Autowired
-    private RedisService redisService;
-    @Value("${spring.application.name}")
-    private String applicationName;
+    public UmsResourceServiceImpl(
+            final UmsResourceMapper resourceMapper,
+            final UmsRoleMapper roleMapper,
+            final UmsRoleResourceRelationMapper roleResourceRelationMapper,
+            final RedisService redisService,
+            @Value("${spring.application.name}") final String applicationName) {
+        this.resourceMapper = resourceMapper;
+        this.roleMapper = roleMapper;
+        this.roleResourceRelationMapper = roleResourceRelationMapper;
+        this.redisService = redisService;
+        this.applicationName = applicationName;
+    }
+
     @Override
-    public int create(UmsResource umsResource) {
+    public int create(final UmsResource umsResource) {
         umsResource.setCreateTime(new Date());
-        int count = resourceMapper.insert(umsResource);
+        final int count = resourceMapper.insert(umsResource);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public int update(Long id, UmsResource umsResource) {
+    public int update(final Long id, final UmsResource umsResource) {
         umsResource.setId(id);
-        int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
+        final int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public UmsResource getItem(Long id) {
+    public UmsResource getItem(final Long id) {
         return resourceMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public int delete(Long id) {
-        int count = resourceMapper.deleteByPrimaryKey(id);
+    public int delete(final Long id) {
+        final int count = resourceMapper.deleteByPrimaryKey(id);
         initResourceRolesMap();
         return count;
     }
 
     @Override
-    public List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
-        PageHelper.startPage(pageNum,pageSize);
-        UmsResourceExample example = new UmsResourceExample();
-        UmsResourceExample.Criteria criteria = example.createCriteria();
-        if(categoryId!=null){
+    public List<UmsResource> list(
+            final Long categoryId,
+            final String nameKeyword,
+            final String urlKeyword,
+            final Integer pageSize,
+            final Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        final UmsResourceExample example = new UmsResourceExample();
+        final UmsResourceExample.Criteria criteria = example.createCriteria();
+        if (categoryId != null) {
             criteria.andCategoryIdEqualTo(categoryId);
         }
-        if(StrUtil.isNotEmpty(nameKeyword)){
-            criteria.andNameLike('%'+nameKeyword+'%');
+        if (StringUtils.hasLength(nameKeyword)) {
+            criteria.andNameLike('%' + nameKeyword + '%');
         }
-        if(StrUtil.isNotEmpty(urlKeyword)){
-            criteria.andUrlLike('%'+urlKeyword+'%');
+        if (StringUtils.hasLength(urlKeyword)) {
+            criteria.andUrlLike('%' + urlKeyword + '%');
         }
         return resourceMapper.selectByExample(example);
     }
@@ -84,16 +107,24 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     }
 
     @Override
-    public Map<String,List<String>> initResourceRolesMap() {
-        Map<String,List<String>> resourceRoleMap = new TreeMap<>();
-        List<UmsResource> resourceList = resourceMapper.selectByExample(new UmsResourceExample());
-        List<UmsRole> roleList = roleMapper.selectByExample(new UmsRoleExample());
-        List<UmsRoleResourceRelation> relationList = roleResourceRelationMapper.selectByExample(new UmsRoleResourceRelationExample());
-        for (UmsResource resource : resourceList) {
-            Set<Long> roleIds = relationList.stream().filter(item -> item.getResourceId().equals(resource.getId())).map(UmsRoleResourceRelation::getRoleId).collect(Collectors.toSet());
-            List<String> roleNames = roleList.stream().filter(item -> roleIds.contains(item.getId())).map(item -> item.getId() + "_" + item.getName()).collect(Collectors.toList());
-            resourceRoleMap.put("/"+applicationName+resource.getUrl(),roleNames);
-        }
+    public Map<String, List<String>> initResourceRolesMap() {
+        final Map<String, List<String>> resourceRoleMap = new TreeMap<>();
+        final List<UmsResource> resourceList = resourceMapper.selectByExample(new UmsResourceExample());
+        final List<UmsRole> roleList = roleMapper.selectByExample(new UmsRoleExample());
+        final List<UmsRoleResourceRelation> relationList = roleResourceRelationMapper.selectByExample(new UmsRoleResourceRelationExample());
+        resourceList.forEach(resource -> {
+            final Set<Long> roleIds = relationList
+                    .stream()
+                    .filter(item -> item.getResourceId().equals(resource.getId()))
+                    .map(UmsRoleResourceRelation::getRoleId)
+                    .collect(Collectors.toSet());
+            final List<String> roleNames = roleList
+                    .stream()
+                    .filter(item -> roleIds.contains(item.getId()))
+                    .map(item -> item.getId() + "_" + item.getName())
+                    .collect(Collectors.toList());
+            resourceRoleMap.put("/" + applicationName + resource.getUrl(), roleNames);
+        });
         redisService.del(AuthConstant.RESOURCE_ROLES_MAP_KEY);
         redisService.hSetAll(AuthConstant.RESOURCE_ROLES_MAP_KEY, resourceRoleMap);
         return resourceRoleMap;

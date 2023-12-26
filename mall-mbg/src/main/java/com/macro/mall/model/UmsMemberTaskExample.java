@@ -295,62 +295,62 @@ public class UmsMemberTaskExample {
         }
 
         public Criteria andIntergrationIsNull() {
-            addCriterion("intergration is null");
+            addCriterion("integration is null");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationIsNotNull() {
-            addCriterion("intergration is not null");
+            addCriterion("integration is not null");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationEqualTo(Integer value) {
-            addCriterion("intergration =", value, "intergration");
+            addCriterion("integration =", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationNotEqualTo(Integer value) {
-            addCriterion("intergration <>", value, "intergration");
+            addCriterion("integration <>", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationGreaterThan(Integer value) {
-            addCriterion("intergration >", value, "intergration");
+            addCriterion("integration >", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationGreaterThanOrEqualTo(Integer value) {
-            addCriterion("intergration >=", value, "intergration");
+            addCriterion("integration >=", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationLessThan(Integer value) {
-            addCriterion("intergration <", value, "intergration");
+            addCriterion("integration <", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationLessThanOrEqualTo(Integer value) {
-            addCriterion("intergration <=", value, "intergration");
+            addCriterion("integration <=", value, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationIn(List<Integer> values) {
-            addCriterion("intergration in", values, "intergration");
+            addCriterion("integration in", values, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationNotIn(List<Integer> values) {
-            addCriterion("intergration not in", values, "intergration");
+            addCriterion("integration not in", values, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationBetween(Integer value1, Integer value2) {
-            addCriterion("intergration between", value1, value2, "intergration");
+            addCriterion("integration between", value1, value2, "integration");
             return (Criteria) this;
         }
 
         public Criteria andIntergrationNotBetween(Integer value1, Integer value2) {
-            addCriterion("intergration not between", value1, value2, "intergration");
+            addCriterion("integration not between", value1, value2, "integration");
             return (Criteria) this;
         }
 

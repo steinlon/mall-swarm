@@ -1,3 +1,5 @@
+info:
+  profile: production
 spring:
   redis:
     host: redis # Redis服务器地址
